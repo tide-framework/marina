@@ -1,0 +1,3 @@
+initialization
+initialize
+	TDDispatcher default sessionManager sessionClass: self

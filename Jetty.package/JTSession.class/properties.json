@@ -1,0 +1,14 @@
+{
+	"category" : "Jetty-Tide",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"user" ],
+	"name" : "JTSession",
+	"pools" : [
+		 ],
+	"super" : "TDSession",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "Jetty-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "JTLoginError",
+	"pools" : [
+		 ],
+	"super" : "JTError",
+	"type" : "normal" }

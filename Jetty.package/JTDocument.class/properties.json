@@ -1,0 +1,14 @@
+{
+	"category" : "Jetty-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"contents" ],
+	"name" : "JTDocument",
+	"pools" : [
+		 ],
+	"super" : "JTStructure",
+	"type" : "normal" }

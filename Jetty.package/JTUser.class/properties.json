@@ -1,0 +1,16 @@
+{
+	"category" : "Jetty-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"username",
+		"password",
+		"email" ],
+	"name" : "JTUser",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
