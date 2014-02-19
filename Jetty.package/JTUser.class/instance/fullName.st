@@ -1,0 +1,3 @@
+accessing
+fullName
+	^ fullName ifNil: [ '' ]

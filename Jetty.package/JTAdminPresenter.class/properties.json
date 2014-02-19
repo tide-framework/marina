@@ -1,0 +1,14 @@
+{
+	"category" : "Jetty-Tide",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "JTAdminPresenter",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

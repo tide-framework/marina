@@ -1,0 +1,4 @@
+testing
+isDIrectory
+	<state>
+	^ true

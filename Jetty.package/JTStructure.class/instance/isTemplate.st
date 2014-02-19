@@ -1,0 +1,4 @@
+testing
+isTemplate
+	<state>
+	^ false

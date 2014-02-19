@@ -1,0 +1,4 @@
+testing
+isPage
+	<state>
+	^ true
