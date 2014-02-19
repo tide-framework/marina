@@ -1,0 +1,14 @@
+{
+	"category" : "Jetty-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "MRLoginError",
+	"pools" : [
+		 ],
+	"super" : "MRError",
+	"type" : "normal" }

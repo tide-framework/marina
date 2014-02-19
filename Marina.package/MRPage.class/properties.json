@@ -1,0 +1,16 @@
+{
+	"category" : "Jetty-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"template",
+		"author",
+		"published" ],
+	"name" : "MRPage",
+	"pools" : [
+		 ],
+	"super" : "MRDocument",
+	"type" : "normal" }

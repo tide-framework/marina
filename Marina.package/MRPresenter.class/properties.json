@@ -1,0 +1,14 @@
+{
+	"category" : "Jetty-Tide",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "MRPresenter",
+	"pools" : [
+		 ],
+	"super" : "TDPresenter",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "Jetty-Tide",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "MRPagesHandler",
+	"pools" : [
+		 ],
+	"super" : "TDHandler",
+	"type" : "normal" }
