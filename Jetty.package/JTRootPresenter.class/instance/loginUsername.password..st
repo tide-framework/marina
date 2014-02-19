@@ -1,7 +1,6 @@
 actions
 loginUsername: username password: password
 	<action>
-	
 	| user |
 	
 	user := JTUser userNamed: username.

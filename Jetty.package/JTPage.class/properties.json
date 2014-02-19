@@ -6,7 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"template" ],
+		"template",
+		"author",
+		"published" ],
 	"name" : "JTPage",
 	"pools" : [
 		 ],

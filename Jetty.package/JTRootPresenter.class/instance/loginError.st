@@ -1,3 +1,3 @@
 error handling
 loginError
-	JTLoginError signal
+	JTLoginError signal: 'Wrong username or password'
