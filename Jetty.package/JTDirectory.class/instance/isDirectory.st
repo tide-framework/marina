@@ -1,4 +1,4 @@
 testing
-isDIrectory
+isDirectory
 	<state>
 	^ true

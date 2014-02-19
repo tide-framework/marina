@@ -1,4 +1,4 @@
 adding/removing
-addstructure: aPage
+addStructure: aPage
 	structures add: aPage.
 	self save

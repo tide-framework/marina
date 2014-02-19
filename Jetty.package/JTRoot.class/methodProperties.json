@@ -6,9 +6,11 @@
 		"setup" : "NicolasPetton 2/19/2014 14:29" },
 	"instance" : {
 		"add:" : "NicolasPetton 2/19/2014 14:40",
+		"addStructure:" : "NicolasPetton 2/19/2014 16:40",
 		"addTemplate:" : "NicolasPetton 2/19/2014 14:34",
 		"addUser:" : "NicolasPetton 2/19/2014 14:33",
-		"addstructure:" : "NicolasPetton 2/19/2014 14:42",
+		"findPageForPath:" : "NicolasPetton 2/19/2014 16:56",
+		"indexPage" : "NicolasPetton 2/19/2014 16:35",
 		"initialize" : "NicolasPetton 2/19/2014 14:34",
 		"name" : "NicolasPetton 2/19/2014 14:30",
 		"name:" : "NicolasPetton 2/19/2014 14:30",

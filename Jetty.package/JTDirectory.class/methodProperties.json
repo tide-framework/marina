@@ -2,8 +2,9 @@
 	"class" : {
 		 },
 	"instance" : {
+		"add:" : "NicolasPetton 2/19/2014 16:45",
 		"addStructure:" : "NicolasPetton 2/19/2014 14:45",
 		"children" : "NicolasPetton 2/18/2014 16:43",
 		"initialize" : "NicolasPetton 2/18/2014 16:20",
-		"isDIrectory" : "NicolasPetton 2/19/2014 14:39",
+		"isDirectory" : "NicolasPetton 2/19/2014 16:51",
 		"removeStructure:" : "NicolasPetton 2/19/2014 14:45" } }
