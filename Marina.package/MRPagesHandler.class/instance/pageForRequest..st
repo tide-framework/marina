@@ -1,3 +1,3 @@
 request handling
 pageForRequest: aRequest
-	^ self root findPageForPath: aRequest requestLine uri segments allButFirst
+	^ self root findPageForPath: aRequest requestLine uri segments

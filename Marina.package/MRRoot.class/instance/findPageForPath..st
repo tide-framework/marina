@@ -2,7 +2,7 @@ accessing
 findPageForPath: aCollection
 	| page |
 	
-	aCollection ifEmpty: [ ^ self indexPage ].
+	(aCollection isNil or: [ aCollection isEmpty ]) ifTrue: [ ^ self indexPage ].
 	
 	page := self structures 
 		detect: [ :each | each path = aCollection first ]

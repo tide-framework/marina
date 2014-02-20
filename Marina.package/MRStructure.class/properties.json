@@ -6,7 +6,8 @@
 		 ],
 	"commentStamp" : "NicolasPetton 2/20/2014 10:54",
 	"instvars" : [
-		"title" ],
+		"title",
+		"parent" ],
 	"name" : "MRStructure",
 	"pools" : [
 		 ],
