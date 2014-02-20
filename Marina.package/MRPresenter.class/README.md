@@ -1,0 +1,1 @@
+I am the common superclass of all presenters in Marina.

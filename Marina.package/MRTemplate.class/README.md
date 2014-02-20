@@ -1,0 +1,1 @@
+I am a template, or "meta-page". My #contents must be compatible with the Mustache templating format.

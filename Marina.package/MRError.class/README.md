@@ -1,0 +1,1 @@
+I am the common superclass of all Marina errors.

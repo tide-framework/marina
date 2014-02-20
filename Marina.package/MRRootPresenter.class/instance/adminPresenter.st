@@ -2,5 +2,5 @@ actions
 adminPresenter
 	<action>
 	self user 
-		ifNil: [ self error: 'Access forbidden' ]
+		ifNil: [ self accessForbidden ]
 		ifNotNil: [ ^ MRAdminPresenter new ]

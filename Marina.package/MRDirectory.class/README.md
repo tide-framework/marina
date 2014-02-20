@@ -1,0 +1,1 @@
+I am a specialized structure that can contain other structures, instances of MRDirectory of MRPage.
