@@ -1,3 +1,5 @@
 adding/removing
 addTo: anObject
-	anObject addTemplate: self
+	anObject addTemplate: self.
+	self parent: anObject.
+	self save
