@@ -2,4 +2,4 @@ initialization
 initialize
 	TDDispatcher default sessionManager sessionClass: self.
 	MRRootPresenter registerAt: '_root'.
-	MRPagesHandler new registerDefault
+	(MRPagesHandler path: 'web') register

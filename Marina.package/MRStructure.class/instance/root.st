@@ -1,3 +1,3 @@
 accessing
 root
-	^ self parent root
+	^ MRRoot default
