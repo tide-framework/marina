@@ -1,5 +1,5 @@
 initialization
 initialize
 	TDDispatcher default sessionManager sessionClass: self.
-	MRRootPresenter registerAt: '_root'.
+	MRLoginPresenter registerAt: 'marina'.
 	(MRPagesHandler path: 'web') register

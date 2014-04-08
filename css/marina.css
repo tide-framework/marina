@@ -1,0 +1,47 @@
+body {
+  background: transparent url("../img/old_map.png") top repeat;
+}
+body .login,
+body .main {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 3px #444;
+  margin-top: 50px;
+}
+body h1,
+body h2,
+body h3 {
+  font-weight: bold;
+  font-family: ubuntu;
+}
+body .login h1 {
+  text-align: center;
+}
+body .login h1 .logo {
+  font-weight: bold;
+  display: block;
+}
+body .bg-danger {
+  padding: 10px;
+  border: 1px solid #ffaaaa;
+}
+body .navbar.navbar-default {
+  background: transparent;
+}
+body .navbar.navbar-default .navbar-brand {
+  color: #222;
+  font-family: ubuntu;
+  font-weight: bold;
+  font-size: 22px;
+  margin-right: 20px;
+}
+body .navbar.navbar-default ul li a {
+  color: #08c;
+  text-decoration: underline;
+  cursor: pointer;
+}
+body .main {
+  margin-top: 0;
+  min-height: 100px;
+}

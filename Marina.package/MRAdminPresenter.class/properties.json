@@ -10,5 +10,5 @@
 	"name" : "MRAdminPresenter",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "MRPresenter",
 	"type" : "normal" }
