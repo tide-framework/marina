@@ -3,4 +3,4 @@ adminPresenter
 	<action>
 	self user 
 		ifNil: [ self accessForbidden ]
-		ifNotNil: [ ^ MRAdminPresenter new ]
+		ifNotNil: [ ^ adminPresenter ]
