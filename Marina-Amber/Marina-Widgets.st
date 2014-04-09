@@ -1,4 +1,138 @@
 Smalltalk createPackage: 'Marina-Widgets'!
+Widget subclass: #MRBootstrapDialog
+	instanceVariableNames: 'id'
+	package: 'Marina-Widgets'!
+!MRBootstrapDialog commentStamp!
+I am an abstract widget rendering a bootstrap modal dialog.!
+
+!MRBootstrapDialog methodsFor: 'accessing'!
+
+cancelBlock
+	^ []
+!
+
+cancelLabel
+	^ 'Cancel'
+!
+
+id
+	^ id ifNil: [ id := 100000 atRandom asString ]
+!
+
+okBlock
+	^ []
+!
+
+okLabel
+	^ 'Ok'
+!
+
+title
+	^ self subclassResponsibility
+! !
+
+!MRBootstrapDialog methodsFor: 'rendering'!
+
+renderBodyOn: html
+	html div
+		class: 'modal-body';
+		with: [ 
+			html p with: [ 
+				self renderContentOn: html ] ]
+!
+
+renderContentOn: html
+!
+
+renderFooterOn: html
+	html div
+		class: 'modal-footer';
+		with: [
+			html button
+				type: 'button';
+				class: 'btn btn-default';
+				at: 'data-dismiss' put: 'modal';
+				with: self cancelLabel;
+				onClick: self cancelBlock. 
+			html button
+				type: 'button';
+				class: 'btn btn-primary';
+				at: 'data-dismiss' put: 'modal';
+				with: self okLabel;
+				onClick: self okBlock ]
+!
+
+renderHeaderOn: html
+	html div class: 'modal-header'; with: [ 
+		html button
+			type: 'button';
+			class: 'close';
+			at: 'data-dismiss' put: 'modal';
+			at: 'aria-hidden' put: 'true';
+			with: '×'.
+		html h4 
+			class: 'modal-title';
+			with: self title ]
+!
+
+renderOn: html
+	html div 
+		class: 'modal fade';
+		id: self id;
+		with: [ 
+			html div 
+				class: 'modal-dialog';
+				with: [ 
+					html div 
+						class: 'modal-content';
+						with: [ 
+							self 
+								renderHeaderOn: html;
+								renderBodyOn: html;
+								renderFooterOn: html ] ] ].
+	('#', self id) asJQuery modal
+! !
+
+MRBootstrapDialog subclass: #MRBootstrapConfirmation
+	instanceVariableNames: 'contents okBlock cancelBlock'
+	package: 'Marina-Widgets'!
+
+!MRBootstrapConfirmation methodsFor: 'accessing'!
+
+cancelBlock
+	^ cancelBlock ifNil: [ [] ]
+!
+
+cancelBlock: aBlock
+	cancelBlock := aBlock
+!
+
+contents
+	^ contents ifNil: [ 'Confirmation' ]
+!
+
+contents: aString
+	contents := aString
+!
+
+okBlock
+	^ okBlock ifNil: [ [] ]
+!
+
+okBlock: aBlock
+	okBlock := aBlock
+!
+
+title
+	^ 'Confirmation'
+! !
+
+!MRBootstrapConfirmation methodsFor: 'rendering'!
+
+renderContentOn: html
+	html with: self contents
+! !
+
 Widget subclass: #MRBootstrapForm
 	instanceVariableNames: 'inputs submitAction cancelAction submitLabel cancelLabel cancellable'
 	package: 'Marina-Widgets'!
@@ -265,7 +399,30 @@ start
 		start
 ! !
 
-Widget subclass: #MRPresenterWidget
+Widget subclass: #MRWidget
+	instanceVariableNames: ''
+	package: 'Marina-Widgets'!
+!MRWidget commentStamp!
+I am the abstract superclass of all Marina widgets.!
+
+!MRWidget methodsFor: 'actions'!
+
+confirm: aString ifTrue: aBlock
+	self 
+		confirm: aString
+		ifTrue: aBlock
+		ifFalse: []
+!
+
+confirm: aString ifTrue: aBlock ifFalse: anotherBlock
+	MRBootstrapConfirmation new
+		contents: aString;
+		okBlock: aBlock;
+		cancelBlock: anotherBlock;
+		appendToJQuery: 'body' asJQuery
+! !
+
+MRWidget subclass: #MRPresenterWidget
 	instanceVariableNames: 'presenter'
 	package: 'Marina-Widgets'!
 !MRPresenterWidget commentStamp!
@@ -540,7 +697,11 @@ title
 !MRStructuresWidget methodsFor: 'actions'!
 
 removeStructure: aStructure
-	aStructure remove then: [ self refresh ]
+	self 
+		confirm: 'Do you really want to remove ', aStructure title, '?'
+		ifTrue: [
+			aStructure remove then: [ 
+				self structures update then: [ self refresh ] ] ]
 ! !
 
 !MRStructuresWidget methodsFor: 'rendering'!

@@ -2,6 +2,436 @@ define("marina/Marina-Widgets", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm
 smalltalk.addPackage('Marina-Widgets');
 smalltalk.packages["Marina-Widgets"].transport = {"type":"amd","amdNamespace":"marina"};
 
+smalltalk.addClass('MRBootstrapDialog', globals.Widget, ['id'], 'Marina-Widgets');
+globals.MRBootstrapDialog.comment="I am an abstract widget rendering a bootstrap modal dialog.";
+smalltalk.addMethod(
+smalltalk.method({
+selector: "cancelBlock",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=(function(){
+});
+return $1;
+},
+args: [],
+source: "cancelBlock\x0a\x09^ []",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "cancelLabel",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "Cancel";
+},
+args: [],
+source: "cancelLabel\x0a\x09^ 'Cancel'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "id",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@id"];
+if(($receiver = $2) == nil || $receiver == null){
+self["@id"]=_st((100000)._atRandom())._asString();
+$1=self["@id"];
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"id",{},globals.MRBootstrapDialog)})},
+args: [],
+source: "id\x0a\x09^ id ifNil: [ id := 100000 atRandom asString ]",
+messageSends: ["ifNil:", "asString", "atRandom"],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "okBlock",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=(function(){
+});
+return $1;
+},
+args: [],
+source: "okBlock\x0a\x09^ []",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "okLabel",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "Ok";
+},
+args: [],
+source: "okLabel\x0a\x09^ 'Ok'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderBodyOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st(html)._div();
+_st($1)._class_("modal-body");
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+return _st(_st(html)._p())._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._renderContentOn_(html);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderBodyOn:",{html:html},globals.MRBootstrapDialog)})},
+args: ["html"],
+source: "renderBodyOn: html\x0a\x09html div\x0a\x09\x09class: 'modal-body';\x0a\x09\x09with: [ \x0a\x09\x09\x09html p with: [ \x0a\x09\x09\x09\x09self renderContentOn: html ] ]",
+messageSends: ["class:", "div", "with:", "p", "renderContentOn:"],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderContentOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return self},
+args: ["html"],
+source: "renderContentOn: html",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderFooterOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$3,$4,$5,$6,$2;
+$1=_st(html)._div();
+_st($1)._class_("modal-footer");
+$ctx1.sendIdx["class:"]=1;
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$3=_st(html)._button();
+$ctx2.sendIdx["button"]=1;
+_st($3)._type_("button");
+$ctx2.sendIdx["type:"]=1;
+_st($3)._class_("btn btn-default");
+$ctx2.sendIdx["class:"]=2;
+_st($3)._at_put_("data-dismiss","modal");
+$ctx2.sendIdx["at:put:"]=1;
+_st($3)._with_(self._cancelLabel());
+$ctx2.sendIdx["with:"]=2;
+$4=_st($3)._onClick_(self._cancelBlock());
+$ctx2.sendIdx["onClick:"]=1;
+$4;
+$5=_st(html)._button();
+_st($5)._type_("button");
+_st($5)._class_("btn btn-primary");
+_st($5)._at_put_("data-dismiss","modal");
+_st($5)._with_(self._okLabel());
+$6=_st($5)._onClick_(self._okBlock());
+return $6;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderFooterOn:",{html:html},globals.MRBootstrapDialog)})},
+args: ["html"],
+source: "renderFooterOn: html\x0a\x09html div\x0a\x09\x09class: 'modal-footer';\x0a\x09\x09with: [\x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09type: 'button';\x0a\x09\x09\x09\x09class: 'btn btn-default';\x0a\x09\x09\x09\x09at: 'data-dismiss' put: 'modal';\x0a\x09\x09\x09\x09with: self cancelLabel;\x0a\x09\x09\x09\x09onClick: self cancelBlock. \x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09type: 'button';\x0a\x09\x09\x09\x09class: 'btn btn-primary';\x0a\x09\x09\x09\x09at: 'data-dismiss' put: 'modal';\x0a\x09\x09\x09\x09with: self okLabel;\x0a\x09\x09\x09\x09onClick: self okBlock ]",
+messageSends: ["class:", "div", "with:", "type:", "button", "at:put:", "cancelLabel", "onClick:", "cancelBlock", "okLabel", "okBlock"],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderHeaderOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$3,$4,$5,$6,$2;
+$1=_st(html)._div();
+_st($1)._class_("modal-header");
+$ctx1.sendIdx["class:"]=1;
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$3=_st(html)._button();
+_st($3)._type_("button");
+_st($3)._class_("close");
+$ctx2.sendIdx["class:"]=2;
+_st($3)._at_put_("data-dismiss","modal");
+$ctx2.sendIdx["at:put:"]=1;
+_st($3)._at_put_("aria-hidden","true");
+$4=_st($3)._with_("×");
+$ctx2.sendIdx["with:"]=2;
+$4;
+$5=_st(html)._h4();
+_st($5)._class_("modal-title");
+$6=_st($5)._with_(self._title());
+return $6;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderHeaderOn:",{html:html},globals.MRBootstrapDialog)})},
+args: ["html"],
+source: "renderHeaderOn: html\x0a\x09html div class: 'modal-header'; with: [ \x0a\x09\x09html button\x0a\x09\x09\x09type: 'button';\x0a\x09\x09\x09class: 'close';\x0a\x09\x09\x09at: 'data-dismiss' put: 'modal';\x0a\x09\x09\x09at: 'aria-hidden' put: 'true';\x0a\x09\x09\x09with: '×'.\x0a\x09\x09html h4 \x0a\x09\x09\x09class: 'modal-title';\x0a\x09\x09\x09with: self title ]",
+messageSends: ["class:", "div", "with:", "type:", "button", "at:put:", "h4", "title"],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3,$5,$7,$9,$8,$6,$4;
+$1=_st(html)._div();
+$ctx1.sendIdx["div"]=1;
+_st($1)._class_("modal fade");
+$ctx1.sendIdx["class:"]=1;
+$2=$1;
+$3=self._id();
+$ctx1.sendIdx["id"]=1;
+_st($2)._id_($3);
+$4=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$5=_st(html)._div();
+$ctx2.sendIdx["div"]=2;
+_st($5)._class_("modal-dialog");
+$ctx2.sendIdx["class:"]=2;
+$6=_st($5)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$7=_st(html)._div();
+_st($7)._class_("modal-content");
+$8=_st($7)._with_((function(){
+return smalltalk.withContext(function($ctx4) {
+self._renderHeaderOn_(html);
+self._renderBodyOn_(html);
+$9=self._renderFooterOn_(html);
+return $9;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
+return $8;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
+return $6;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+_st(_st("#".__comma(self._id()))._asJQuery())._modal();
+return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRBootstrapDialog)})},
+args: ["html"],
+source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'modal fade';\x0a\x09\x09id: self id;\x0a\x09\x09with: [ \x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'modal-dialog';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09class: 'modal-content';\x0a\x09\x09\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09\x09\x09self \x0a\x09\x09\x09\x09\x09\x09\x09\x09renderHeaderOn: html;\x0a\x09\x09\x09\x09\x09\x09\x09\x09renderBodyOn: html;\x0a\x09\x09\x09\x09\x09\x09\x09\x09renderFooterOn: html ] ] ].\x0a\x09('#', self id) asJQuery modal",
+messageSends: ["class:", "div", "id:", "id", "with:", "renderHeaderOn:", "renderBodyOn:", "renderFooterOn:", "modal", "asJQuery", ","],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "title",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._subclassResponsibility();
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"title",{},globals.MRBootstrapDialog)})},
+args: [],
+source: "title\x0a\x09^ self subclassResponsibility",
+messageSends: ["subclassResponsibility"],
+referencedClasses: []
+}),
+globals.MRBootstrapDialog);
+
+
+
+smalltalk.addClass('MRBootstrapConfirmation', globals.MRBootstrapDialog, ['contents', 'okBlock', 'cancelBlock'], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "cancelBlock",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@cancelBlock"];
+if(($receiver = $2) == nil || $receiver == null){
+$1=(function(){
+});
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"cancelBlock",{},globals.MRBootstrapConfirmation)})},
+args: [],
+source: "cancelBlock\x0a\x09^ cancelBlock ifNil: [ [] ]",
+messageSends: ["ifNil:"],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "cancelBlock:",
+protocol: 'accessing',
+fn: function (aBlock){
+var self=this;
+self["@cancelBlock"]=aBlock;
+return self},
+args: ["aBlock"],
+source: "cancelBlock: aBlock\x0a\x09cancelBlock := aBlock",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "contents",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@contents"];
+if(($receiver = $2) == nil || $receiver == null){
+$1="Confirmation";
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"contents",{},globals.MRBootstrapConfirmation)})},
+args: [],
+source: "contents\x0a\x09^ contents ifNil: [ 'Confirmation' ]",
+messageSends: ["ifNil:"],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "contents:",
+protocol: 'accessing',
+fn: function (aString){
+var self=this;
+self["@contents"]=aString;
+return self},
+args: ["aString"],
+source: "contents: aString\x0a\x09contents := aString",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "okBlock",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@okBlock"];
+if(($receiver = $2) == nil || $receiver == null){
+$1=(function(){
+});
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"okBlock",{},globals.MRBootstrapConfirmation)})},
+args: [],
+source: "okBlock\x0a\x09^ okBlock ifNil: [ [] ]",
+messageSends: ["ifNil:"],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "okBlock:",
+protocol: 'accessing',
+fn: function (aBlock){
+var self=this;
+self["@okBlock"]=aBlock;
+return self},
+args: ["aBlock"],
+source: "okBlock: aBlock\x0a\x09okBlock := aBlock",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderContentOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(html)._with_(self._contents());
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRBootstrapConfirmation)})},
+args: ["html"],
+source: "renderContentOn: html\x0a\x09html with: self contents",
+messageSends: ["with:", "contents"],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "title",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "Confirmation";
+},
+args: [],
+source: "title\x0a\x09^ 'Confirmation'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapConfirmation);
+
+
+
 smalltalk.addClass('MRBootstrapForm', globals.Widget, ['inputs', 'submitAction', 'cancelAction', 'submitLabel', 'cancelLabel', 'cancellable'], 'Marina-Widgets');
 smalltalk.addMethod(
 smalltalk.method({
@@ -850,7 +1280,50 @@ referencedClasses: ["TDProxy"]
 globals.MRLoginDispatcher.klass);
 
 
-smalltalk.addClass('MRPresenterWidget', globals.Widget, ['presenter'], 'Marina-Widgets');
+smalltalk.addClass('MRWidget', globals.Widget, [], 'Marina-Widgets');
+globals.MRWidget.comment="I am the abstract superclass of all Marina widgets.";
+smalltalk.addMethod(
+smalltalk.method({
+selector: "confirm:ifTrue:",
+protocol: 'actions',
+fn: function (aString,aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+self._confirm_ifTrue_ifFalse_(aString,aBlock,(function(){
+}));
+return self}, function($ctx1) {$ctx1.fill(self,"confirm:ifTrue:",{aString:aString,aBlock:aBlock},globals.MRWidget)})},
+args: ["aString", "aBlock"],
+source: "confirm: aString ifTrue: aBlock\x0a\x09self \x0a\x09\x09confirm: aString\x0a\x09\x09ifTrue: aBlock\x0a\x09\x09ifFalse: []",
+messageSends: ["confirm:ifTrue:ifFalse:"],
+referencedClasses: []
+}),
+globals.MRWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "confirm:ifTrue:ifFalse:",
+protocol: 'actions',
+fn: function (aString,aBlock,anotherBlock){
+var self=this;
+function $MRBootstrapConfirmation(){return globals.MRBootstrapConfirmation||(typeof MRBootstrapConfirmation=="undefined"?nil:MRBootstrapConfirmation)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st($MRBootstrapConfirmation())._new();
+_st($1)._contents_(aString);
+_st($1)._okBlock_(aBlock);
+_st($1)._cancelBlock_(anotherBlock);
+$2=_st($1)._appendToJQuery_("body"._asJQuery());
+return self}, function($ctx1) {$ctx1.fill(self,"confirm:ifTrue:ifFalse:",{aString:aString,aBlock:aBlock,anotherBlock:anotherBlock},globals.MRWidget)})},
+args: ["aString", "aBlock", "anotherBlock"],
+source: "confirm: aString ifTrue: aBlock ifFalse: anotherBlock\x0a\x09MRBootstrapConfirmation new\x0a\x09\x09contents: aString;\x0a\x09\x09okBlock: aBlock;\x0a\x09\x09cancelBlock: anotherBlock;\x0a\x09\x09appendToJQuery: 'body' asJQuery",
+messageSends: ["contents:", "new", "okBlock:", "cancelBlock:", "appendToJQuery:", "asJQuery"],
+referencedClasses: ["MRBootstrapConfirmation"]
+}),
+globals.MRWidget);
+
+
+
+smalltalk.addClass('MRPresenterWidget', globals.MRWidget, ['presenter'], 'Marina-Widgets');
 globals.MRPresenterWidget.comment="I am a widget holding a tide presenter.";
 smalltalk.addMethod(
 smalltalk.method({
@@ -1570,14 +2043,24 @@ protocol: 'actions',
 fn: function (aStructure){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(_st(aStructure)._remove())._then_((function(){
+var $1;
+$1=_st("Do you really want to remove ".__comma(_st(aStructure)._title())).__comma("?");
+$ctx1.sendIdx[","]=1;
+self._confirm_ifTrue_($1,(function(){
 return smalltalk.withContext(function($ctx2) {
+return _st(_st(aStructure)._remove())._then_((function(){
+return smalltalk.withContext(function($ctx3) {
+return _st(_st(self._structures())._update())._then_((function(){
+return smalltalk.withContext(function($ctx4) {
 return self._refresh();
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["then:"]=1;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"removeStructure:",{aStructure:aStructure},globals.MRStructuresWidget)})},
 args: ["aStructure"],
-source: "removeStructure: aStructure\x0a\x09aStructure remove then: [ self refresh ]",
-messageSends: ["then:", "remove", "refresh"],
+source: "removeStructure: aStructure\x0a\x09self \x0a\x09\x09confirm: 'Do you really want to remove ', aStructure title, '?'\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09aStructure remove then: [ \x0a\x09\x09\x09\x09self structures update then: [ self refresh ] ] ]",
+messageSends: ["confirm:ifTrue:", ",", "title", "then:", "remove", "update", "structures", "refresh"],
 referencedClasses: []
 }),
 globals.MRStructuresWidget);
