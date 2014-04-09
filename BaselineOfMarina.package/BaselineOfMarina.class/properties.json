@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfMarina",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfMarina",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
