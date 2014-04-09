@@ -335,6 +335,12 @@ headerWidget
 
 mainWidget
 	^ MRMainWidget new
+!
+
+structuresWidget
+	^ MRStructuresWidget new
+		presenter: self presenter structures;
+		yourself
 ! !
 
 !MRAdminFrameWidget methodsFor: 'rendering'!
@@ -343,7 +349,8 @@ renderContentOn: html
 	html div
 		class: 'admin';
 		with: self headerWidget;
-		with: self mainWidget
+		with: self mainWidget.
+	self structuresWidget render
 ! !
 
 MRFrameWidget subclass: #MRLoginWidget
@@ -402,12 +409,8 @@ renderContentOn: html
 							html div 
 								class: 'login'; 
 								with: [
-									html h1 with: [
-										html span 
-											class: 'logo';
-											with: 'Marina'.
-										html with: 'Log in' ].
-									self renderFormOn: html ] ] ] ]
+									self renderHeaderOn: html.
+							self renderFormOn: html ] ] ] ]
 !
 
 renderFormOn: html
@@ -451,6 +454,15 @@ renderFrameOn: html
 											with: 'Marina'.
 										html with: 'Log in' ].
 									self renderFormOn: html ] ] ] ]
+!
+
+renderHeaderOn: html
+	html h1 with: [
+		html span 
+			class: 'logo';
+			with: [
+				html span class: 'glyphicon glyphicon-tint'.
+				html with: ' Marina' ] ]
 ! !
 
 MRFrameWidget subclass: #MRMainFrameWidget
@@ -460,6 +472,14 @@ MRFrameWidget subclass: #MRMainFrameWidget
 I render myself in the '#main' div of the admin app, removing previously rendered widgets in this area.!
 
 !MRMainFrameWidget methodsFor: 'accessing'!
+
+icon
+	^ ''
+!
+
+iconColor
+	^ 'black'
+!
 
 mainArea
 	^ ('#', MRMainWidget mainAreaId) asJQuery
@@ -480,8 +500,19 @@ renderContentOn: html
 !
 
 renderOn: html
-	html h2 with: self title.
-	self renderContentOn: html
+	html div 
+		class: 'main_frame'; 
+		with: [
+			self renderTitleOn: html.
+			self renderContentOn: html ]
+!
+
+renderTitleOn: html
+	html h2 with: [
+		html span 
+			class: self icon;
+			style: 'color: ', self iconColor.
+		html with: self title ]
 ! !
 
 MRMainFrameWidget subclass: #MRStructuresWidget
@@ -490,12 +521,20 @@ MRMainFrameWidget subclass: #MRStructuresWidget
 
 !MRStructuresWidget methodsFor: 'accessing'!
 
+icon
+	^ 'glyphicon glyphicon-list-alt'
+!
+
+iconColor
+	^ '#6F5499'
+!
+
 structures
 	^ self presenter
 !
 
 title
-	^ 'Structures'
+	^ 'Pages'
 ! !
 
 !MRStructuresWidget methodsFor: 'actions'!
@@ -523,6 +562,15 @@ renderStructureRow: aStructure on: html
 				ifTrue: [ html span class: 'structure-icon glyphicon glyphicon-file' ]
 				ifFalse: [ html span class: 'structure-icon glyphicon glyphicon-folder-open' ].
 			html with: aStructure title ].
+		html td with: [
+			aStructure isPage ifTrue: [
+				aStructure published 
+					ifTrue: [ html span 
+						class: 'label label-success';
+						with: 'Published' ]
+					ifFalse: [ html span
+						class: 'label label-warning';
+						with: 'draft' ] ] ].
 		html td class: 'align-right'; with: [
 			html a 
 				with: 'Edit';
@@ -640,7 +688,9 @@ renderToggleOn: html
 			html a 
 				class: 'navbar-brand';
 				href: '#'; 
-				with: 'Marina' ]
+				with: [
+					html span class: 'glyphicon glyphicon-tint'.
+					html with: ' Marina' ] ]
 ! !
 
 MRPresenterWidget subclass: #MRMainWidget

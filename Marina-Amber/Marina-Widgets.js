@@ -1052,11 +1052,34 @@ _st($1)._class_("admin");
 _st($1)._with_(self._headerWidget());
 $ctx1.sendIdx["with:"]=1;
 $2=_st($1)._with_(self._mainWidget());
+_st(self._structuresWidget())._render();
 return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRAdminFrameWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09html div\x0a\x09\x09class: 'admin';\x0a\x09\x09with: self headerWidget;\x0a\x09\x09with: self mainWidget",
-messageSends: ["class:", "div", "with:", "headerWidget", "mainWidget"],
+source: "renderContentOn: html\x0a\x09html div\x0a\x09\x09class: 'admin';\x0a\x09\x09with: self headerWidget;\x0a\x09\x09with: self mainWidget.\x0a\x09self structuresWidget render",
+messageSends: ["class:", "div", "with:", "headerWidget", "mainWidget", "render", "structuresWidget"],
 referencedClasses: []
+}),
+globals.MRAdminFrameWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "structuresWidget",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+function $MRStructuresWidget(){return globals.MRStructuresWidget||(typeof MRStructuresWidget=="undefined"?nil:MRStructuresWidget)}
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=_st($MRStructuresWidget())._new();
+_st($2)._presenter_(_st(self._presenter())._structures());
+$3=_st($2)._yourself();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"structuresWidget",{},globals.MRAdminFrameWidget)})},
+args: [],
+source: "structuresWidget\x0a\x09^ MRStructuresWidget new\x0a\x09\x09presenter: self presenter structures;\x0a\x09\x09yourself",
+messageSends: ["presenter:", "new", "structures", "presenter", "yourself"],
+referencedClasses: ["MRStructuresWidget"]
 }),
 globals.MRAdminFrameWidget);
 
@@ -1187,7 +1210,7 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$7,$9,$10,$8,$6,$4,$2;
+var $1,$3,$5,$7,$8,$6,$4,$2;
 $1=_st(html)._div();
 $ctx1.sendIdx["div"]=1;
 _st($1)._class_("container-fluid");
@@ -1208,22 +1231,11 @@ $6=_st($5)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
 $7=_st(html)._div();
 _st($7)._class_("login");
-$ctx4.sendIdx["class:"]=4;
 $8=_st($7)._with_((function(){
 return smalltalk.withContext(function($ctx5) {
-_st(_st(html)._h1())._with_((function(){
-return smalltalk.withContext(function($ctx6) {
-$9=_st(html)._span();
-_st($9)._class_("logo");
-$10=_st($9)._with_("Marina");
-$ctx6.sendIdx["with:"]=6;
-$10;
-return _st(html)._with_("Log in");
-}, function($ctx6) {$ctx6.fillBlock({},$ctx5,5)})}));
-$ctx5.sendIdx["with:"]=5;
+self._renderHeaderOn_(html);
 return self._renderFormOn_(html);
 }, function($ctx5) {$ctx5.fillBlock({},$ctx4,4)})}));
-$ctx4.sendIdx["with:"]=4;
 return $8;
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 $ctx3.sendIdx["with:"]=3;
@@ -1235,8 +1247,8 @@ return $4;
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRLoginWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09html div \x0a\x09\x09class: 'container-fluid';\x0a\x09\x09with: [\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'row';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09class: 'col-xs-12 col-md-4 col-md-offset-4';\x0a\x09\x09\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09\x09\x09class: 'login'; \x0a\x09\x09\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09html h1 with: [\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09html span \x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09class: 'logo';\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09with: 'Marina'.\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09html with: 'Log in' ].\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09self renderFormOn: html ] ] ] ]",
-messageSends: ["class:", "div", "with:", "h1", "span", "renderFormOn:"],
+source: "renderContentOn: html\x0a\x09html div \x0a\x09\x09class: 'container-fluid';\x0a\x09\x09with: [\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'row';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09class: 'col-xs-12 col-md-4 col-md-offset-4';\x0a\x09\x09\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09\x09\x09class: 'login'; \x0a\x09\x09\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09self renderHeaderOn: html.\x0a\x09\x09\x09\x09\x09\x09\x09self renderFormOn: html ] ] ] ]",
+messageSends: ["class:", "div", "with:", "renderHeaderOn:", "renderFormOn:"],
 referencedClasses: []
 }),
 globals.MRLoginWidget);
@@ -1334,10 +1346,71 @@ referencedClasses: []
 }),
 globals.MRLoginWidget);
 
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderHeaderOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+_st(_st(html)._h1())._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$1=_st(html)._span();
+$ctx2.sendIdx["span"]=1;
+_st($1)._class_("logo");
+$ctx2.sendIdx["class:"]=1;
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+_st(_st(html)._span())._class_("glyphicon glyphicon-tint");
+return _st(html)._with_(" Marina");
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderHeaderOn:",{html:html},globals.MRLoginWidget)})},
+args: ["html"],
+source: "renderHeaderOn: html\x0a\x09html h1 with: [\x0a\x09\x09html span \x0a\x09\x09\x09class: 'logo';\x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html span class: 'glyphicon glyphicon-tint'.\x0a\x09\x09\x09\x09html with: ' Marina' ] ]",
+messageSends: ["with:", "h1", "class:", "span"],
+referencedClasses: []
+}),
+globals.MRLoginWidget);
+
 
 
 smalltalk.addClass('MRMainFrameWidget', globals.MRFrameWidget, [], 'Marina-Widgets');
 globals.MRMainFrameWidget.comment="I render myself in the '#main' div of the admin app, removing previously rendered widgets in this area.";
+smalltalk.addMethod(
+smalltalk.method({
+selector: "icon",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "";
+},
+args: [],
+source: "icon\x0a\x09^ ''",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRMainFrameWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "iconColor",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "black";
+},
+args: [],
+source: "iconColor\x0a\x09^ 'black'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRMainFrameWidget);
+
 smalltalk.addMethod(
 smalltalk.method({
 selector: "mainArea",
@@ -1398,12 +1471,43 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(_st(html)._h2())._with_(self._title());
-self._renderContentOn_(html);
+var $1,$2;
+$1=_st(html)._div();
+_st($1)._class_("main_frame");
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+self._renderTitleOn_(html);
+return self._renderContentOn_(html);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRMainFrameWidget)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09html h2 with: self title.\x0a\x09self renderContentOn: html",
-messageSends: ["with:", "h2", "title", "renderContentOn:"],
+source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'main_frame'; \x0a\x09\x09with: [\x0a\x09\x09\x09self renderTitleOn: html.\x0a\x09\x09\x09self renderContentOn: html ]",
+messageSends: ["class:", "div", "with:", "renderTitleOn:", "renderContentOn:"],
+referencedClasses: []
+}),
+globals.MRMainFrameWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderTitleOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+_st(_st(html)._h2())._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$1=_st(html)._span();
+_st($1)._class_(self._icon());
+$2=_st($1)._style_("color: ".__comma(self._iconColor()));
+$2;
+return _st(html)._with_(self._title());
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderTitleOn:",{html:html},globals.MRMainFrameWidget)})},
+args: ["html"],
+source: "renderTitleOn: html\x0a\x09html h2 with: [\x0a\x09\x09html span \x0a\x09\x09\x09class: self icon;\x0a\x09\x09\x09style: 'color: ', self iconColor.\x0a\x09\x09html with: self title ]",
+messageSends: ["with:", "h2", "class:", "span", "icon", "style:", ",", "iconColor", "title"],
 referencedClasses: []
 }),
 globals.MRMainFrameWidget);
@@ -1429,6 +1533,36 @@ globals.MRMainFrameWidget);
 
 
 smalltalk.addClass('MRStructuresWidget', globals.MRMainFrameWidget, [], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "icon",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "glyphicon glyphicon-list-alt";
+},
+args: [],
+source: "icon\x0a\x09^ 'glyphicon glyphicon-list-alt'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructuresWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "iconColor",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "#6F5499";
+},
+args: [],
+source: "iconColor\x0a\x09^ '#6F5499'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructuresWidget);
+
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeStructure:",
@@ -1488,7 +1622,7 @@ protocol: 'rendering',
 fn: function (aStructure,html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$6,$7,$8,$9,$5;
+var $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$14,$15,$16,$17,$13;
 _st(_st(html)._tr())._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 $1=_st(html)._td();
@@ -1496,51 +1630,80 @@ $ctx2.sendIdx["td"]=1;
 _st($1)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
 $2=_st(aStructure)._isPage();
+$ctx3.sendIdx["isPage"]=1;
 if(smalltalk.assert($2)){
 $3=_st(html)._span();
 $ctx3.sendIdx["span"]=1;
 _st($3)._class_("structure-icon glyphicon glyphicon-file");
 $ctx3.sendIdx["class:"]=1;
 } else {
-_st(_st(html)._span())._class_("structure-icon glyphicon glyphicon-folder-open");
+$4=_st(html)._span();
+$ctx3.sendIdx["span"]=2;
+_st($4)._class_("structure-icon glyphicon glyphicon-folder-open");
 $ctx3.sendIdx["class:"]=2;
 };
 return _st(html)._with_(_st(aStructure)._title());
 $ctx3.sendIdx["with:"]=3;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["with:"]=2;
-$4=_st(html)._td();
-_st($4)._class_("align-right");
-$5=_st($4)._with_((function(){
+$5=_st(html)._td();
+$ctx2.sendIdx["td"]=2;
+_st($5)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-$6=_st(html)._a();
-$ctx3.sendIdx["a"]=1;
-_st($6)._with_("Edit");
+$6=_st(aStructure)._isPage();
+if(smalltalk.assert($6)){
+$7=_st(aStructure)._published();
+if(smalltalk.assert($7)){
+$8=_st(html)._span();
+$ctx3.sendIdx["span"]=3;
+_st($8)._class_("label label-success");
+$ctx3.sendIdx["class:"]=3;
+$9=_st($8)._with_("Published");
 $ctx3.sendIdx["with:"]=5;
-$7=_st($6)._onClick_((function(){
-return smalltalk.withContext(function($ctx4) {
-return self._editStructure_(aStructure);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,6)})}));
-$ctx3.sendIdx["onClick:"]=1;
-$7;
-_st(html)._with_(" - ");
-$ctx3.sendIdx["with:"]=6;
-$8=_st(html)._a();
-_st($8)._with_("Remove");
-$9=_st($8)._onClick_((function(){
-return smalltalk.withContext(function($ctx4) {
-return self._removeStructure_(aStructure);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,7)})}));
 return $9;
+} else {
+$10=_st(html)._span();
+_st($10)._class_("label label-warning");
+$ctx3.sendIdx["class:"]=4;
+$11=_st($10)._with_("draft");
+$ctx3.sendIdx["with:"]=6;
+return $11;
+};
+};
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
 $ctx2.sendIdx["with:"]=4;
-return $5;
+$12=_st(html)._td();
+_st($12)._class_("align-right");
+$13=_st($12)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$14=_st(html)._a();
+$ctx3.sendIdx["a"]=1;
+_st($14)._with_("Edit");
+$ctx3.sendIdx["with:"]=8;
+$15=_st($14)._onClick_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._editStructure_(aStructure);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,10)})}));
+$ctx3.sendIdx["onClick:"]=1;
+$15;
+_st(html)._with_(" - ");
+$ctx3.sendIdx["with:"]=9;
+$16=_st(html)._a();
+_st($16)._with_("Remove");
+$17=_st($16)._onClick_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._removeStructure_(aStructure);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,11)})}));
+return $17;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,9)})}));
+$ctx2.sendIdx["with:"]=7;
+return $13;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderStructureRow:on:",{aStructure:aStructure,html:html},globals.MRStructuresWidget)})},
 args: ["aStructure", "html"],
-source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage \x0a\x09\x09\x09\x09ifTrue: [ html span class: 'structure-icon glyphicon glyphicon-file' ]\x0a\x09\x09\x09\x09ifFalse: [ html span class: 'structure-icon glyphicon glyphicon-folder-open' ].\x0a\x09\x09\x09html with: aStructure title ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Edit';\x0a\x09\x09\x09\x09onClick: [ self editStructure: aStructure ]. \x0a\x09\x09\x09html with: ' - '.\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
-messageSends: ["with:", "tr", "td", "ifTrue:ifFalse:", "isPage", "class:", "span", "title", "a", "onClick:", "editStructure:", "removeStructure:"],
+source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage \x0a\x09\x09\x09\x09ifTrue: [ html span class: 'structure-icon glyphicon glyphicon-file' ]\x0a\x09\x09\x09\x09ifFalse: [ html span class: 'structure-icon glyphicon glyphicon-folder-open' ].\x0a\x09\x09\x09html with: aStructure title ].\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage ifTrue: [\x0a\x09\x09\x09\x09aStructure published \x0a\x09\x09\x09\x09\x09ifTrue: [ html span \x0a\x09\x09\x09\x09\x09\x09class: 'label label-success';\x0a\x09\x09\x09\x09\x09\x09with: 'Published' ]\x0a\x09\x09\x09\x09\x09ifFalse: [ html span\x0a\x09\x09\x09\x09\x09\x09class: 'label label-warning';\x0a\x09\x09\x09\x09\x09\x09with: 'draft' ] ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Edit';\x0a\x09\x09\x09\x09onClick: [ self editStructure: aStructure ]. \x0a\x09\x09\x09html with: ' - '.\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
+messageSends: ["with:", "tr", "td", "ifTrue:ifFalse:", "isPage", "class:", "span", "title", "ifTrue:", "published", "a", "onClick:", "editStructure:", "removeStructure:"],
 referencedClasses: []
 }),
 globals.MRStructuresWidget);
@@ -1569,10 +1732,10 @@ selector: "title",
 protocol: 'accessing',
 fn: function (){
 var self=this;
-return "Structures";
+return "Pages";
 },
 args: [],
-source: "title\x0a\x09^ 'Structures'",
+source: "title\x0a\x09^ 'Pages'",
 messageSends: [],
 referencedClasses: []
 }),
@@ -1844,7 +2007,7 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$6,$4,$7,$8,$2;
+var $1,$3,$5,$6,$7,$4,$8,$9,$2;
 $1=_st(html)._div();
 _st($1)._class_("navbar-header");
 $ctx1.sendIdx["class:"]=1;
@@ -1868,22 +2031,30 @@ $ctx3.sendIdx["with:"]=3;
 $6;
 return (3)._timesRepeat_((function(){
 return smalltalk.withContext(function($ctx4) {
-return _st(_st(html)._span())._class_("icon-bar");
+$7=_st(html)._span();
+$ctx4.sendIdx["span"]=2;
+return _st($7)._class_("icon-bar");
 $ctx4.sendIdx["class:"]=4;
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["with:"]=2;
 $4;
-$7=_st(html)._a();
-_st($7)._class_("navbar-brand");
-_st($7)._href_("#");
-$8=_st($7)._with_("Marina");
-return $8;
+$8=_st(html)._a();
+_st($8)._class_("navbar-brand");
+$ctx2.sendIdx["class:"]=5;
+_st($8)._href_("#");
+$9=_st($8)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+_st(_st(html)._span())._class_("glyphicon glyphicon-tint");
+return _st(html)._with_(" Marina");
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,4)})}));
+$ctx2.sendIdx["with:"]=4;
+return $9;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderToggleOn:",{html:html},globals.MRHeaderWidget)})},
 args: ["html"],
-source: "renderToggleOn: html\x0a\x09html div\x0a\x09\x09class: 'navbar-header';\x0a\x09\x09with: [\x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09type: 'button';\x0a\x09\x09\x09\x09class: 'navbar-toggle';\x0a\x09\x09\x09\x09at: 'data-toggle' put: 'collapse';\x0a\x09\x09\x09\x09at: 'data-target' put: 'menu';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span \x0a\x09\x09\x09\x09\x09\x09class: 'sr-only';\x0a\x09\x09\x09\x09\x09\x09with: 'Toggle Navigation'.\x0a\x09\x09\x09\x09\x093 timesRepeat: [ \x0a\x09\x09\x09\x09\x09\x09html span class: 'icon-bar' ] ].\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09class: 'navbar-brand';\x0a\x09\x09\x09\x09href: '#'; \x0a\x09\x09\x09\x09with: 'Marina' ]",
+source: "renderToggleOn: html\x0a\x09html div\x0a\x09\x09class: 'navbar-header';\x0a\x09\x09with: [\x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09type: 'button';\x0a\x09\x09\x09\x09class: 'navbar-toggle';\x0a\x09\x09\x09\x09at: 'data-toggle' put: 'collapse';\x0a\x09\x09\x09\x09at: 'data-target' put: 'menu';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span \x0a\x09\x09\x09\x09\x09\x09class: 'sr-only';\x0a\x09\x09\x09\x09\x09\x09with: 'Toggle Navigation'.\x0a\x09\x09\x09\x09\x093 timesRepeat: [ \x0a\x09\x09\x09\x09\x09\x09html span class: 'icon-bar' ] ].\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09class: 'navbar-brand';\x0a\x09\x09\x09\x09href: '#'; \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span class: 'glyphicon glyphicon-tint'.\x0a\x09\x09\x09\x09\x09html with: ' Marina' ] ]",
 messageSends: ["class:", "div", "with:", "type:", "button", "at:put:", "span", "timesRepeat:", "a", "href:"],
 referencedClasses: []
 }),

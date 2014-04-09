@@ -52,6 +52,13 @@ body .main {
   margin-top: 0;
   min-height: 100px;
 }
+body .main .main_frame h2 {
+  margin-bottom: 30px;
+}
+body .main .main_frame h2 .glyphicon {
+  font-size: 22px;
+  margin-right: 10px;
+}
 body .main .structure-icon {
   width: 22px;
 }
