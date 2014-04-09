@@ -1,4 +1,4 @@
 accessing
 templates
 	<state>
-	^ templates copy
+	^ templates

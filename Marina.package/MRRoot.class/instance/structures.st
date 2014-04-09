@@ -1,4 +1,4 @@
 accessing
 structures
 	<state>
-	^ structures copy
+	^ structures
