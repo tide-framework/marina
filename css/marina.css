@@ -15,6 +15,11 @@ body h3 {
   font-weight: bold;
   font-family: ubuntu;
 }
+body a {
+  color: #08c;
+  text-decoration: underline;
+  cursor: pointer;
+}
 body .login h1 {
   text-align: center;
 }
@@ -28,6 +33,7 @@ body .bg-danger {
 }
 body .navbar.navbar-default {
   background: transparent;
+  border: 0 none;
 }
 body .navbar.navbar-default .navbar-brand {
   color: #222;
@@ -35,6 +41,7 @@ body .navbar.navbar-default .navbar-brand {
   font-weight: bold;
   font-size: 22px;
   margin-right: 20px;
+  text-decoration: none;
 }
 body .navbar.navbar-default ul li a {
   color: #08c;
@@ -44,4 +51,10 @@ body .navbar.navbar-default ul li a {
 body .main {
   margin-top: 0;
   min-height: 100px;
+}
+body .main .structure-icon {
+  width: 22px;
+}
+body .main .align-right {
+  text-align: right;
 }
