@@ -819,15 +819,31 @@ selector: "initialize",
 protocol: 'initialization',
 fn: function (){
 var self=this;
+return smalltalk.withContext(function($ctx1) { 
+self._start();
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.MRLoginDispatcher.klass)})},
+args: [],
+source: "initialize\x0a\x09self start",
+messageSends: ["start"],
+referencedClasses: []
+}),
+globals.MRLoginDispatcher.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "start",
+protocol: 'initialization',
+fn: function (){
+var self=this;
 function $TDProxy(){return globals.TDProxy||(typeof TDProxy=="undefined"?nil:TDProxy)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 $1=self._new();
 _st($1)._presenter_(_st($TDProxy())._on_("/marina"));
 $2=_st($1)._start();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.MRLoginDispatcher.klass)})},
+return self}, function($ctx1) {$ctx1.fill(self,"start",{},globals.MRLoginDispatcher.klass)})},
 args: [],
-source: "initialize\x0a\x09self new\x0a\x09\x09presenter: (TDProxy on: '/marina');\x0a\x09\x09start",
+source: "start\x0a\x09self new\x0a\x09\x09presenter: (TDProxy on: '/marina');\x0a\x09\x09start",
 messageSends: ["presenter:", "new", "on:", "start"],
 referencedClasses: ["TDProxy"]
 }),
@@ -872,6 +888,24 @@ globals.MRPresenterWidget);
 
 smalltalk.addClass('MRFrameWidget', globals.MRPresenterWidget, ['wrapper'], 'Marina-Widgets');
 globals.MRFrameWidget.comment="I am an abstract widget building a frame.\x0a\x0aI know how to remove and render myself on a page. Only one instance should rendered at a time.";
+smalltalk.addMethod(
+smalltalk.method({
+selector: "refresh",
+protocol: 'actions',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+self._remove();
+$1=self._render();
+return self}, function($ctx1) {$ctx1.fill(self,"refresh",{},globals.MRFrameWidget)})},
+args: [],
+source: "refresh\x0a\x09self remove; render",
+messageSends: ["remove", "render"],
+referencedClasses: []
+}),
+globals.MRFrameWidget);
+
 smalltalk.addMethod(
 smalltalk.method({
 selector: "remove",
@@ -1020,7 +1054,7 @@ $ctx1.sendIdx["with:"]=1;
 $2=_st($1)._with_(self._mainWidget());
 return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRAdminFrameWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09html div\x0a\x09\x09class: 'admin'; \x0a\x09\x09with: self headerWidget;\x0a\x09\x09with: self mainWidget",
+source: "renderContentOn: html\x0a\x09html div\x0a\x09\x09class: 'admin';\x0a\x09\x09with: self headerWidget;\x0a\x09\x09with: self mainWidget",
 messageSends: ["class:", "div", "with:", "headerWidget", "mainWidget"],
 referencedClasses: []
 }),
@@ -1397,33 +1431,116 @@ globals.MRMainFrameWidget);
 smalltalk.addClass('MRStructuresWidget', globals.MRMainFrameWidget, [], 'Marina-Widgets');
 smalltalk.addMethod(
 smalltalk.method({
+selector: "removeStructure:",
+protocol: 'actions',
+fn: function (aStructure){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(aStructure)._remove())._then_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._refresh();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"removeStructure:",{aStructure:aStructure},globals.MRStructuresWidget)})},
+args: ["aStructure"],
+source: "removeStructure: aStructure\x0a\x09aStructure remove then: [ self refresh ]",
+messageSends: ["then:", "remove", "refresh"],
+referencedClasses: []
+}),
+globals.MRStructuresWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "renderContentOn:",
 protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
+_st(_st(self._structures())._contents())._then_((function(structures){
+return smalltalk.withContext(function($ctx2) {
 $1=_st(html)._table();
 _st($1)._class_("table table-striped");
 $2=_st($1)._with_((function(){
-return smalltalk.withContext(function($ctx2) {
-return _st(_st(html)._tbody())._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-return _st(_st(self._structures())._contents())._then_((function(structures){
+return _st(_st(html)._tbody())._with_((function(){
 return smalltalk.withContext(function($ctx4) {
 return _st(structures)._do_((function(each){
 return smalltalk.withContext(function($ctx5) {
-return _st(_st(html)._tr())._with_(_st(each)._title());
+return self._renderStructureRow_on_(each,html);
 }, function($ctx5) {$ctx5.fillBlock({each:each},$ctx4,4)})}));
-}, function($ctx4) {$ctx4.fillBlock({structures:structures},$ctx3,3)})}));
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
-$ctx2.sendIdx["with:"]=2;
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-$ctx1.sendIdx["with:"]=1;
+$ctx2.sendIdx["with:"]=1;
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({structures:structures},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRStructuresWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09self structures contents then: [ :structures |\x0a\x09\x09\x09\x09\x09structures do: [ :each |\x0a\x09\x09\x09\x09\x09\x09html tr with: each title ] ] ] ]",
-messageSends: ["class:", "table", "with:", "tbody", "then:", "contents", "structures", "do:", "tr", "title"],
+source: "renderContentOn: html\x0a\x09self structures contents then: [ :structures |\x0a\x09\x09html table \x0a\x09\x09\x09class: 'table table-striped';\x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09\x09structures do: [ :each |\x0a\x09\x09\x09\x09\x09\x09self renderStructureRow: each on: html ] ] ] ]",
+messageSends: ["then:", "contents", "structures", "class:", "table", "with:", "tbody", "do:", "renderStructureRow:on:"],
+referencedClasses: []
+}),
+globals.MRStructuresWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderStructureRow:on:",
+protocol: 'rendering',
+fn: function (aStructure,html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3,$4,$6,$7,$8,$9,$5;
+_st(_st(html)._tr())._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$1=_st(html)._td();
+$ctx2.sendIdx["td"]=1;
+_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$2=_st(aStructure)._isPage();
+if(smalltalk.assert($2)){
+$3=_st(html)._span();
+$ctx3.sendIdx["span"]=1;
+_st($3)._class_("structure-icon glyphicon glyphicon-file");
+$ctx3.sendIdx["class:"]=1;
+} else {
+_st(_st(html)._span())._class_("structure-icon glyphicon glyphicon-folder-open");
+$ctx3.sendIdx["class:"]=2;
+};
+return _st(html)._with_(_st(aStructure)._title());
+$ctx3.sendIdx["with:"]=3;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
+$4=_st(html)._td();
+_st($4)._class_("align-right");
+$5=_st($4)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$6=_st(html)._a();
+$ctx3.sendIdx["a"]=1;
+_st($6)._with_("Edit");
+$ctx3.sendIdx["with:"]=5;
+$7=_st($6)._onClick_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._editStructure_(aStructure);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,6)})}));
+$ctx3.sendIdx["onClick:"]=1;
+$7;
+_st(html)._with_(" - ");
+$ctx3.sendIdx["with:"]=6;
+$8=_st(html)._a();
+_st($8)._with_("Remove");
+$9=_st($8)._onClick_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._removeStructure_(aStructure);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,7)})}));
+return $9;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
+$ctx2.sendIdx["with:"]=4;
+return $5;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderStructureRow:on:",{aStructure:aStructure,html:html},globals.MRStructuresWidget)})},
+args: ["aStructure", "html"],
+source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage \x0a\x09\x09\x09\x09ifTrue: [ html span class: 'structure-icon glyphicon glyphicon-file' ]\x0a\x09\x09\x09\x09ifFalse: [ html span class: 'structure-icon glyphicon glyphicon-folder-open' ].\x0a\x09\x09\x09html with: aStructure title ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Edit';\x0a\x09\x09\x09\x09onClick: [ self editStructure: aStructure ]. \x0a\x09\x09\x09html with: ' - '.\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
+messageSends: ["with:", "tr", "td", "ifTrue:ifFalse:", "isPage", "class:", "span", "title", "a", "onClick:", "editStructure:", "removeStructure:"],
 referencedClasses: []
 }),
 globals.MRStructuresWidget);
@@ -1467,7 +1584,74 @@ smalltalk.addClass('MRHeaderWidget', globals.MRPresenterWidget, [], 'Marina-Widg
 globals.MRHeaderWidget.comment="I display the main header of the admin page.";
 smalltalk.addMethod(
 smalltalk.method({
-selector: "renderMenuItemsOn:",
+selector: "editUserSettings",
+protocol: 'actions',
+fn: function (){
+var self=this;
+return self},
+args: [],
+source: "editUserSettings",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRHeaderWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "logout",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRLoginDispatcher(){return globals.MRLoginDispatcher||(typeof MRLoginDispatcher=="undefined"?nil:MRLoginDispatcher)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(self._presenter())._logout())._then_((function(){
+return smalltalk.withContext(function($ctx2) {
+return _st($MRLoginDispatcher())._start();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"logout",{},globals.MRHeaderWidget)})},
+args: [],
+source: "logout\x0a\x09self presenter logout then: [ \x0a\x09\x09MRLoginDispatcher start ]",
+messageSends: ["then:", "logout", "presenter", "start"],
+referencedClasses: ["MRLoginDispatcher"]
+}),
+globals.MRHeaderWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderHeaderOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$3,$4,$2;
+$1=_st(html)._div();
+$ctx1.sendIdx["div"]=1;
+_st($1)._class_("navbar navbar-default");
+$ctx1.sendIdx["class:"]=1;
+_st($1)._at_put_("role","navigation");
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$3=_st(html)._div();
+_st($3)._class_("container-fluid");
+$4=_st($3)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+self._renderToggleOn_(html);
+return self._renderMenuOn_(html);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+return $4;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderHeaderOn:",{html:html},globals.MRHeaderWidget)})},
+args: ["html"],
+source: "renderHeaderOn: html\x0a\x09html div\x0a\x09\x09class: 'navbar navbar-default';\x0a\x09\x09at: 'role' put: 'navigation';\x0a\x09\x09with: [\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'container-fluid'; \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09self renderToggleOn: html.\x0a\x09\x09\x09\x09\x09self renderMenuOn: html ] ]",
+messageSends: ["class:", "div", "at:put:", "with:", "renderToggleOn:", "renderMenuOn:"],
+referencedClasses: []
+}),
+globals.MRHeaderWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderLeftItemsOn:",
 protocol: 'rendering',
 fn: function (html){
 var self=this;
@@ -1516,9 +1700,9 @@ return self._showUsersWidget();
 return $8;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,5)})}));
 $ctx1.sendIdx["with:"]=5;
-return self}, function($ctx1) {$ctx1.fill(self,"renderMenuItemsOn:",{html:html},globals.MRHeaderWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderLeftItemsOn:",{html:html},globals.MRHeaderWidget)})},
 args: ["html"],
-source: "renderMenuItemsOn: html\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Pages';\x0a\x09\x09\x09onClick: [ self showStructuresWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Templates';\x0a\x09\x09\x09onClick: [ self showTemplatesWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Users';\x0a\x09\x09\x09onClick: [ self showUsersWidget ] ]",
+source: "renderLeftItemsOn: html\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Pages';\x0a\x09\x09\x09onClick: [ self showStructuresWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Templates';\x0a\x09\x09\x09onClick: [ self showTemplatesWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Users';\x0a\x09\x09\x09onClick: [ self showUsersWidget ] ]",
 messageSends: ["with:", "li", "a", "onClick:", "showStructuresWidget", "showTemplatesWidget", "showUsersWidget"],
 referencedClasses: []
 }),
@@ -1531,7 +1715,7 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$4,$2;
+var $1,$3,$4,$5,$6,$2;
 $1=_st(html)._div();
 _st($1)._class_("collapse navbar-collapse");
 $ctx1.sendIdx["class:"]=1;
@@ -1539,18 +1723,28 @@ _st($1)._id_("menu");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 $3=_st(html)._ul();
+$ctx2.sendIdx["ul"]=1;
 _st($3)._class_("nav navbar-nav");
+$ctx2.sendIdx["class:"]=2;
 $4=_st($3)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-return self._renderMenuItemsOn_(html);
+return self._renderLeftItemsOn_(html);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
-return $4;
+$ctx2.sendIdx["with:"]=2;
+$4;
+$5=_st(html)._ul();
+_st($5)._class_("nav navbar-nav navbar-right");
+$6=_st($5)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._renderRightItemsOn_(html);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
+return $6;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderMenuOn:",{html:html},globals.MRHeaderWidget)})},
 args: ["html"],
-source: "renderMenuOn: html\x0a\x09html div \x0a\x09\x09class: 'collapse navbar-collapse';\x0a\x09\x09id: 'menu';\x0a\x09\x09with: [\x0a\x09\x09\x09html ul \x0a\x09\x09\x09\x09class: 'nav navbar-nav';\x0a\x09\x09\x09\x09with: [ self renderMenuItemsOn: html ] ]",
-messageSends: ["class:", "div", "id:", "with:", "ul", "renderMenuItemsOn:"],
+source: "renderMenuOn: html\x0a\x09html div \x0a\x09\x09class: 'collapse navbar-collapse';\x0a\x09\x09id: 'menu';\x0a\x09\x09with: [\x0a\x09\x09\x09html ul \x0a\x09\x09\x09\x09class: 'nav navbar-nav';\x0a\x09\x09\x09\x09with: [ self renderLeftItemsOn: html ].\x0a\x09\x09\x09html ul\x0a\x09\x09\x09\x09class: 'nav navbar-nav navbar-right';\x0a\x09\x09\x09\x09with: [ self renderRightItemsOn: html ] ]",
+messageSends: ["class:", "div", "id:", "with:", "ul", "renderLeftItemsOn:", "renderRightItemsOn:"],
 referencedClasses: []
 }),
 globals.MRHeaderWidget);
@@ -1562,28 +1756,83 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$4,$2;
+var $1,$3,$5,$6,$4,$2;
 $1=_st(html)._div();
 $ctx1.sendIdx["div"]=1;
-_st($1)._class_("navbar navbar-default");
+_st($1)._class_("container-fluid");
 $ctx1.sendIdx["class:"]=1;
-_st($1)._at_put_("role","navigation");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 $3=_st(html)._div();
-_st($3)._class_("container");
+$ctx2.sendIdx["div"]=2;
+_st($3)._class_("row");
+$ctx2.sendIdx["class:"]=2;
 $4=_st($3)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-self._renderToggleOn_(html);
-return self._renderMenuOn_(html);
+$5=_st(html)._div();
+_st($5)._class_("col-md-8 col-md-offset-2 col-xs-12");
+$6=_st($5)._with_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._renderHeaderOn_(html);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
+return $6;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
 return $4;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRHeaderWidget)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09html div\x0a\x09\x09class: 'navbar navbar-default';\x0a\x09\x09at: 'role' put: 'navigation';\x0a\x09\x09with: [\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'container'; \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09self renderToggleOn: html.\x0a\x09\x09\x09\x09\x09self renderMenuOn: html ] ]",
-messageSends: ["class:", "div", "at:put:", "with:", "renderToggleOn:", "renderMenuOn:"],
+source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'container-fluid';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'row';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09class: 'col-md-8 col-md-offset-2 col-xs-12';\x0a\x09\x09\x09\x09\x09\x09with: [ self renderHeaderOn: html ] ] ]",
+messageSends: ["class:", "div", "with:", "renderHeaderOn:"],
+referencedClasses: []
+}),
+globals.MRHeaderWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderRightItemsOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3,$4,$5;
+$1=_st(html)._li();
+$ctx1.sendIdx["li"]=1;
+_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$2=_st(html)._a();
+$ctx2.sendIdx["a"]=1;
+_st($2)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+_st(_st(html)._span())._class_("glyphicon glyphicon-user");
+return _st(html)._with_(" ".__comma(_st(_st(self._presenter())._user())._fullName()));
+$ctx3.sendIdx["with:"]=3;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
+$3=_st($2)._onClick_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._editUserSettings();
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
+$ctx2.sendIdx["onClick:"]=1;
+return $3;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+_st(_st(html)._li())._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$4=_st(html)._a();
+_st($4)._with_("logout");
+$5=_st($4)._onClick_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._logout();
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
+return $5;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,4)})}));
+$ctx1.sendIdx["with:"]=4;
+return self}, function($ctx1) {$ctx1.fill(self,"renderRightItemsOn:",{html:html},globals.MRHeaderWidget)})},
+args: ["html"],
+source: "renderRightItemsOn: html\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html span class: 'glyphicon glyphicon-user'.\x0a\x09\x09\x09\x09html with: ' ', self presenter user fullName ];\x0a\x09\x09\x09onClick: [ self editUserSettings ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'logout';\x0a\x09\x09\x09onClick: [ self logout ] ]",
+messageSends: ["with:", "li", "a", "class:", "span", ",", "fullName", "user", "presenter", "onClick:", "editUserSettings", "logout"],
 referencedClasses: []
 }),
 globals.MRHeaderWidget);

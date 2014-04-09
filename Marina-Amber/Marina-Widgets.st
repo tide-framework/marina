@@ -256,6 +256,10 @@ start
 !MRLoginDispatcher class methodsFor: 'initialization'!
 
 initialize
+	self start
+!
+
+start
 	self new
 		presenter: (TDProxy on: '/marina');
 		start
@@ -292,6 +296,10 @@ wrapper
 ! !
 
 !MRFrameWidget methodsFor: 'actions'!
+
+refresh
+	self remove; render
+!
 
 remove
 	self wrapper ifNotNil: [ wrapper asJQuery remove ]
@@ -333,7 +341,7 @@ mainWidget
 
 renderContentOn: html
 	html div
-		class: 'admin'; 
+		class: 'admin';
 		with: self headerWidget;
 		with: self mainWidget
 ! !
@@ -490,16 +498,39 @@ title
 	^ 'Structures'
 ! !
 
+!MRStructuresWidget methodsFor: 'actions'!
+
+removeStructure: aStructure
+	aStructure remove then: [ self refresh ]
+! !
+
 !MRStructuresWidget methodsFor: 'rendering'!
 
 renderContentOn: html
-	html table 
-		class: 'table table-striped';
-		with: [
-			html tbody with: [
-				self structures contents then: [ :structures |
+	self structures contents then: [ :structures |
+		html table 
+			class: 'table table-striped';
+			with: [
+				html tbody with: [
 					structures do: [ :each |
-						html tr with: each title ] ] ] ]
+						self renderStructureRow: each on: html ] ] ] ]
+!
+
+renderStructureRow: aStructure on: html
+	html tr with: [
+		html td with: [
+			aStructure isPage 
+				ifTrue: [ html span class: 'structure-icon glyphicon glyphicon-file' ]
+				ifFalse: [ html span class: 'structure-icon glyphicon glyphicon-folder-open' ].
+			html with: aStructure title ].
+		html td class: 'align-right'; with: [
+			html a 
+				with: 'Edit';
+				onClick: [ self editStructure: aStructure ]. 
+			html with: ' - '.
+			html a 
+				with: 'Remove';
+				onClick: [ self removeStructure: aStructure ] ] ]
 ! !
 
 MRPresenterWidget subclass: #MRHeaderWidget
@@ -510,6 +541,14 @@ I display the main header of the admin page.!
 
 !MRHeaderWidget methodsFor: 'actions'!
 
+editUserSettings
+!
+
+logout
+	self presenter logout then: [ 
+		MRLoginDispatcher start ]
+!
+
 showStructuresWidget
 	MRStructuresWidget new
 		presenter: self presenter structures;
@@ -518,7 +557,19 @@ showStructuresWidget
 
 !MRHeaderWidget methodsFor: 'rendering'!
 
-renderMenuItemsOn: html
+renderHeaderOn: html
+	html div
+		class: 'navbar navbar-default';
+		at: 'role' put: 'navigation';
+		with: [
+			html div 
+				class: 'container-fluid'; 
+				with: [
+					self renderToggleOn: html.
+					self renderMenuOn: html ] ]
+!
+
+renderLeftItemsOn: html
 	html li with: [ 
 		html a 
 			with: 'Pages';
@@ -540,19 +591,35 @@ renderMenuOn: html
 		with: [
 			html ul 
 				class: 'nav navbar-nav';
-				with: [ self renderMenuItemsOn: html ] ]
+				with: [ self renderLeftItemsOn: html ].
+			html ul
+				class: 'nav navbar-nav navbar-right';
+				with: [ self renderRightItemsOn: html ] ]
 !
 
 renderOn: html
-	html div
-		class: 'navbar navbar-default';
-		at: 'role' put: 'navigation';
+	html div 
+		class: 'container-fluid';
 		with: [
-			html div 
-				class: 'container'; 
+			html div
+				class: 'row';
 				with: [
-					self renderToggleOn: html.
-					self renderMenuOn: html ] ]
+					html div 
+						class: 'col-md-8 col-md-offset-2 col-xs-12';
+						with: [ self renderHeaderOn: html ] ] ]
+!
+
+renderRightItemsOn: html
+	html li with: [ 
+		html a 
+			with: [
+				html span class: 'glyphicon glyphicon-user'.
+				html with: ' ', self presenter user fullName ];
+			onClick: [ self editUserSettings ] ].
+	html li with: [ 
+		html a 
+			with: 'logout';
+			onClick: [ self logout ] ]
 !
 
 renderToggleOn: html
