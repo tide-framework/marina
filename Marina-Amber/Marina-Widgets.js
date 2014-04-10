@@ -2737,7 +2737,7 @@ $19=_st(titleInput)._value();
 $ctx2.sendIdx["value"]=1;
 $20=_st(templateInput)._value();
 $ctx2.sendIdx["value"]=2;
-$21=_st(titleInput)._value();
+$21=_st(contentsInput)._value();
 $ctx2.sendIdx["value"]=3;
 return self._updatePageWithTitle_template_contents_published_($19,$20,$21,_st(publishedInput)._value());
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
@@ -2748,7 +2748,7 @@ return self._showStructureListWidget();
 _st(html)._with_(form);
 return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput,templateInput:templateInput,contentsInput:contentsInput,publishedInput:publishedInput},globals.MRPageEditorWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09| form titleInput templateInput contentsInput publishedInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self page title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x0a\x09templateInput := form selectInput\x0a\x09\x09options: self templateTitles;\x0a\x09\x09selectedOption: self page template title;\x0a\x09\x09label: 'Template';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self page contents;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09publishedInput := form checkboxInput\x0a\x09\x09label: 'Published';\x0a\x09\x09checked: self page published;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updatePageWithTitle: titleInput value\x0a\x09\x09\x09template: templateInput value\x0a\x09\x09\x09contents: titleInput value\x0a\x09\x09\x09published: publishedInput value ].\x0a\x0a\x09form cancelAction: [ self showStructureListWidget ].\x0a\x09\x0a\x09html with: form",
+source: "renderContentOn: html\x0a\x09| form titleInput templateInput contentsInput publishedInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self page title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x0a\x09templateInput := form selectInput\x0a\x09\x09options: self templateTitles;\x0a\x09\x09selectedOption: self page template title;\x0a\x09\x09label: 'Template';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self page contents;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09publishedInput := form checkboxInput\x0a\x09\x09label: 'Published';\x0a\x09\x09checked: self page published;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updatePageWithTitle: titleInput value\x0a\x09\x09\x09template: templateInput value\x0a\x09\x09\x09contents: contentsInput value\x0a\x09\x09\x09published: publishedInput value ].\x0a\x0a\x09form cancelAction: [ self showStructureListWidget ].\x0a\x09\x0a\x09html with: form",
 messageSends: ["new", "placeholder:", "textInput", "defaultValue:", "title", "page", "label:", "yourself", "options:", "selectInput", "templateTitles", "selectedOption:", "template", "textareaInput", "contents", "checkboxInput", "checked:", "published", "submitAction:", "updatePageWithTitle:template:contents:published:", "value", "cancelAction:", "showStructureListWidget", "with:"],
 referencedClasses: ["MRBootstrapForm"]
 }),

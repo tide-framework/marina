@@ -930,7 +930,7 @@ renderContentOn: html
 		self 
 			updatePageWithTitle: titleInput value
 			template: templateInput value
-			contents: titleInput value
+			contents: contentsInput value
 			published: publishedInput value ].
 
 	form cancelAction: [ self showStructureListWidget ].
