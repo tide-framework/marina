@@ -545,6 +545,25 @@ globals.MRBootstrapForm);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "checkboxInput",
+protocol: 'adding',
+fn: function (){
+var self=this;
+function $MRBootstrapCheckboxInput(){return globals.MRBootstrapCheckboxInput||(typeof MRBootstrapCheckboxInput=="undefined"?nil:MRBootstrapCheckboxInput)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._addInput_(_st($MRBootstrapCheckboxInput())._new());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"checkboxInput",{},globals.MRBootstrapForm)})},
+args: [],
+source: "checkboxInput\x0a\x09^ self addInput: MRBootstrapCheckboxInput new",
+messageSends: ["addInput:", "new"],
+referencedClasses: ["MRBootstrapCheckboxInput"]
+}),
+globals.MRBootstrapForm);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "detectInput:",
 protocol: 'accessing',
 fn: function (aBlock){
@@ -728,6 +747,7 @@ $ctx3.sendIdx["button"]=1;
 _st($3)._class_("btn btn-default");
 $ctx3.sendIdx["class:"]=2;
 _st($3)._type_("submit");
+$ctx3.sendIdx["type:"]=1;
 $4=_st($3)._with_(self._submitLabel());
 $ctx3.sendIdx["with:"]=4;
 $4;
@@ -735,8 +755,15 @@ $5=self._isCancellable();
 if(smalltalk.assert($5)){
 $6=_st(html)._button();
 _st($6)._class_("btn");
+_st($6)._type_("cancel");
 _st($6)._with_(self._cancelLabel());
-$7=_st($6)._onClick_(self._cancelAction());
+$7=_st($6)._onClick_((function(e){
+return smalltalk.withContext(function($ctx4) {
+_st(self._cancelAction())._value();
+_st(e)._preventDefault();
+$ctx4.sendIdx["preventDefault"]=1;
+return false;
+}, function($ctx4) {$ctx4.fillBlock({e:e},$ctx3,5)})}));
 return $7;
 };
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
@@ -748,11 +775,11 @@ _st(_st(htmlForm)._asJQuery())._submit_((function(event){
 return smalltalk.withContext(function($ctx2) {
 _st(self._submitAction())._value_(self);
 return _st(event)._preventDefault();
-}, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,5)})}));
+}, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,6)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html,htmlForm:htmlForm},globals.MRBootstrapForm)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09| htmlForm |\x0a\x09htmlForm := html form with: [\x0a\x09\x09self inputs do: [ :each | html with: each ].\x0a\x09\x0a\x09html div \x0a\x09\x09class: 'form-group';\x0a\x09\x09with: [\x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09class: 'btn btn-default';\x0a\x09\x09\x09\x09type: 'submit';\x0a\x09\x09\x09\x09with: self submitLabel.\x0a\x09\x0a\x09\x09\x09self isCancellable ifTrue: [ \x0a\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09class: 'btn';\x0a\x09\x09\x09\x09\x09with: self cancelLabel;\x0a\x09\x09\x09\x09\x09onClick: self cancelAction ] ] ].\x0a\x09\x09\x09\x0a\x09htmlForm asJQuery submit: [ :event |\x0a\x09\x09self submitAction value: self.\x0a\x09\x09event preventDefault ]",
-messageSends: ["with:", "form", "do:", "inputs", "class:", "div", "button", "type:", "submitLabel", "ifTrue:", "isCancellable", "cancelLabel", "onClick:", "cancelAction", "submit:", "asJQuery", "value:", "submitAction", "preventDefault"],
+source: "renderOn: html\x0a\x09| htmlForm |\x0a\x09htmlForm := html form with: [\x0a\x09\x09self inputs do: [ :each | html with: each ].\x0a\x09\x0a\x09\x09html div \x0a\x09\x09\x09class: 'form-group';\x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09class: 'btn btn-default';\x0a\x09\x09\x09\x09\x09type: 'submit';\x0a\x09\x09\x09\x09\x09with: self submitLabel.\x0a\x09\x0a\x09\x09\x09\x09self isCancellable ifTrue: [ \x0a\x09\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09\x09class: 'btn';\x0a\x09\x09\x09\x09\x09\x09type: 'cancel';\x0a\x09\x09\x09\x09\x09\x09with: self cancelLabel;\x0a\x09\x09\x09\x09\x09\x09onClick: [ :e | \x0a\x09\x09\x09\x09\x09\x09\x09self cancelAction value.\x0a\x09\x09\x09\x09\x09\x09\x09e preventDefault. false ] ] ] ].\x0a\x09\x09\x09\x0a\x09htmlForm asJQuery submit: [ :event |\x0a\x09\x09self submitAction value: self.\x0a\x09\x09event preventDefault ]",
+messageSends: ["with:", "form", "do:", "inputs", "class:", "div", "button", "type:", "submitLabel", "ifTrue:", "isCancellable", "cancelLabel", "onClick:", "value", "cancelAction", "preventDefault", "submit:", "asJQuery", "value:", "submitAction"],
 referencedClasses: []
 }),
 globals.MRBootstrapForm);
@@ -869,6 +896,25 @@ args: [],
 source: "textInput\x0a\x09^ self addInput: MRBootstrapTextInput new",
 messageSends: ["addInput:", "new"],
 referencedClasses: ["MRBootstrapTextInput"]
+}),
+globals.MRBootstrapForm);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "textareaInput",
+protocol: 'adding',
+fn: function (){
+var self=this;
+function $MRBootstrapTextareaInput(){return globals.MRBootstrapTextareaInput||(typeof MRBootstrapTextareaInput=="undefined"?nil:MRBootstrapTextareaInput)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._addInput_(_st($MRBootstrapTextareaInput())._new());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"textareaInput",{},globals.MRBootstrapForm)})},
+args: [],
+source: "textareaInput\x0a\x09^ self addInput: MRBootstrapTextareaInput new",
+messageSends: ["addInput:", "new"],
+referencedClasses: ["MRBootstrapTextareaInput"]
 }),
 globals.MRBootstrapForm);
 
@@ -1038,7 +1084,132 @@ referencedClasses: []
 globals.MRBootstrapInput.klass);
 
 
-smalltalk.addClass('MRBootstrapSelectInput', globals.MRBootstrapInput, ['options'], 'Marina-Widgets');
+smalltalk.addClass('MRBootstrapCheckboxInput', globals.MRBootstrapInput, ['checked'], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "checked",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@checked"];
+if(($receiver = $2) == nil || $receiver == null){
+$1=false;
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"checked",{},globals.MRBootstrapCheckboxInput)})},
+args: [],
+source: "checked\x0a\x09^ checked ifNil: [ false ]",
+messageSends: ["ifNil:"],
+referencedClasses: []
+}),
+globals.MRBootstrapCheckboxInput);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "checked:",
+protocol: 'accessing',
+fn: function (aBoolean){
+var self=this;
+self["@checked"]=aBoolean;
+return self},
+args: ["aBoolean"],
+source: "checked: aBoolean\x0a\x09checked := aBoolean",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapCheckboxInput);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderFormInputOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3;
+$1=_st(html)._input();
+_st($1)._id_(self._id());
+$2=_st($1)._type_("checkbox");
+self["@htmlInput"]=$2;
+$3=self._checked();
+$ctx1.sendIdx["checked"]=1;
+if(smalltalk.assert($3)){
+_st(self["@htmlInput"])._at_put_("checked",self._checked());
+};
+_st(html)._with_(self._label());
+return self}, function($ctx1) {$ctx1.fill(self,"renderFormInputOn:",{html:html},globals.MRBootstrapCheckboxInput)})},
+args: ["html"],
+source: "renderFormInputOn: html\x0a\x09htmlInput := html input \x0a\x09\x09id: self id;\x0a\x09\x09type: 'checkbox'.\x0a\x09\x09\x0a\x09self checked ifTrue: [\x0a\x09\x09htmlInput at: 'checked' put: self checked ].\x0a\x09\x09\x09\x0a\x09html with: self label",
+messageSends: ["id:", "input", "id", "type:", "ifTrue:", "checked", "at:put:", "with:", "label"],
+referencedClasses: []
+}),
+globals.MRBootstrapCheckboxInput);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$3,$4,$2;
+$1=_st(html)._div();
+$ctx1.sendIdx["div"]=1;
+_st($1)._class_("form-group");
+$ctx1.sendIdx["class:"]=1;
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$3=_st(html)._div();
+_st($3)._class_("checkbox");
+$4=_st($3)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+return _st(_st(html)._label())._with_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._renderFormInputOn_(html);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
+return $4;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRBootstrapCheckboxInput)})},
+args: ["html"],
+source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'form-group';\x0a\x09\x09with: [ \x0a\x09\x09\x09html div class: 'checkbox'; with: [\x0a\x09\x09\x09\x09html label \x0a\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09self renderFormInputOn: html ] ] ]",
+messageSends: ["class:", "div", "with:", "label", "renderFormInputOn:"],
+referencedClasses: []
+}),
+globals.MRBootstrapCheckboxInput);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "value",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@htmlInput"];
+if(($receiver = $2) == nil || $receiver == null){
+$1=$2;
+} else {
+$1=_st(_st(self["@htmlInput"])._asJQuery())._is_(":checked");
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"value",{},globals.MRBootstrapCheckboxInput)})},
+args: [],
+source: "value\x0a\x09^ htmlInput ifNotNil: [ htmlInput asJQuery is: ':checked' ]",
+messageSends: ["ifNotNil:", "is:", "asJQuery"],
+referencedClasses: []
+}),
+globals.MRBootstrapCheckboxInput);
+
+
+
+smalltalk.addClass('MRBootstrapSelectInput', globals.MRBootstrapInput, ['options', 'selectedOption'], 'Marina-Widgets');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "options",
@@ -1084,43 +1255,125 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2;
+var $1,$3,$2;
 $1=_st(html)._select();
 _st($1)._id_(self._id());
 _st($1)._class_("form-control");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 return _st(self._options())._do_((function(each){
+var option;
 return smalltalk.withContext(function($ctx3) {
-return _st(_st(html)._option())._with_(each);
-}, function($ctx3) {$ctx3.fillBlock({each:each},$ctx2,2)})}));
+option=_st(_st(html)._option())._with_(each);
+option;
+$3=_st(self._selectedOption()).__eq(each);
+if(smalltalk.assert($3)){
+return _st(option)._at_put_("selected","selected");
+};
+}, function($ctx3) {$ctx3.fillBlock({each:each,option:option},$ctx2,2)})}));
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 self["@htmlInput"]=$2;
 return self}, function($ctx1) {$ctx1.fill(self,"renderFormInputOn:",{html:html},globals.MRBootstrapSelectInput)})},
 args: ["html"],
-source: "renderFormInputOn: html\x0a\x09htmlInput := html select\x0a\x09\x09id: self id;\x0a\x09\x09class: 'form-control';\x0a\x09\x09with: [ \x0a\x09\x09\x09self options do: [ :each |\x0a\x09\x09\x09\x09html option with: each ] ]",
-messageSends: ["id:", "select", "id", "class:", "with:", "do:", "options", "option"],
+source: "renderFormInputOn: html\x0a\x09htmlInput := html select\x0a\x09\x09id: self id;\x0a\x09\x09class: 'form-control';\x0a\x09\x09with: [ \x0a\x09\x09\x09self options do: [ :each || option |\x0a\x09\x09\x09\x09option := html option with: each.\x0a\x09\x09\x09\x09self selectedOption = each ifTrue: [\x0a\x09\x09\x09\x09\x09option at: 'selected' put: 'selected' ] ] ]",
+messageSends: ["id:", "select", "id", "class:", "with:", "do:", "options", "option", "ifTrue:", "=", "selectedOption", "at:put:"],
+referencedClasses: []
+}),
+globals.MRBootstrapSelectInput);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "selectedOption",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@selectedOption"];
+return $1;
+},
+args: [],
+source: "selectedOption\x0a\x09^ selectedOption",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapSelectInput);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "selectedOption:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@selectedOption"]=anObject;
+return self},
+args: ["anObject"],
+source: "selectedOption: anObject\x0a\x09selectedOption := anObject",
+messageSends: [],
 referencedClasses: []
 }),
 globals.MRBootstrapSelectInput);
 
 
 
-smalltalk.addClass('MRBootstrapTextInput', globals.MRBootstrapInput, ['placeholder'], 'Marina-Widgets');
+smalltalk.addClass('MRBootstrapTextInput', globals.MRBootstrapInput, ['placeholder', 'defaultValue'], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "defaultValue",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@defaultValue"];
+if(($receiver = $2) == nil || $receiver == null){
+$1="";
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"defaultValue",{},globals.MRBootstrapTextInput)})},
+args: [],
+source: "defaultValue\x0a\x09^ defaultValue ifNil: [ '' ]",
+messageSends: ["ifNil:"],
+referencedClasses: []
+}),
+globals.MRBootstrapTextInput);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "defaultValue:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@defaultValue"]=anObject;
+return self},
+args: ["anObject"],
+source: "defaultValue: anObject\x0a\x09defaultValue := anObject",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRBootstrapTextInput);
+
 smalltalk.addMethod(
 smalltalk.method({
 selector: "placeholder",
 protocol: 'accessing',
 fn: function (){
 var self=this;
-var $1;
-$1=self["@placeholder"];
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@placeholder"];
+if(($receiver = $2) == nil || $receiver == null){
+$1="";
+} else {
+$1=$2;
+};
 return $1;
-},
+}, function($ctx1) {$ctx1.fill(self,"placeholder",{},globals.MRBootstrapTextInput)})},
 args: [],
-source: "placeholder\x0a\x09^ placeholder",
-messageSends: [],
+source: "placeholder\x0a\x09^ placeholder ifNil: [ '' ]",
+messageSends: ["ifNil:"],
 referencedClasses: []
 }),
 globals.MRBootstrapTextInput);
@@ -1151,49 +1404,14 @@ var $1,$2;
 $1=_st(html)._input();
 _st($1)._id_(self._id());
 _st($1)._type_(self._type());
+_st($1)._at_put_("placeholder",self._placeholder());
+_st($1)._value_(self._defaultValue());
 $2=_st($1)._class_("form-control");
 self["@htmlInput"]=$2;
 return self}, function($ctx1) {$ctx1.fill(self,"renderFormInputOn:",{html:html},globals.MRBootstrapTextInput)})},
 args: ["html"],
-source: "renderFormInputOn: html\x0a\x09htmlInput := html input \x0a\x09\x09id: self id;\x0a\x09\x09type: self type;\x0a\x09\x09class: 'form-control'",
-messageSends: ["id:", "input", "id", "type:", "type", "class:"],
-referencedClasses: []
-}),
-globals.MRBootstrapTextInput);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "renderOn:",
-protocol: 'rendering',
-fn: function (html){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$4,$5,$6,$7,$8,$2;
-$1=_st(html)._div();
-_st($1)._class_("form-group");
-$ctx1.sendIdx["class:"]=1;
-$2=_st($1)._with_((function(){
-return smalltalk.withContext(function($ctx2) {
-$3=_st(html)._label();
-$ctx2.sendIdx["label"]=1;
-$4=$3;
-$5=self._id();
-$ctx2.sendIdx["id"]=1;
-_st($4)._for_($5);
-$6=_st($3)._with_(self._label());
-$6;
-$7=_st(html)._input();
-_st($7)._id_(self._id());
-_st($7)._type_(self._type());
-$8=_st($7)._class_("form-control");
-self["@htmlInput"]=$8;
-return self["@htmlInput"];
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-$ctx1.sendIdx["with:"]=1;
-return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRBootstrapTextInput)})},
-args: ["html"],
-source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'form-group';\x0a\x09\x09with: [ \x0a\x09\x09\x09html label \x0a\x09\x09\x09\x09for: self id;\x0a\x09\x09\x09\x09with: self label.\x0a\x09\x09\x09htmlInput := html input \x0a\x09\x09\x09\x09id: self id;\x0a\x09\x09\x09\x09type: self type;\x0a\x09\x09\x09\x09class: 'form-control' ]",
-messageSends: ["class:", "div", "with:", "for:", "label", "id", "id:", "input", "type:", "type"],
+source: "renderFormInputOn: html\x0a\x09htmlInput := html input \x0a\x09\x09id: self id;\x0a\x09\x09type: self type;\x0a\x09\x09at: 'placeholder' put: self placeholder;\x0a\x09\x09value: self defaultValue;\x0a\x09\x09class: 'form-control'",
+messageSends: ["id:", "input", "id", "type:", "type", "at:put:", "placeholder", "value:", "defaultValue", "class:"],
 referencedClasses: []
 }),
 globals.MRBootstrapTextInput);
@@ -1230,6 +1448,31 @@ messageSends: [],
 referencedClasses: []
 }),
 globals.MRBootstrapPasswordInput);
+
+
+
+smalltalk.addClass('MRBootstrapTextareaInput', globals.MRBootstrapTextInput, [], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderFormInputOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st(html)._textarea();
+_st($1)._id_(self._id());
+_st($1)._at_put_("placeholder",self._placeholder());
+_st($1)._with_(self._defaultValue());
+$2=_st($1)._class_("form-control");
+self["@htmlInput"]=$2;
+return self}, function($ctx1) {$ctx1.fill(self,"renderFormInputOn:",{html:html},globals.MRBootstrapTextareaInput)})},
+args: ["html"],
+source: "renderFormInputOn: html\x0a\x09htmlInput := html textarea \x0a\x09\x09id: self id;\x0a\x09\x09at: 'placeholder' put: self placeholder;\x0a\x09\x09with: self defaultValue;\x0a\x09\x09class: 'form-control'",
+messageSends: ["id:", "textarea", "id", "at:put:", "placeholder", "with:", "defaultValue", "class:"],
+referencedClasses: []
+}),
+globals.MRBootstrapTextareaInput);
 
 
 
@@ -2440,10 +2683,118 @@ selector: "renderContentOn:",
 protocol: 'rendering',
 fn: function (html){
 var self=this;
-return self},
+var form,titleInput,templateInput,contentsInput,publishedInput;
+function $MRBootstrapForm(){return globals.MRBootstrapForm||(typeof MRBootstrapForm=="undefined"?nil:MRBootstrapForm)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$4,$3,$5,$6,$7,$10,$9,$8,$11,$12,$13,$15,$14,$16,$17,$18,$19,$20,$21;
+form=_st($MRBootstrapForm())._new();
+$1=_st(form)._textInput();
+_st($1)._placeholder_("Title");
+$2=$1;
+$4=self._page();
+$ctx1.sendIdx["page"]=1;
+$3=_st($4)._title();
+$ctx1.sendIdx["title"]=1;
+_st($2)._defaultValue_($3);
+$ctx1.sendIdx["defaultValue:"]=1;
+_st($1)._label_("Title");
+$ctx1.sendIdx["label:"]=1;
+$5=_st($1)._yourself();
+$ctx1.sendIdx["yourself"]=1;
+titleInput=$5;
+$6=_st(form)._selectInput();
+_st($6)._options_(self._templateTitles());
+$7=$6;
+$10=self._page();
+$ctx1.sendIdx["page"]=2;
+$9=_st($10)._template();
+$8=_st($9)._title();
+_st($7)._selectedOption_($8);
+_st($6)._label_("Template");
+$ctx1.sendIdx["label:"]=2;
+$11=_st($6)._yourself();
+$ctx1.sendIdx["yourself"]=2;
+templateInput=$11;
+$12=_st(form)._textareaInput();
+_st($12)._label_("Contents");
+$ctx1.sendIdx["label:"]=3;
+$13=$12;
+$15=self._page();
+$ctx1.sendIdx["page"]=3;
+$14=_st($15)._contents();
+_st($13)._defaultValue_($14);
+$16=_st($12)._yourself();
+$ctx1.sendIdx["yourself"]=3;
+contentsInput=$16;
+$17=_st(form)._checkboxInput();
+_st($17)._label_("Published");
+_st($17)._checked_(_st(self._page())._published());
+$18=_st($17)._yourself();
+publishedInput=$18;
+_st(form)._submitAction_((function(){
+return smalltalk.withContext(function($ctx2) {
+$19=_st(titleInput)._value();
+$ctx2.sendIdx["value"]=1;
+$20=_st(templateInput)._value();
+$ctx2.sendIdx["value"]=2;
+$21=_st(titleInput)._value();
+$ctx2.sendIdx["value"]=3;
+return self._updatePageWithTitle_template_contents_published_($19,$20,$21,_st(publishedInput)._value());
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+_st(form)._cancelAction_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._showStructureListWidget();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+_st(html)._with_(form);
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput,templateInput:templateInput,contentsInput:contentsInput,publishedInput:publishedInput},globals.MRPageEditorWidget)})},
 args: ["html"],
-source: "renderContentOn: html",
-messageSends: [],
+source: "renderContentOn: html\x0a\x09| form titleInput templateInput contentsInput publishedInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self page title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x0a\x09templateInput := form selectInput\x0a\x09\x09options: self templateTitles;\x0a\x09\x09selectedOption: self page template title;\x0a\x09\x09label: 'Template';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self page contents;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09publishedInput := form checkboxInput\x0a\x09\x09label: 'Published';\x0a\x09\x09checked: self page published;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updatePageWithTitle: titleInput value\x0a\x09\x09\x09template: templateInput value\x0a\x09\x09\x09contents: titleInput value\x0a\x09\x09\x09published: publishedInput value ].\x0a\x0a\x09form cancelAction: [ self showStructureListWidget ].\x0a\x09\x0a\x09html with: form",
+messageSends: ["new", "placeholder:", "textInput", "defaultValue:", "title", "page", "label:", "yourself", "options:", "selectInput", "templateTitles", "selectedOption:", "template", "textareaInput", "contents", "checkboxInput", "checked:", "published", "submitAction:", "updatePageWithTitle:template:contents:published:", "value", "cancelAction:", "showStructureListWidget", "with:"],
+referencedClasses: ["MRBootstrapForm"]
+}),
+globals.MRPageEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "showStructureListWidget",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRStructureListWidget(){return globals.MRStructureListWidget||(typeof MRStructureListWidget=="undefined"?nil:MRStructureListWidget)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+_st(_st(self._page())._parent())._then_((function(parent){
+return smalltalk.withContext(function($ctx2) {
+$1=_st($MRStructureListWidget())._new();
+_st($1)._directory_(parent);
+$2=_st($1)._render();
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({parent:parent},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"showStructureListWidget",{},globals.MRPageEditorWidget)})},
+args: [],
+source: "showStructureListWidget\x0a\x09self page parent then: [ :parent |\x0a\x09\x09MRStructureListWidget new\x0a\x09\x09\x09directory: parent;\x0a\x09\x09\x09render ]",
+messageSends: ["then:", "parent", "page", "directory:", "new", "render"],
+referencedClasses: ["MRStructureListWidget"]
+}),
+globals.MRPageEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "templateTitles",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(self._templates())._collect_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st(each)._title();
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"templateTitles",{},globals.MRPageEditorWidget)})},
+args: [],
+source: "templateTitles\x0a\x09^ self templates collect: [ :each | each title ]",
+messageSends: ["collect:", "templates", "title"],
 referencedClasses: []
 }),
 globals.MRPageEditorWidget);
@@ -2462,6 +2813,33 @@ return $1;
 args: [],
 source: "title\x0a\x09^ 'Edit page ', self page title",
 messageSends: [",", "title", "page"],
+referencedClasses: []
+}),
+globals.MRPageEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "updatePageWithTitle:template:contents:published:",
+protocol: 'actions',
+fn: function (aTitle,aTemplateTitle,contents,aBoolean){
+var self=this;
+var template;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+template=_st(self._templates())._detect_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st(_st(each)._title()).__eq(aTemplateTitle);
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
+$1=self._page();
+_st($1)._updateTitle_template_contents_published_(aTitle,template,contents,aBoolean);
+$2=_st($1)._then_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._showStructureListWidget();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"updatePageWithTitle:template:contents:published:",{aTitle:aTitle,aTemplateTitle:aTemplateTitle,contents:contents,aBoolean:aBoolean,template:template},globals.MRPageEditorWidget)})},
+args: ["aTitle", "aTemplateTitle", "contents", "aBoolean"],
+source: "updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean\x0a\x09| template |\x0a\x09\x0a\x09template := self templates detect: [ :each | \x0a\x09\x09each title = aTemplateTitle ].\x0a\x09\x09\x0a\x09self page\x0a\x09\x09updateTitle: aTitle\x0a\x09\x09template: template\x0a\x09\x09contents: contents\x0a\x09\x09published: aBoolean;\x0a\x09\x09then: [\x0a\x09\x09\x09self showStructureListWidget ]",
+messageSends: ["detect:", "templates", "=", "title", "updateTitle:template:contents:published:", "page", "then:", "showStructureListWidget"],
 referencedClasses: []
 }),
 globals.MRPageEditorWidget);

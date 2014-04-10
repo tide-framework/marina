@@ -62,6 +62,9 @@ body .main .main_frame h2 .glyphicon {
 body .main button.btn {
   margin-right: 5px;
 }
+body .main form textarea {
+  height: 300px;
+}
 body .main .breadcrumb {
   background: transparent;
   font-size: 1.2em;

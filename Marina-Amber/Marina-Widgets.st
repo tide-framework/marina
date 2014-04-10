@@ -203,6 +203,10 @@ addInput: anInput
 	^ inputs add: anInput
 !
 
+checkboxInput
+	^ self addInput: MRBootstrapCheckboxInput new
+!
+
 passwordInput
 	^ self addInput: MRBootstrapPasswordInput new
 !
@@ -213,6 +217,10 @@ selectInput
 
 textInput
 	^ self addInput: MRBootstrapTextInput new
+!
+
+textareaInput
+	^ self addInput: MRBootstrapTextareaInput new
 ! !
 
 !MRBootstrapForm methodsFor: 'initialization'!
@@ -230,19 +238,22 @@ renderOn: html
 	htmlForm := html form with: [
 		self inputs do: [ :each | html with: each ].
 	
-	html div 
-		class: 'form-group';
-		with: [
-			html button
-				class: 'btn btn-default';
-				type: 'submit';
-				with: self submitLabel.
-	
-			self isCancellable ifTrue: [ 
+		html div 
+			class: 'form-group';
+			with: [
 				html button
-					class: 'btn';
-					with: self cancelLabel;
-					onClick: self cancelAction ] ] ].
+					class: 'btn btn-default';
+					type: 'submit';
+					with: self submitLabel.
+	
+				self isCancellable ifTrue: [ 
+					html button
+						class: 'btn';
+						type: 'cancel';
+						with: self cancelLabel;
+						onClick: [ :e | 
+							self cancelAction value.
+							e preventDefault. false ] ] ] ].
 			
 	htmlForm asJQuery submit: [ :event |
 		self submitAction value: self.
@@ -312,8 +323,49 @@ generateId
 	^ 'bootstrap_input_', nextId asString
 ! !
 
+MRBootstrapInput subclass: #MRBootstrapCheckboxInput
+	instanceVariableNames: 'checked'
+	package: 'Marina-Widgets'!
+
+!MRBootstrapCheckboxInput methodsFor: 'accessing'!
+
+checked
+	^ checked ifNil: [ false ]
+!
+
+checked: aBoolean
+	checked := aBoolean
+!
+
+value
+	^ htmlInput ifNotNil: [ htmlInput asJQuery is: ':checked' ]
+! !
+
+!MRBootstrapCheckboxInput methodsFor: 'rendering'!
+
+renderFormInputOn: html
+	htmlInput := html input 
+		id: self id;
+		type: 'checkbox'.
+		
+	self checked ifTrue: [
+		htmlInput at: 'checked' put: self checked ].
+			
+	html with: self label
+!
+
+renderOn: html
+	html div 
+		class: 'form-group';
+		with: [ 
+			html div class: 'checkbox'; with: [
+				html label 
+					with: [
+						self renderFormInputOn: html ] ] ]
+! !
+
 MRBootstrapInput subclass: #MRBootstrapSelectInput
-	instanceVariableNames: 'options'
+	instanceVariableNames: 'options selectedOption'
 	package: 'Marina-Widgets'!
 
 !MRBootstrapSelectInput methodsFor: 'accessing'!
@@ -324,6 +376,14 @@ options
 
 options: aCollection
 	options := aCollection
+!
+
+selectedOption
+	^ selectedOption
+!
+
+selectedOption: anObject
+	selectedOption := anObject
 ! !
 
 !MRBootstrapSelectInput methodsFor: 'rendering'!
@@ -333,18 +393,28 @@ renderFormInputOn: html
 		id: self id;
 		class: 'form-control';
 		with: [ 
-			self options do: [ :each |
-				html option with: each ] ]
+			self options do: [ :each || option |
+				option := html option with: each.
+				self selectedOption = each ifTrue: [
+					option at: 'selected' put: 'selected' ] ] ]
 ! !
 
 MRBootstrapInput subclass: #MRBootstrapTextInput
-	instanceVariableNames: 'placeholder'
+	instanceVariableNames: 'placeholder defaultValue'
 	package: 'Marina-Widgets'!
 
 !MRBootstrapTextInput methodsFor: 'accessing'!
 
+defaultValue
+	^ defaultValue ifNil: [ '' ]
+!
+
+defaultValue: anObject
+	defaultValue := anObject
+!
+
 placeholder
-	^ placeholder
+	^ placeholder ifNil: [ '' ]
 !
 
 placeholder: aString
@@ -361,20 +431,9 @@ renderFormInputOn: html
 	htmlInput := html input 
 		id: self id;
 		type: self type;
+		at: 'placeholder' put: self placeholder;
+		value: self defaultValue;
 		class: 'form-control'
-!
-
-renderOn: html
-	html div 
-		class: 'form-group';
-		with: [ 
-			html label 
-				for: self id;
-				with: self label.
-			htmlInput := html input 
-				id: self id;
-				type: self type;
-				class: 'form-control' ]
 ! !
 
 MRBootstrapTextInput subclass: #MRBootstrapPasswordInput
@@ -385,6 +444,20 @@ MRBootstrapTextInput subclass: #MRBootstrapPasswordInput
 
 type
 	^ 'password'
+! !
+
+MRBootstrapTextInput subclass: #MRBootstrapTextareaInput
+	instanceVariableNames: ''
+	package: 'Marina-Widgets'!
+
+!MRBootstrapTextareaInput methodsFor: 'rendering'!
+
+renderFormInputOn: html
+	htmlInput := html textarea 
+		id: self id;
+		at: 'placeholder' put: self placeholder;
+		with: self defaultValue;
+		class: 'form-control'
 ! !
 
 Object subclass: #MRContext
@@ -792,13 +865,77 @@ page: anObject
 	page := anObject
 !
 
+templateTitles
+	^ self templates collect: [ :each | each title ]
+!
+
 title
 	^ 'Edit page ', self page title
+! !
+
+!MRPageEditorWidget methodsFor: 'actions'!
+
+showStructureListWidget
+	self page parent then: [ :parent |
+		MRStructureListWidget new
+			directory: parent;
+			render ]
+!
+
+updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean
+	| template |
+	
+	template := self templates detect: [ :each | 
+		each title = aTemplateTitle ].
+		
+	self page
+		updateTitle: aTitle
+		template: template
+		contents: contents
+		published: aBoolean;
+		then: [
+			self showStructureListWidget ]
 ! !
 
 !MRPageEditorWidget methodsFor: 'rendering'!
 
 renderContentOn: html
+	| form titleInput templateInput contentsInput publishedInput |
+	
+	form := MRBootstrapForm new.
+	
+	titleInput := form textInput
+		placeholder: 'Title';
+		defaultValue: self page title;
+		label: 'Title';
+		yourself.
+	
+	templateInput := form selectInput
+		options: self templateTitles;
+		selectedOption: self page template title;
+		label: 'Template';
+		yourself.
+		
+	contentsInput := form textareaInput
+		label: 'Contents';
+		defaultValue: self page contents;
+		yourself.
+		
+	publishedInput := form checkboxInput
+		label: 'Published';
+		checked: self page published;
+		yourself.
+
+	form submitAction: [
+		self 
+			updatePageWithTitle: titleInput value
+			template: templateInput value
+			contents: titleInput value
+			published: publishedInput value ].
+
+	form cancelAction: [ self showStructureListWidget ].
+	
+	html with: form
 ! !
 
 MRMainFrameWidget subclass: #MRStructureCreatorWidget
