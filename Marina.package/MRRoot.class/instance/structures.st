@@ -1,4 +1,3 @@
 accessing
 structures
-	<state>
-	^ structures
+	^ self children

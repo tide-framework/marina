@@ -4,7 +4,9 @@
 	"instance" : {
 		"add:" : "NicolasPetton 3/28/2014 16:34",
 		"addStructure:" : "NicolasPetton 2/19/2014 17:21",
-		"children" : "NicolasPetton 2/18/2014 16:43",
+		"children" : "NicolasPetton 4/10/2014 12:39",
 		"initialize" : "NicolasPetton 2/19/2014 17:21",
 		"isDirectory" : "NicolasPetton 2/19/2014 16:51",
-		"removeStructure:" : "NicolasPetton 3/28/2014 16:34" } }
+		"remove:" : "NicolasPetton 4/10/2014 12:41",
+		"removeStructure:" : "NicolasPetton 3/28/2014 16:34",
+		"validChildrenClasses" : "NicolasPetton 4/10/2014 12:36" } }

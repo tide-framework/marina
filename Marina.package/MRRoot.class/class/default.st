@@ -1,3 +1,3 @@
 accessing
 default
-	^ MRRoot selectOne: [ :each | each name = self defaultName ]
+	^ MRRoot selectOne: [ :each | each title = self defaultName ]

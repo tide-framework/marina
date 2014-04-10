@@ -535,8 +535,8 @@ mainWidget
 	^ MRMainWidget new
 !
 
-structuresWidget
-	^ MRStructuresWidget new
+structureListWidget
+	^ MRStructureListWidget new
 ! !
 
 !MRAdminFrameWidget methodsFor: 'rendering'!
@@ -546,7 +546,7 @@ renderContentOn: html
 		class: 'admin';
 		with: self headerWidget;
 		with: self mainWidget.
-	self structuresWidget render
+	self structureListWidget render
 ! !
 
 MRFrameWidget subclass: #MRLoginWidget
@@ -719,11 +719,11 @@ renderTitleOn: html
 		html with: self title ]
 ! !
 
-MRMainFrameWidget subclass: #MRPageEditor
+MRMainFrameWidget subclass: #MRPageEditorWidget
 	instanceVariableNames: 'page'
 	package: 'Marina-Widgets'!
 
-!MRPageEditor methodsFor: 'accessing'!
+!MRPageEditorWidget methodsFor: 'accessing'!
 
 icon
 	^ 'glyphicon glyphicon-pencil'
@@ -745,16 +745,52 @@ title
 	^ 'Edit page ', self page title
 ! !
 
-!MRPageEditor methodsFor: 'rendering'!
+!MRPageEditorWidget methodsFor: 'rendering'!
 
 renderContentOn: html
 ! !
 
-MRMainFrameWidget subclass: #MRStructuresWidget
-	instanceVariableNames: 'directory titleSpan titleEditorSpan'
+MRMainFrameWidget subclass: #MRStructureCreatorWidget
+	instanceVariableNames: 'structureTitle structureType'
 	package: 'Marina-Widgets'!
 
-!MRStructuresWidget methodsFor: 'accessing'!
+!MRStructureCreatorWidget methodsFor: 'accessing'!
+
+icon
+	^ 'glyphicon glyphicon-plus-sign'
+!
+
+iconColor
+	^ '#178F34'
+!
+
+structureTitle
+	^ structureTitle
+!
+
+structureTitle: anObject
+	structureTitle := anObject
+!
+
+structureType
+	^ structureType
+!
+
+structureType: anObject
+	structureType := anObject
+!
+
+title
+	^ 'New structure'
+! !
+
+MRMainFrameWidget subclass: #MRStructureListWidget
+	instanceVariableNames: 'directory titleSpan titleEditorSpan'
+	package: 'Marina-Widgets'!
+!MRStructureListWidget commentStamp!
+I display a list of structures, children of `directory`. If `directory` is not set, the `root` is used.!
+
+!MRStructureListWidget methodsFor: 'accessing'!
 
 directory
 	^ directory ifNil: [ self root ]
@@ -782,9 +818,11 @@ title
 	^ 'Pages'
 ! !
 
-!MRStructuresWidget methodsFor: 'actions'!
+!MRStructureListWidget methodsFor: 'actions'!
 
 addStructure
+	MRStructureCreatorWidget new
+		render
 !
 
 cancelDirectoryTitleEdition
@@ -799,7 +837,7 @@ editDirectoryTitle
 !
 
 editPage: aPage
-	MRPageEditor new
+	MRPageEditorWidget new
 		page: aPage;
 		render
 !
@@ -826,7 +864,14 @@ setDirectoryTitle: aString
 		then: [ self refresh ]
 ! !
 
-!MRStructuresWidget methodsFor: 'rendering'!
+!MRStructureListWidget methodsFor: 'rendering'!
+
+renderAddStructureOn: html
+	html button
+		class: 'btn btn-xs btn-default';
+		with: 'Add structure';
+		onClick: [ self addStructure ]
+!
 
 renderBreadcrumbOn: html
 	self directory allParents then: [ :proxies |
@@ -841,9 +886,10 @@ renderBreadcrumbOn: html
 						html a 
 							with: each title;
 							onClick: [ self openStructure: each ] ] ].
-				self directory isRoot ifFalse: [
-					html li with: [
-						self renderDirectoryTitleOn: html ] ] ] ] ]
+				html li with: [	
+					self directory isRoot ifFalse: [
+						self renderDirectoryTitleOn: html ].
+					self renderAddStructureOn: html ] ] ] ]
 !
 
 renderContentOn: html
@@ -860,11 +906,7 @@ renderDirectoryTitleOn: html
 			html button
 				class: 'btn btn-xs btn-default';
 				with: 'Edit title';
-				onClick: [ self editDirectoryTitle ].
-			html button
-				class: 'btn btn-xs btn-default';
-				with: 'Add structure';
-				onClick: [ self addStructure ] ].
+				onClick: [ self editDirectoryTitle ] ].
 	titleEditorSpan := html span
 		class: 'title_editor';
 		with: [
@@ -936,8 +978,8 @@ logout
 		MRLoginDispatcher start ]
 !
 
-showStructuresWidget
-	MRStructuresWidget new render
+showStructureListWidget
+	MRStructureListWidget new render
 ! !
 
 !MRHeaderWidget methodsFor: 'rendering'!
@@ -958,15 +1000,15 @@ renderLeftItemsOn: html
 	html li with: [ 
 		html a 
 			with: 'Pages';
-			onClick: [ self showStructuresWidget ] ].
+			onClick: [ self showStructureListWidget ] ].
 	html li with: [ 
 		html a 
 			with: 'Templates';
-			onClick: [ self showTemplatesWidget ] ].
+			onClick: [ self showTemplateListWidget ] ].
 	html li with: [ 
 		html a 
 			with: 'Users';
-			onClick: [ self showUsersWidget ] ]
+			onClick: [ self showUserListWidget ] ]
 !
 
 renderMenuOn: html

@@ -1706,31 +1706,31 @@ _st($1)._class_("admin");
 _st($1)._with_(self._headerWidget());
 $ctx1.sendIdx["with:"]=1;
 $2=_st($1)._with_(self._mainWidget());
-_st(self._structuresWidget())._render();
+_st(self._structureListWidget())._render();
 return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRAdminFrameWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09html div\x0a\x09\x09class: 'admin';\x0a\x09\x09with: self headerWidget;\x0a\x09\x09with: self mainWidget.\x0a\x09self structuresWidget render",
-messageSends: ["class:", "div", "with:", "headerWidget", "mainWidget", "render", "structuresWidget"],
+source: "renderContentOn: html\x0a\x09html div\x0a\x09\x09class: 'admin';\x0a\x09\x09with: self headerWidget;\x0a\x09\x09with: self mainWidget.\x0a\x09self structureListWidget render",
+messageSends: ["class:", "div", "with:", "headerWidget", "mainWidget", "render", "structureListWidget"],
 referencedClasses: []
 }),
 globals.MRAdminFrameWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "structuresWidget",
+selector: "structureListWidget",
 protocol: 'accessing',
 fn: function (){
 var self=this;
-function $MRStructuresWidget(){return globals.MRStructuresWidget||(typeof MRStructuresWidget=="undefined"?nil:MRStructuresWidget)}
+function $MRStructureListWidget(){return globals.MRStructureListWidget||(typeof MRStructureListWidget=="undefined"?nil:MRStructureListWidget)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=_st($MRStructuresWidget())._new();
+$1=_st($MRStructureListWidget())._new();
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"structuresWidget",{},globals.MRAdminFrameWidget)})},
+}, function($ctx1) {$ctx1.fill(self,"structureListWidget",{},globals.MRAdminFrameWidget)})},
 args: [],
-source: "structuresWidget\x0a\x09^ MRStructuresWidget new",
+source: "structureListWidget\x0a\x09^ MRStructureListWidget new",
 messageSends: ["new"],
-referencedClasses: ["MRStructuresWidget"]
+referencedClasses: ["MRStructureListWidget"]
 }),
 globals.MRAdminFrameWidget);
 
@@ -2215,7 +2215,7 @@ globals.MRMainFrameWidget);
 
 
 
-smalltalk.addClass('MRPageEditor', globals.MRMainFrameWidget, ['page'], 'Marina-Widgets');
+smalltalk.addClass('MRPageEditorWidget', globals.MRMainFrameWidget, ['page'], 'Marina-Widgets');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "icon",
@@ -2229,7 +2229,7 @@ source: "icon\x0a\x09^ 'glyphicon glyphicon-pencil'",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRPageEditor);
+globals.MRPageEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2244,7 +2244,7 @@ source: "iconColor\x0a\x09^ '#B37113'",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRPageEditor);
+globals.MRPageEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2261,7 +2261,7 @@ source: "page\x0a\x09^ page",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRPageEditor);
+globals.MRPageEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2276,7 +2276,7 @@ source: "page: anObject\x0a\x09page := anObject",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRPageEditor);
+globals.MRPageEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2290,7 +2290,7 @@ source: "renderContentOn: html",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRPageEditor);
+globals.MRPageEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2302,30 +2302,146 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1="Edit page ".__comma(_st(self._page())._title());
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"title",{},globals.MRPageEditor)})},
+}, function($ctx1) {$ctx1.fill(self,"title",{},globals.MRPageEditorWidget)})},
 args: [],
 source: "title\x0a\x09^ 'Edit page ', self page title",
 messageSends: [",", "title", "page"],
 referencedClasses: []
 }),
-globals.MRPageEditor);
+globals.MRPageEditorWidget);
 
 
 
-smalltalk.addClass('MRStructuresWidget', globals.MRMainFrameWidget, ['directory', 'titleSpan', 'titleEditorSpan'], 'Marina-Widgets');
+smalltalk.addClass('MRStructureCreatorWidget', globals.MRMainFrameWidget, ['structureTitle', 'structureType'], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "icon",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "glyphicon glyphicon-plus-sign";
+},
+args: [],
+source: "icon\x0a\x09^ 'glyphicon glyphicon-plus-sign'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructureCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "iconColor",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "#178F34";
+},
+args: [],
+source: "iconColor\x0a\x09^ '#178F34'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructureCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "structureTitle",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@structureTitle"];
+return $1;
+},
+args: [],
+source: "structureTitle\x0a\x09^ structureTitle",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructureCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "structureTitle:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@structureTitle"]=anObject;
+return self},
+args: ["anObject"],
+source: "structureTitle: anObject\x0a\x09structureTitle := anObject",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructureCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "structureType",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@structureType"];
+return $1;
+},
+args: [],
+source: "structureType\x0a\x09^ structureType",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructureCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "structureType:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@structureType"]=anObject;
+return self},
+args: ["anObject"],
+source: "structureType: anObject\x0a\x09structureType := anObject",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructureCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "title",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "New structure";
+},
+args: [],
+source: "title\x0a\x09^ 'New structure'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRStructureCreatorWidget);
+
+
+
+smalltalk.addClass('MRStructureListWidget', globals.MRMainFrameWidget, ['directory', 'titleSpan', 'titleEditorSpan'], 'Marina-Widgets');
+globals.MRStructureListWidget.comment="I display a list of structures, children of `directory`. If `directory` is not set, the `root` is used.";
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addStructure",
 protocol: 'actions',
 fn: function (){
 var self=this;
-return self},
+function $MRStructureCreatorWidget(){return globals.MRStructureCreatorWidget||(typeof MRStructureCreatorWidget=="undefined"?nil:MRStructureCreatorWidget)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st($MRStructureCreatorWidget())._new())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"addStructure",{},globals.MRStructureListWidget)})},
 args: [],
-source: "addStructure",
-messageSends: [],
-referencedClasses: []
+source: "addStructure\x0a\x09MRStructureCreatorWidget new\x0a\x09\x09render",
+messageSends: ["render", "new"],
+referencedClasses: ["MRStructureCreatorWidget"]
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2339,13 +2455,13 @@ $1=_st(self["@titleSpan"])._asJQuery();
 $ctx1.sendIdx["asJQuery"]=1;
 _st($1)._show();
 _st(_st(self["@titleEditorSpan"])._asJQuery())._hide();
-return self}, function($ctx1) {$ctx1.fill(self,"cancelDirectoryTitleEdition",{},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"cancelDirectoryTitleEdition",{},globals.MRStructureListWidget)})},
 args: [],
 source: "cancelDirectoryTitleEdition\x0a\x09titleSpan asJQuery show.\x0a\x09titleEditorSpan asJQuery hide",
 messageSends: ["show", "asJQuery", "hide"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2362,13 +2478,13 @@ $1=self._root();
 $1=$2;
 };
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"directory",{},globals.MRStructuresWidget)})},
+}, function($ctx1) {$ctx1.fill(self,"directory",{},globals.MRStructureListWidget)})},
 args: [],
 source: "directory\x0a\x09^ directory ifNil: [ self root ]",
 messageSends: ["ifNil:", "root"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2383,7 +2499,7 @@ source: "directory: anObject\x0a\x09directory := anObject",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2400,13 +2516,13 @@ $2=_st(self["@titleEditorSpan"])._asJQuery();
 $ctx1.sendIdx["asJQuery"]=2;
 _st($2)._show();
 _st(_st(self["@titleEditorSpan"])._asJQuery())._focus();
-return self}, function($ctx1) {$ctx1.fill(self,"editDirectoryTitle",{},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"editDirectoryTitle",{},globals.MRStructureListWidget)})},
 args: [],
 source: "editDirectoryTitle\x0a\x09titleSpan asJQuery hide.\x0a\x09titleEditorSpan asJQuery show.\x0a\x09titleEditorSpan asJQuery focus",
 messageSends: ["hide", "asJQuery", "show", "focus"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2414,19 +2530,19 @@ selector: "editPage:",
 protocol: 'actions',
 fn: function (aPage){
 var self=this;
-function $MRPageEditor(){return globals.MRPageEditor||(typeof MRPageEditor=="undefined"?nil:MRPageEditor)}
+function $MRPageEditorWidget(){return globals.MRPageEditorWidget||(typeof MRPageEditorWidget=="undefined"?nil:MRPageEditorWidget)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
-$1=_st($MRPageEditor())._new();
+$1=_st($MRPageEditorWidget())._new();
 _st($1)._page_(aPage);
 $2=_st($1)._render();
-return self}, function($ctx1) {$ctx1.fill(self,"editPage:",{aPage:aPage},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"editPage:",{aPage:aPage},globals.MRStructureListWidget)})},
 args: ["aPage"],
-source: "editPage: aPage\x0a\x09MRPageEditor new\x0a\x09\x09page: aPage;\x0a\x09\x09render",
+source: "editPage: aPage\x0a\x09MRPageEditorWidget new\x0a\x09\x09page: aPage;\x0a\x09\x09render",
 messageSends: ["page:", "new", "render"],
-referencedClasses: ["MRPageEditor"]
+referencedClasses: ["MRPageEditorWidget"]
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2441,7 +2557,7 @@ source: "icon\x0a\x09^ 'glyphicon glyphicon-list-alt'",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2456,7 +2572,7 @@ source: "iconColor\x0a\x09^ '#6F5499'",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2473,13 +2589,13 @@ $1="structure-icon glyphicon glyphicon-file";
 $1="structure-icon glyphicon glyphicon-folder-open";
 };
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"iconFor:",{aStructure:aStructure},globals.MRStructuresWidget)})},
+}, function($ctx1) {$ctx1.fill(self,"iconFor:",{aStructure:aStructure},globals.MRStructureListWidget)})},
 args: ["aStructure"],
 source: "iconFor: aStructure\x0a\x09^ aStructure isPage \x0a\x09\x09ifTrue: [ 'structure-icon glyphicon glyphicon-file' ]\x0a\x09\x09ifFalse: [ 'structure-icon glyphicon glyphicon-folder-open' ]",
 messageSends: ["ifTrue:ifFalse:", "isPage"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2496,13 +2612,13 @@ return $2;
 };
 self._directory_(aStructure);
 $3=self._refresh();
-return self}, function($ctx1) {$ctx1.fill(self,"openStructure:",{aStructure:aStructure},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"openStructure:",{aStructure:aStructure},globals.MRStructureListWidget)})},
 args: ["aStructure"],
 source: "openStructure: aStructure\x0a\x09aStructure isPage ifTrue: [ ^ self editPage: aStructure ].\x0a\x09\x0a\x09self \x0a\x09\x09directory: aStructure; \x0a\x09\x09refresh",
 messageSends: ["ifTrue:", "isPage", "editPage:", "directory:", "refresh"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2525,13 +2641,36 @@ return self._refresh();
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["then:"]=1;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"removeStructure:",{aStructure:aStructure},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"removeStructure:",{aStructure:aStructure},globals.MRStructureListWidget)})},
 args: ["aStructure"],
 source: "removeStructure: aStructure\x0a\x09self \x0a\x09\x09confirm: 'Do you really want to remove ', aStructure title, '?'\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09aStructure remove then: [ \x0a\x09\x09\x09\x09self structures update then: [ self refresh ] ] ]",
 messageSends: ["confirm:ifTrue:", ",", "title", "then:", "remove", "update", "structures", "refresh"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderAddStructureOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st(html)._button();
+_st($1)._class_("btn btn-xs btn-default");
+_st($1)._with_("Add structure");
+$2=_st($1)._onClick_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._addStructure();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"renderAddStructureOn:",{html:html},globals.MRStructureListWidget)})},
+args: ["html"],
+source: "renderAddStructureOn: html\x0a\x09html button\x0a\x09\x09class: 'btn btn-xs btn-default';\x0a\x09\x09with: 'Add structure';\x0a\x09\x09onClick: [ self addStructure ]",
+messageSends: ["class:", "button", "with:", "onClick:", "addStructure"],
+referencedClasses: []
+}),
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2586,26 +2725,27 @@ return $10;
 }, function($ctx6) {$ctx6.fillBlock({},$ctx5,7)})}));
 $ctx5.sendIdx["with:"]=4;
 }, function($ctx5) {$ctx5.fillBlock({each:each},$ctx4,6)})}));
-$11=_st(self._directory())._isRoot();
-if(! smalltalk.assert($11)){
 return _st(_st(html)._li())._with_((function(){
 return smalltalk.withContext(function($ctx5) {
-return self._renderDirectoryTitleOn_(html);
-}, function($ctx5) {$ctx5.fillBlock({},$ctx4,10)})}));
+$11=_st(self._directory())._isRoot();
+if(! smalltalk.assert($11)){
+self._renderDirectoryTitleOn_(html);
 };
+return self._renderAddStructureOn_(html);
+}, function($ctx5) {$ctx5.fillBlock({},$ctx4,9)})}));
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 $ctx3.sendIdx["with:"]=1;
 return $4;
 }, function($ctx3) {$ctx3.fillBlock({parents:parents},$ctx2,2)})}));
 }, function($ctx2) {$ctx2.fillBlock({proxies:proxies},$ctx1,1)})}));
 $ctx1.sendIdx["then:"]=1;
-return self}, function($ctx1) {$ctx1.fill(self,"renderBreadcrumbOn:",{html:html},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderBreadcrumbOn:",{html:html},globals.MRStructureListWidget)})},
 args: ["html"],
-source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :proxies |\x0a\x09\x09proxies contents then: [ :parents | \x0a\x09\x09\x09html ul class: 'breadcrumb'; with: [\x0a\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: 'Root directory';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ] ] ] ] ]",
-messageSends: ["then:", "allParents", "directory", "contents", "class:", "ul", "with:", "li", "a", "onClick:", "openStructure:", "root", "do:", "reversed", "allButLast", "title", "ifFalse:", "isRoot", "renderDirectoryTitleOn:"],
+source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :proxies |\x0a\x09\x09proxies contents then: [ :parents | \x0a\x09\x09\x09html ul class: 'breadcrumb'; with: [\x0a\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: 'Root directory';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09html li with: [\x09\x0a\x09\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ].\x0a\x09\x09\x09\x09\x09self renderAddStructureOn: html ] ] ] ]",
+messageSends: ["then:", "allParents", "directory", "contents", "class:", "ul", "with:", "li", "a", "onClick:", "openStructure:", "root", "do:", "reversed", "allButLast", "title", "ifFalse:", "isRoot", "renderDirectoryTitleOn:", "renderAddStructureOn:"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2619,13 +2759,13 @@ _st(_st(_st(self._directory())._children())._contents())._then_((function(struct
 return smalltalk.withContext(function($ctx2) {
 return self._renderStructures_on_(structures,html);
 }, function($ctx2) {$ctx2.fillBlock({structures:structures},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRStructureListWidget)})},
 args: ["html"],
 source: "renderContentOn: html\x0a\x09self renderBreadcrumbOn: html copy.\x0a\x09self directory children contents then: [ :structures |\x0a\x09\x09self renderStructures: structures on: html ]",
 messageSends: ["renderBreadcrumbOn:", "copy", "then:", "contents", "children", "directory", "renderStructures:on:"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2634,7 +2774,7 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$4,$3,$5,$6,$7,$8,$2,$9,$11,$12,$13,$16,$15,$14,$17,$18,$10;
+var $1,$4,$3,$5,$6,$2,$7,$9,$10,$11,$14,$13,$12,$15,$16,$8;
 $1=_st(html)._span();
 $ctx1.sendIdx["span"]=1;
 _st($1)._class_("title");
@@ -2658,68 +2798,56 @@ return smalltalk.withContext(function($ctx3) {
 return self._editDirectoryTitle();
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["onClick:"]=1;
-$6;
-$7=_st(html)._button();
-$ctx2.sendIdx["button"]=2;
-_st($7)._class_("btn btn-xs btn-default");
-$ctx2.sendIdx["class:"]=3;
-_st($7)._with_("Add structure");
-$ctx2.sendIdx["with:"]=4;
-$8=_st($7)._onClick_((function(){
-return smalltalk.withContext(function($ctx3) {
-return self._addStructure();
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
-$ctx2.sendIdx["onClick:"]=2;
-return $8;
+return $6;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 self["@titleSpan"]=$2;
-$9=_st(html)._span();
-_st($9)._class_("title_editor");
-$ctx1.sendIdx["class:"]=4;
-$10=_st($9)._with_((function(){
+$7=_st(html)._span();
+_st($7)._class_("title_editor");
+$ctx1.sendIdx["class:"]=3;
+$8=_st($7)._with_((function(){
 var titleInput;
 return smalltalk.withContext(function($ctx2) {
-$11=_st(html)._input();
-_st($11)._class_("input-xs");
+$9=_st(html)._input();
+_st($9)._class_("input-xs");
+$ctx2.sendIdx["class:"]=4;
+_st($9)._class_("form-control");
 $ctx2.sendIdx["class:"]=5;
-_st($11)._class_("form-control");
-$ctx2.sendIdx["class:"]=6;
-_st($11)._type_("text");
-$12=_st($11)._value_(_st(self._directory())._title());
-titleInput=$12;
+_st($9)._type_("text");
+$10=_st($9)._value_(_st(self._directory())._title());
+titleInput=$10;
 titleInput;
-$13=_st(html)._button();
-_st($13)._class_("btn btn-default btn-xs");
-_st($13)._with_("Save");
-$ctx2.sendIdx["with:"]=6;
-$14=_st($13)._onClick_((function(){
+$11=_st(html)._button();
+_st($11)._class_("btn btn-default btn-xs");
+_st($11)._with_("Save");
+$ctx2.sendIdx["with:"]=5;
+$12=_st($11)._onClick_((function(){
 return smalltalk.withContext(function($ctx3) {
-$16=_st(titleInput)._asJQuery();
+$14=_st(titleInput)._asJQuery();
 $ctx3.sendIdx["asJQuery"]=1;
-$15=_st($16)._val();
-return self._setDirectoryTitle_($15);
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
-$ctx2.sendIdx["onClick:"]=3;
-$14;
-$17=_st(html)._a();
-_st($17)._with_("Cancel");
-$18=_st($17)._onClick_((function(){
+$13=_st($14)._val();
+return self._setDirectoryTitle_($13);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,4)})}));
+$ctx2.sendIdx["onClick:"]=2;
+$12;
+$15=_st(html)._a();
+_st($15)._with_("Cancel");
+$16=_st($15)._onClick_((function(){
 return smalltalk.withContext(function($ctx3) {
 return self._cancelDirectoryTitleEdition();
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,6)})}));
-return $18;
-}, function($ctx2) {$ctx2.fillBlock({titleInput:titleInput},$ctx1,4)})}));
-$ctx1.sendIdx["with:"]=5;
-self["@titleEditorSpan"]=$10;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
+return $16;
+}, function($ctx2) {$ctx2.fillBlock({titleInput:titleInput},$ctx1,3)})}));
+$ctx1.sendIdx["with:"]=4;
+self["@titleEditorSpan"]=$8;
 _st(_st(self["@titleEditorSpan"])._asJQuery())._hide();
-return self}, function($ctx1) {$ctx1.fill(self,"renderDirectoryTitleOn:",{html:html},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderDirectoryTitleOn:",{html:html},globals.MRStructureListWidget)})},
 args: ["html"],
-source: "renderDirectoryTitleOn: html\x0a\x09titleSpan := html span \x0a\x09\x09class: 'title';\x0a\x09\x09with: [\x0a\x09\x09\x09html with: self directory title.\x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09class: 'btn btn-xs btn-default';\x0a\x09\x09\x09\x09with: 'Edit title';\x0a\x09\x09\x09\x09onClick: [ self editDirectoryTitle ].\x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09class: 'btn btn-xs btn-default';\x0a\x09\x09\x09\x09with: 'Add structure';\x0a\x09\x09\x09\x09onClick: [ self addStructure ] ].\x0a\x09titleEditorSpan := html span\x0a\x09\x09class: 'title_editor';\x0a\x09\x09with: [\x0a\x09\x09\x09| titleInput |\x0a\x09\x09\x09titleInput := html input\x0a\x09\x09\x09\x09class: 'input-xs';\x0a\x09\x09\x09\x09class: 'form-control';\x0a\x09\x09\x09\x09type: 'text';\x0a\x09\x09\x09\x09value: self directory title.\x0a\x09\x09\x09html button \x0a\x09\x09\x09\x09class: 'btn btn-default btn-xs';\x0a\x09\x09\x09\x09with: 'Save';\x0a\x09\x09\x09\x09onClick: [ self setDirectoryTitle: titleInput asJQuery val ].\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Cancel';\x0a\x09\x09\x09\x09onClick: [ self cancelDirectoryTitleEdition ] ].\x0a\x09titleEditorSpan asJQuery hide",
-messageSends: ["class:", "span", "with:", "title", "directory", "button", "onClick:", "editDirectoryTitle", "addStructure", "input", "type:", "value:", "setDirectoryTitle:", "val", "asJQuery", "a", "cancelDirectoryTitleEdition", "hide"],
+source: "renderDirectoryTitleOn: html\x0a\x09titleSpan := html span \x0a\x09\x09class: 'title';\x0a\x09\x09with: [\x0a\x09\x09\x09html with: self directory title.\x0a\x09\x09\x09html button\x0a\x09\x09\x09\x09class: 'btn btn-xs btn-default';\x0a\x09\x09\x09\x09with: 'Edit title';\x0a\x09\x09\x09\x09onClick: [ self editDirectoryTitle ] ].\x0a\x09titleEditorSpan := html span\x0a\x09\x09class: 'title_editor';\x0a\x09\x09with: [\x0a\x09\x09\x09| titleInput |\x0a\x09\x09\x09titleInput := html input\x0a\x09\x09\x09\x09class: 'input-xs';\x0a\x09\x09\x09\x09class: 'form-control';\x0a\x09\x09\x09\x09type: 'text';\x0a\x09\x09\x09\x09value: self directory title.\x0a\x09\x09\x09html button \x0a\x09\x09\x09\x09class: 'btn btn-default btn-xs';\x0a\x09\x09\x09\x09with: 'Save';\x0a\x09\x09\x09\x09onClick: [ self setDirectoryTitle: titleInput asJQuery val ].\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Cancel';\x0a\x09\x09\x09\x09onClick: [ self cancelDirectoryTitleEdition ] ].\x0a\x09titleEditorSpan asJQuery hide",
+messageSends: ["class:", "span", "with:", "title", "directory", "button", "onClick:", "editDirectoryTitle", "input", "type:", "value:", "setDirectoryTitle:", "val", "asJQuery", "a", "cancelDirectoryTitleEdition", "hide"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2809,13 +2937,13 @@ $ctx2.sendIdx["with:"]=8;
 return $13;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
-return self}, function($ctx1) {$ctx1.fill(self,"renderStructureRow:on:",{aStructure:aStructure,html:html},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderStructureRow:on:",{aStructure:aStructure,html:html},globals.MRStructureListWidget)})},
 args: ["aStructure", "html"],
 source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span class: (self iconFor: aStructure).\x0a\x09\x09\x09\x09\x09html with: aStructure title ];\x0a\x09\x09\x09\x09onClick: [ self openStructure: aStructure ] ].\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage ifTrue: [\x0a\x09\x09\x09\x09aStructure published \x0a\x09\x09\x09\x09\x09ifTrue: [ html span \x0a\x09\x09\x09\x09\x09\x09class: 'label label-success';\x0a\x09\x09\x09\x09\x09\x09with: 'Published' ]\x0a\x09\x09\x09\x09\x09ifFalse: [ html span\x0a\x09\x09\x09\x09\x09\x09class: 'label label-warning';\x0a\x09\x09\x09\x09\x09\x09with: 'draft' ] ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Edit';\x0a\x09\x09\x09\x09onClick: [ self editStructure: aStructure ]. \x0a\x09\x09\x09html with: ' - '.\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
 messageSends: ["with:", "tr", "td", "a", "class:", "span", "iconFor:", "title", "onClick:", "openStructure:", "ifTrue:", "isPage", "ifTrue:ifFalse:", "published", "editStructure:", "removeStructure:"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2838,13 +2966,13 @@ return self._renderStructureRow_on_(each,html);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
-return self}, function($ctx1) {$ctx1.fill(self,"renderStructures:on:",{aCollection:aCollection,html:html},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderStructures:on:",{aCollection:aCollection,html:html},globals.MRStructureListWidget)})},
 args: ["aCollection", "html"],
 source: "renderStructures: aCollection on: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09aCollection do: [ :each |\x0a\x09\x09\x09\x09\x09self renderStructureRow: each on: html ] ] ]",
 messageSends: ["class:", "table", "with:", "tbody", "do:", "renderStructureRow:on:"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2860,13 +2988,13 @@ $2=_st($1)._then_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._refresh();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"setDirectoryTitle:",{aString:aString},globals.MRStructuresWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"setDirectoryTitle:",{aString:aString},globals.MRStructureListWidget)})},
 args: ["aString"],
 source: "setDirectoryTitle: aString\x0a\x09self directory \x0a\x09\x09title: aString; \x0a\x09\x09then: [ self refresh ]",
 messageSends: ["title:", "directory", "then:", "refresh"],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -2881,7 +3009,7 @@ source: "title\x0a\x09^ 'Pages'",
 messageSends: [],
 referencedClasses: []
 }),
-globals.MRStructuresWidget);
+globals.MRStructureListWidget);
 
 
 
@@ -2972,7 +3100,7 @@ _st($2)._with_("Pages");
 $ctx2.sendIdx["with:"]=2;
 $3=_st($2)._onClick_((function(){
 return smalltalk.withContext(function($ctx3) {
-return self._showStructuresWidget();
+return self._showStructureListWidget();
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["onClick:"]=1;
 return $3;
@@ -2988,7 +3116,7 @@ _st($5)._with_("Templates");
 $ctx2.sendIdx["with:"]=4;
 $6=_st($5)._onClick_((function(){
 return smalltalk.withContext(function($ctx3) {
-return self._showTemplatesWidget();
+return self._showTemplateListWidget();
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,4)})}));
 $ctx2.sendIdx["onClick:"]=2;
 return $6;
@@ -3000,15 +3128,15 @@ $7=_st(html)._a();
 _st($7)._with_("Users");
 $8=_st($7)._onClick_((function(){
 return smalltalk.withContext(function($ctx3) {
-return self._showUsersWidget();
+return self._showUserListWidget();
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,6)})}));
 return $8;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,5)})}));
 $ctx1.sendIdx["with:"]=5;
 return self}, function($ctx1) {$ctx1.fill(self,"renderLeftItemsOn:",{html:html},globals.MRHeaderWidget)})},
 args: ["html"],
-source: "renderLeftItemsOn: html\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Pages';\x0a\x09\x09\x09onClick: [ self showStructuresWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Templates';\x0a\x09\x09\x09onClick: [ self showTemplatesWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Users';\x0a\x09\x09\x09onClick: [ self showUsersWidget ] ]",
-messageSends: ["with:", "li", "a", "onClick:", "showStructuresWidget", "showTemplatesWidget", "showUsersWidget"],
+source: "renderLeftItemsOn: html\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Pages';\x0a\x09\x09\x09onClick: [ self showStructureListWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Templates';\x0a\x09\x09\x09onClick: [ self showTemplateListWidget ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'Users';\x0a\x09\x09\x09onClick: [ self showUserListWidget ] ]",
+messageSends: ["with:", "li", "a", "onClick:", "showStructureListWidget", "showTemplateListWidget", "showUserListWidget"],
 referencedClasses: []
 }),
 globals.MRHeaderWidget);
@@ -3204,18 +3332,18 @@ globals.MRHeaderWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "showStructuresWidget",
+selector: "showStructureListWidget",
 protocol: 'actions',
 fn: function (){
 var self=this;
-function $MRStructuresWidget(){return globals.MRStructuresWidget||(typeof MRStructuresWidget=="undefined"?nil:MRStructuresWidget)}
+function $MRStructureListWidget(){return globals.MRStructureListWidget||(typeof MRStructureListWidget=="undefined"?nil:MRStructureListWidget)}
 return smalltalk.withContext(function($ctx1) { 
-_st(_st($MRStructuresWidget())._new())._render();
-return self}, function($ctx1) {$ctx1.fill(self,"showStructuresWidget",{},globals.MRHeaderWidget)})},
+_st(_st($MRStructureListWidget())._new())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"showStructureListWidget",{},globals.MRHeaderWidget)})},
 args: [],
-source: "showStructuresWidget\x0a\x09MRStructuresWidget new render",
+source: "showStructureListWidget\x0a\x09MRStructureListWidget new render",
 messageSends: ["render", "new"],
-referencedClasses: ["MRStructuresWidget"]
+referencedClasses: ["MRStructureListWidget"]
 }),
 globals.MRHeaderWidget);
 

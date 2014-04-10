@@ -1,4 +1,0 @@
-testing
-isDirectory
-	<state>
-	^ false
