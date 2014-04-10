@@ -59,6 +59,29 @@ body .main .main_frame h2 .glyphicon {
   font-size: 22px;
   margin-right: 10px;
 }
+body .main .breadcrumb {
+  background: transparent;
+  font-size: 1.2em;
+}
+body .main .breadcrumb a {
+  font-weight: bold !important;
+}
+body .main .breadcrumb button.btn-xs {
+  margin-left: 5px;
+}
+body .main .breadcrumb .title_editor input {
+  display: inline;
+  width: auto;
+  font-size: 0.8em;
+  height: 25px;
+}
+body .main .breadcrumb .title_editor button.btn {
+  margin-right: 5px;
+}
+body .main .breadcrumb .title_editor a {
+  font-size: 12px;
+  font-weight: normal;
+}
 body .main .structure-icon {
   width: 22px;
 }
