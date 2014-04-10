@@ -1,0 +1,17 @@
+{
+	"category" : "Marina-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"indexPage",
+		"root",
+		"adminUser",
+		"defaultTemplate" ],
+	"name" : "MRSetup",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
