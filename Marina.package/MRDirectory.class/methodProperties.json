@@ -1,12 +1,14 @@
 {
 	"class" : {
-		 },
+		"validChildrenClasses" : "NicolasPetton 4/10/2014 12:52" },
 	"instance" : {
-		"add:" : "NicolasPetton 3/28/2014 16:34",
-		"addStructure:" : "NicolasPetton 2/19/2014 17:21",
-		"children" : "NicolasPetton 4/10/2014 12:39",
+		"add:" : "NicolasPetton 4/10/2014 13:17",
+		"addStructure:" : "NicolasPetton 4/10/2014 13:17",
+		"addStructureOfType:title:" : "NicolasPetton 4/10/2014 14:16",
+		"children" : "NicolasPetton 4/10/2014 13:28",
 		"initialize" : "NicolasPetton 2/19/2014 17:21",
 		"isDirectory" : "NicolasPetton 2/19/2014 16:51",
 		"remove:" : "NicolasPetton 4/10/2014 12:41",
 		"removeStructure:" : "NicolasPetton 3/28/2014 16:34",
-		"validChildrenClasses" : "NicolasPetton 4/10/2014 12:36" } }
+		"validChildrenClasses" : "NicolasPetton 4/10/2014 12:53",
+		"validChildrenLabels" : "NicolasPetton 4/10/2014 12:54" } }

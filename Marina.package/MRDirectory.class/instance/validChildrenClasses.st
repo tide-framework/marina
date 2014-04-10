@@ -1,3 +1,3 @@
 accessing
 validChildrenClasses
-	^ Array with: MRPage with: MRDirectory
+	^ self class validChildrenClasses 
