@@ -1,3 +1,3 @@
 accessing
 validChildrenClasses
-	^ Array with: MRPage with: MRDirectory
+	^ Array with: MRPage with: MRDirectory with: MRBlog

@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"template" ],
+	"name" : "MRBlog",
+	"pools" : [
+		 ],
+	"super" : "MRDirectory",
+	"type" : "normal" }
