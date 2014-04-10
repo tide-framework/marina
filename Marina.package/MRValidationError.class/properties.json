@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "NicolasPetton 4/10/2014 17:13",
+	"instvars" : [
+		 ],
+	"name" : "MRValidationError",
+	"pools" : [
+		 ],
+	"super" : "Error",
+	"type" : "normal" }

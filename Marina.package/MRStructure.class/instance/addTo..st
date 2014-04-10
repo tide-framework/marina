@@ -1,6 +1,7 @@
 adding/removing
 addTo: anObject
-	anObject addStructure: self.
 	self parent: anObject.
+	self validate.
+	anObject addStructure: self.
 	self save.
 	^ self

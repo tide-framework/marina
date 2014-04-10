@@ -1870,6 +1870,39 @@ globals.MRWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "notifyError:",
+protocol: 'actions',
+fn: function (anError){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$3,$4,$2,$5;
+$1="#notification"._asJQuery();
+$ctx1.sendIdx["asJQuery"]=1;
+_st($1)._empty();
+$2=(function(html){
+return smalltalk.withContext(function($ctx2) {
+$3=_st(html)._p();
+_st($3)._class_("bg-danger");
+$4=_st($3)._with_(_st(anError)._messageText());
+return $4;
+}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)})});
+$5="#notification"._asJQuery();
+$ctx1.sendIdx["asJQuery"]=2;
+_st($2)._appendToJQuery_($5);
+_st((function(){
+return smalltalk.withContext(function($ctx2) {
+return _st("#notification p"._asJQuery())._fadeOut_((500));
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}))._valueWithTimeout_((2000));
+return self}, function($ctx1) {$ctx1.fill(self,"notifyError:",{anError:anError},globals.MRWidget)})},
+args: ["anError"],
+source: "notifyError: anError\x0a\x09'#notification' asJQuery empty.\x0a\x09[ :html | html p class: 'bg-danger'; with: anError messageText ]\x0a\x09\x09appendToJQuery: '#notification' asJQuery.\x0a\x09\x09\x0a\x09[ '#notification p' asJQuery fadeOut: 500 ] valueWithTimeout: 2000",
+messageSends: ["empty", "asJQuery", "appendToJQuery:", "class:", "p", "with:", "messageText", "valueWithTimeout:", "fadeOut:"],
+referencedClasses: []
+}),
+globals.MRWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "root",
 protocol: 'accessing',
 fn: function (){
@@ -2830,16 +2863,23 @@ template=_st(self._templates())._detect_((function(each){
 return smalltalk.withContext(function($ctx2) {
 return _st(_st(each)._title()).__eq(aTemplateTitle);
 }, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
+_st((function(){
+return smalltalk.withContext(function($ctx2) {
 $1=self._page();
 _st($1)._updateTitle_template_contents_published_(aTitle,template,contents,aBoolean);
 $2=_st($1)._then_((function(){
-return smalltalk.withContext(function($ctx2) {
+return smalltalk.withContext(function($ctx3) {
 return self._showStructureListWidget();
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}))._onPromiseFailureDo_((function(ex){
+return smalltalk.withContext(function($ctx2) {
+return self._notifyError_(ex);
+}, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,4)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"updatePageWithTitle:template:contents:published:",{aTitle:aTitle,aTemplateTitle:aTemplateTitle,contents:contents,aBoolean:aBoolean,template:template},globals.MRPageEditorWidget)})},
 args: ["aTitle", "aTemplateTitle", "contents", "aBoolean"],
-source: "updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean\x0a\x09| template |\x0a\x09\x0a\x09template := self templates detect: [ :each | \x0a\x09\x09each title = aTemplateTitle ].\x0a\x09\x09\x0a\x09self page\x0a\x09\x09updateTitle: aTitle\x0a\x09\x09template: template\x0a\x09\x09contents: contents\x0a\x09\x09published: aBoolean;\x0a\x09\x09then: [\x0a\x09\x09\x09self showStructureListWidget ]",
-messageSends: ["detect:", "templates", "=", "title", "updateTitle:template:contents:published:", "page", "then:", "showStructureListWidget"],
+source: "updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean\x0a\x09| template |\x0a\x09\x0a\x09template := self templates detect: [ :each | \x0a\x09\x09each title = aTemplateTitle ].\x0a\x09\x09\x0a\x09[\x0a\x09\x09self page\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09template: template\x0a\x09\x09\x09contents: contents\x0a\x09\x09\x09published: aBoolean;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showStructureListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]\x09\x09",
+messageSends: ["detect:", "templates", "=", "title", "onPromiseFailureDo:", "updateTitle:template:contents:published:", "page", "then:", "showStructureListWidget", "notifyError:"],
 referencedClasses: []
 }),
 globals.MRPageEditorWidget);
@@ -2855,16 +2895,23 @@ fn: function (aType,aTitle){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
+_st((function(){
+return smalltalk.withContext(function($ctx2) {
 $1=self._directory();
 _st($1)._addStructureOfType_title_(aType,aTitle);
 $2=_st($1)._then_((function(){
-return smalltalk.withContext(function($ctx2) {
+return smalltalk.withContext(function($ctx3) {
 return self._showStructureListWidget();
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}))._onPromiseFailureDo_((function(ex){
+return smalltalk.withContext(function($ctx2) {
+return self._notifyError_(ex);
+}, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,3)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"createStructureOfType:title:",{aType:aType,aTitle:aTitle},globals.MRStructureCreatorWidget)})},
 args: ["aType", "aTitle"],
-source: "createStructureOfType: aType title: aTitle\x0a\x09self directory \x0a\x09\x09addStructureOfType: aType title: aTitle;\x0a\x09\x09then: [ self showStructureListWidget ]",
-messageSends: ["addStructureOfType:title:", "directory", "then:", "showStructureListWidget"],
+source: "createStructureOfType: aType title: aTitle\x0a\x09[\x0a\x09\x09self directory \x0a\x09\x09\x09addStructureOfType: aType title: aTitle;\x0a\x09\x09\x09then: [ self showStructureListWidget ] \x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]\x09\x09",
+messageSends: ["onPromiseFailureDo:", "addStructureOfType:title:", "directory", "then:", "showStructureListWidget", "notifyError:"],
 referencedClasses: []
 }),
 globals.MRStructureCreatorWidget);
@@ -3641,16 +3688,23 @@ fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
-$1=self._directory();
-_st($1)._title_(aString);
-$2=_st($1)._then_((function(){
+_st((function(){
 return smalltalk.withContext(function($ctx2) {
+$1=self._directory();
+_st($1)._setTitle_(aString);
+$2=_st($1)._then_((function(){
+return smalltalk.withContext(function($ctx3) {
 return self._refresh();
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}))._onPromiseFailureDo_((function(error){
+return smalltalk.withContext(function($ctx2) {
+return self._notifyError_(error);
+}, function($ctx2) {$ctx2.fillBlock({error:error},$ctx1,3)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"setDirectoryTitle:",{aString:aString},globals.MRStructureListWidget)})},
 args: ["aString"],
-source: "setDirectoryTitle: aString\x0a\x09self directory \x0a\x09\x09title: aString; \x0a\x09\x09then: [ self refresh ]",
-messageSends: ["title:", "directory", "then:", "refresh"],
+source: "setDirectoryTitle: aString\x0a\x09[ \x0a\x09\x09self directory \x0a\x09\x09\x09setTitle: aString; \x0a\x09\x09\x09then: [ self refresh ] \x0a\x09] onPromiseFailureDo: [ :error |\x0a\x09\x09self notifyError: error ]\x09\x09",
+messageSends: ["onPromiseFailureDo:", "setTitle:", "directory", "then:", "refresh", "notifyError:"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
@@ -4034,7 +4088,7 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$6,$4,$2;
+var $1,$3,$5,$7,$6,$4,$2;
 $1=_st(html)._div();
 $ctx1.sendIdx["div"]=1;
 _st($1)._class_("container-fluid");
@@ -4052,6 +4106,10 @@ $ctx3.sendIdx["div"]=3;
 _st($5)._class_("main col-md-8 col-md-offset-2 col-xs-12");
 $6=_st($5)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
+$7=_st(html)._div();
+$ctx4.sendIdx["div"]=4;
+_st($7)._id_("notification");
+$ctx4.sendIdx["id:"]=1;
 return _st(_st(html)._div())._id_(self._mainAreaId());
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 self["@contentsDiv"]=$6;
@@ -4063,7 +4121,7 @@ return $4;
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRMainWidget)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'container-fluid';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'row';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09contentsDiv := html div \x0a\x09\x09\x09\x09\x09\x09class: 'main col-md-8 col-md-offset-2 col-xs-12';\x0a\x09\x09\x09\x09\x09\x09with: [ html div id: self mainAreaId ] ] ]",
+source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'container-fluid';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'row';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09contentsDiv := html div \x0a\x09\x09\x09\x09\x09\x09class: 'main col-md-8 col-md-offset-2 col-xs-12';\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html div id: 'notification'.\x0a\x09\x09\x09\x09\x09\x09\x09html div id: self mainAreaId ] ] ]",
 messageSends: ["class:", "div", "with:", "id:", "mainAreaId"],
 referencedClasses: []
 }),

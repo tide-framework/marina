@@ -11,5 +11,5 @@
 	"name" : "MRStructure",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "MRValidatedObject",
 	"type" : "normal" }

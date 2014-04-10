@@ -4,13 +4,10 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "<historical>",
+	"commentStamp" : "",
 	"instvars" : [
-		"indexPage",
-		"root",
-		"adminUser",
-		"defaultTemplate" ],
-	"name" : "MRSetup",
+		 ],
+	"name" : "MRValidatedObject",
 	"pools" : [
 		 ],
 	"super" : "Object",
