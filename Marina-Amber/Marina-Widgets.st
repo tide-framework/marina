@@ -152,7 +152,7 @@ cancelAction: aBlock
 !
 
 cancelLabel
-	^ cancelLabel
+	^ cancelLabel ifNil: [ 'Cancel' ]
 !
 
 cancelLabel: aString
@@ -190,7 +190,7 @@ submitAction: aBlock
 !
 
 submitLabel
-	^ submitLabel
+	^ submitLabel ifNil: [ 'Save' ]
 !
 
 submitLabel: aString
@@ -205,6 +205,10 @@ addInput: anInput
 
 passwordInput
 	^ self addInput: MRBootstrapPasswordInput new
+!
+
+selectInput
+	^ self addInput: MRBootstrapSelectInput new
 !
 
 textInput
@@ -225,17 +229,20 @@ renderOn: html
 	| htmlForm |
 	htmlForm := html form with: [
 		self inputs do: [ :each | html with: each ].
-		
-		html button
-			class: 'btn btn-default';
-			type: 'submit';
-			with: self submitLabel.
-
-		self isCancellable ifTrue: [ 
+	
+	html div 
+		class: 'form-group';
+		with: [
 			html button
-				class: 'btn';
-				with: self cancelLabel;
-				onClick: self cancelAction ] ].
+				class: 'btn btn-default';
+				type: 'submit';
+				with: self submitLabel.
+	
+			self isCancellable ifTrue: [ 
+				html button
+					class: 'btn';
+					with: self cancelLabel;
+					onClick: self cancelAction ] ] ].
 			
 	htmlForm asJQuery submit: [ :event |
 		self submitAction value: self.
@@ -249,7 +256,7 @@ isCancellable
 ! !
 
 Widget subclass: #MRBootstrapInput
-	instanceVariableNames: 'label id placeholder htmlInput'
+	instanceVariableNames: 'label id htmlInput'
 	package: 'Marina-Widgets'!
 
 !MRBootstrapInput methodsFor: 'accessing'!
@@ -266,18 +273,6 @@ label: aString
 	label := aString
 !
 
-placeholder
-	^ placeholder
-!
-
-placeholder: aString
-	placeholder := aString
-!
-
-type
-	^ self subclassResponsibility
-!
-
 value
 	^ htmlInput ifNotNil: [ htmlInput asJQuery val ]
 ! !
@@ -287,10 +282,87 @@ value
 initialize
 	super initialize.
 
-	id := self class generateId
+	id := MRBootstrapInput generateId
 ! !
 
 !MRBootstrapInput methodsFor: 'rendering'!
+
+renderFormInputOn: html
+	self subclassResponsibility
+!
+
+renderOn: html
+	html div 
+		class: 'form-group';
+		with: [ 
+			html label 
+				for: self id;
+				with: self label.
+			self renderFormInputOn: html ]
+! !
+
+MRBootstrapInput class instanceVariableNames: 'nextId'!
+
+!MRBootstrapInput class methodsFor: 'accessing'!
+
+generateId
+	nextId ifNil: [ nextId := 0 ].
+	nextId := nextId + 1.
+	
+	^ 'bootstrap_input_', nextId asString
+! !
+
+MRBootstrapInput subclass: #MRBootstrapSelectInput
+	instanceVariableNames: 'options'
+	package: 'Marina-Widgets'!
+
+!MRBootstrapSelectInput methodsFor: 'accessing'!
+
+options
+	^ options ifNil: [ #() ]
+!
+
+options: aCollection
+	options := aCollection
+! !
+
+!MRBootstrapSelectInput methodsFor: 'rendering'!
+
+renderFormInputOn: html
+	htmlInput := html select
+		id: self id;
+		class: 'form-control';
+		with: [ 
+			self options do: [ :each |
+				html option with: each ] ]
+! !
+
+MRBootstrapInput subclass: #MRBootstrapTextInput
+	instanceVariableNames: 'placeholder'
+	package: 'Marina-Widgets'!
+
+!MRBootstrapTextInput methodsFor: 'accessing'!
+
+placeholder
+	^ placeholder
+!
+
+placeholder: aString
+	placeholder := aString
+!
+
+type
+	^ 'text'
+! !
+
+!MRBootstrapTextInput methodsFor: 'rendering'!
+
+renderFormInputOn: html
+	htmlInput := html input 
+		id: self id;
+		type: self type;
+		class: 'form-control'
+!
 
 renderOn: html
 	html div 
@@ -305,18 +377,7 @@ renderOn: html
 				class: 'form-control' ]
 ! !
 
-MRBootstrapInput class instanceVariableNames: 'nextId'!
-
-!MRBootstrapInput class methodsFor: 'accessing'!
-
-generateId
-	nextId ifNil: [ nextId := 0 ].
-	nextId := nextId + 1.
-	
-	^ 'bootstrap_input_', nextId asString
-! !
-
-MRBootstrapInput subclass: #MRBootstrapPasswordInput
+MRBootstrapTextInput subclass: #MRBootstrapPasswordInput
 	instanceVariableNames: ''
 	package: 'Marina-Widgets'!
 
@@ -324,16 +385,6 @@ MRBootstrapInput subclass: #MRBootstrapPasswordInput
 
 type
 	^ 'password'
-! !
-
-MRBootstrapInput subclass: #MRBootstrapTextInput
-	instanceVariableNames: ''
-	package: 'Marina-Widgets'!
-
-!MRBootstrapTextInput methodsFor: 'accessing'!
-
-type
-	^ 'text'
 ! !
 
 Object subclass: #MRContext
@@ -535,8 +586,8 @@ mainWidget
 	^ MRMainWidget new
 !
 
-structuresWidget
-	^ MRStructuresWidget new
+structureListWidget
+	^ MRStructureListWidget new
 ! !
 
 !MRAdminFrameWidget methodsFor: 'rendering'!
@@ -546,7 +597,7 @@ renderContentOn: html
 		class: 'admin';
 		with: self headerWidget;
 		with: self mainWidget.
-	self structuresWidget render
+	self structureListWidget render
 ! !
 
 MRFrameWidget subclass: #MRLoginWidget
@@ -719,11 +770,11 @@ renderTitleOn: html
 		html with: self title ]
 ! !
 
-MRMainFrameWidget subclass: #MRPageEditor
+MRMainFrameWidget subclass: #MRPageEditorWidget
 	instanceVariableNames: 'page'
 	package: 'Marina-Widgets'!
 
-!MRPageEditor methodsFor: 'accessing'!
+!MRPageEditorWidget methodsFor: 'accessing'!
 
 icon
 	^ 'glyphicon glyphicon-pencil'
@@ -745,16 +796,105 @@ title
 	^ 'Edit page ', self page title
 ! !
 
-!MRPageEditor methodsFor: 'rendering'!
+!MRPageEditorWidget methodsFor: 'rendering'!
 
 renderContentOn: html
 ! !
 
-MRMainFrameWidget subclass: #MRStructuresWidget
-	instanceVariableNames: 'directory titleSpan titleEditorSpan'
+MRMainFrameWidget subclass: #MRStructureCreatorWidget
+	instanceVariableNames: 'directory structureTitle structureType'
 	package: 'Marina-Widgets'!
 
-!MRStructuresWidget methodsFor: 'accessing'!
+!MRStructureCreatorWidget methodsFor: 'accessing'!
+
+directory
+	^ directory
+!
+
+directory: aDirectory
+	directory := aDirectory
+!
+
+icon
+	^ 'glyphicon glyphicon-plus-sign'
+!
+
+iconColor
+	^ '#178F34'
+!
+
+structureTitle
+	^ structureTitle
+!
+
+structureTitle: anObject
+	structureTitle := anObject
+!
+
+structureType
+	^ structureType
+!
+
+structureType: anObject
+	structureType := anObject
+!
+
+title
+	^ 'New structure'
+!
+
+validStructureTypes
+	^ self directory validChildrenLabels
+! !
+
+!MRStructureCreatorWidget methodsFor: 'actions'!
+
+createStructureOfType: aType title: aTitle
+	self directory 
+		addStructureOfType: aType title: aTitle;
+		then: [ self showStructureListWidget ]
+!
+
+showStructureListWidget
+	MRStructureListWidget new
+		directory: self directory;
+		render
+! !
+
+!MRStructureCreatorWidget methodsFor: 'rendering'!
+
+renderContentOn: html
+	| form typeInput titleInput |
+	
+	form := MRBootstrapForm new.
+	
+	titleInput := form textInput
+		placeholder: 'Title';
+		label: 'Title';
+		yourself.
+	
+	typeInput := form selectInput
+		options: self validStructureTypes;
+		label: 'Type';
+		yourself.
+		
+	form submitAction: [
+		self 
+			createStructureOfType: typeInput value
+			title: titleInput value ].
+
+	form cancelAction: [ self showStructureListWidget ].
+	
+	html with: form
+! !
+
+MRMainFrameWidget subclass: #MRStructureListWidget
+	instanceVariableNames: 'directory titleSpan titleEditorSpan'
+	package: 'Marina-Widgets'!
+!MRStructureListWidget commentStamp!
+I display a list of structures, children of `directory`. If `directory` is not set, the `root` is used.!
+
+!MRStructureListWidget methodsFor: 'accessing'!
 
 directory
 	^ directory ifNil: [ self root ]
@@ -782,9 +922,12 @@ title
 	^ 'Pages'
 ! !
 
-!MRStructuresWidget methodsFor: 'actions'!
+!MRStructureListWidget methodsFor: 'actions'!
 
 addStructure
+	MRStructureCreatorWidget new
+		directory: self directory;
+		render
 !
 
 cancelDirectoryTitleEdition
@@ -799,7 +942,7 @@ editDirectoryTitle
 !
 
 editPage: aPage
-	MRPageEditor new
+	MRPageEditorWidget new
 		page: aPage;
 		render
 !
@@ -817,7 +960,7 @@ removeStructure: aStructure
 		confirm: 'Do you really want to remove ', aStructure title, '?'
 		ifTrue: [
 			aStructure remove then: [ 
-				self structures update then: [ self refresh ] ] ]
+				self refresh ] ]
 !
 
 setDirectoryTitle: aString
@@ -826,7 +969,14 @@ setDirectoryTitle: aString
 		then: [ self refresh ]
 ! !
 
-!MRStructuresWidget methodsFor: 'rendering'!
+!MRStructureListWidget methodsFor: 'rendering'!
+
+renderAddStructureOn: html
+	html button
+		class: 'btn btn-xs btn-default';
+		with: 'Add structure';
+		onClick: [ self addStructure ]
+!
 
 renderBreadcrumbOn: html
 	self directory allParents then: [ :proxies |
@@ -841,15 +991,17 @@ renderBreadcrumbOn: html
 						html a 
 							with: each title;
 							onClick: [ self openStructure: each ] ] ].
-				self directory isRoot ifFalse: [
-					html li with: [
-						self renderDirectoryTitleOn: html ] ] ] ] ]
+				html li with: [	
+					self directory isRoot ifFalse: [
+						self renderDirectoryTitleOn: html ].
+					self renderAddStructureOn: html ] ] ] ]
 !
 
 renderContentOn: html
 	self renderBreadcrumbOn: html copy.
-	self directory children contents then: [ :structures |
-		self renderStructures: structures on: html ]
+	self directory children then: [ :children |
+			children contents then: [ :structures |
+				self renderStructures: structures on: html ] ]
 !
 
 renderDirectoryTitleOn: html
@@ -860,11 +1012,7 @@ renderDirectoryTitleOn: html
 			html button
 				class: 'btn btn-xs btn-default';
 				with: 'Edit title';
-				onClick: [ self editDirectoryTitle ].
-			html button
-				class: 'btn btn-xs btn-default';
-				with: 'Add structure';
-				onClick: [ self addStructure ] ].
+				onClick: [ self editDirectoryTitle ] ].
 	titleEditorSpan := html span
 		class: 'title_editor';
 		with: [
@@ -903,10 +1051,6 @@ renderStructureRow: aStructure on: html
 						with: 'draft' ] ] ].
 		html td class: 'align-right'; with: [
 			html a 
-				with: 'Edit';
-				onClick: [ self editStructure: aStructure ]. 
-			html with: ' - '.
-			html a 
 				with: 'Remove';
 				onClick: [ self removeStructure: aStructure ] ] ]
 !
@@ -936,8 +1080,8 @@ logout
 		MRLoginDispatcher start ]
 !
 
-showStructuresWidget
-	MRStructuresWidget new render
+showStructureListWidget
+	MRStructureListWidget new render
 ! !
 
 !MRHeaderWidget methodsFor: 'rendering'!
@@ -958,15 +1102,15 @@ renderLeftItemsOn: html
 	html li with: [ 
 		html a 
 			with: 'Pages';
-			onClick: [ self showStructuresWidget ] ].
+			onClick: [ self showStructureListWidget ] ].
 	html li with: [ 
 		html a 
 			with: 'Templates';
-			onClick: [ self showTemplatesWidget ] ].
+			onClick: [ self showTemplateListWidget ] ].
 	html li with: [ 
 		html a 
 			with: 'Users';
-			onClick: [ self showUsersWidget ] ]
+			onClick: [ self showUserListWidget ] ]
 !
 
 renderMenuOn: html

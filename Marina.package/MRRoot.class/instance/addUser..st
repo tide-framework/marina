@@ -3,4 +3,6 @@ addUser: anUser
 	(users includes: anUser) ifTrue: [ ^ self ].
 	
 	users add: anUser.
-	self save
+	self save.
+	
+	^ anUser

@@ -59,6 +59,9 @@ body .main .main_frame h2 .glyphicon {
   font-size: 22px;
   margin-right: 10px;
 }
+body .main button.btn {
+  margin-right: 5px;
+}
 body .main .breadcrumb {
   background: transparent;
   font-size: 1.2em;

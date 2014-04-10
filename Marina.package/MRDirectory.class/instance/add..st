@@ -1,4 +1,4 @@
 adding/removing
 add: anObject
 	<action>
-	anObject addTo: self
+	^ anObject addTo: self

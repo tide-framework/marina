@@ -6,12 +6,10 @@
 		 ],
 	"commentStamp" : "NicolasPetton 2/20/2014 10:53",
 	"instvars" : [
-		"name",
 		"templates",
-		"users",
-		"structures" ],
+		"users" ],
 	"name" : "MRRoot",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "MRDirectory",
 	"type" : "normal" }
