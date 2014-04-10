@@ -2,6 +2,7 @@
 	"class" : {
 		"load" : "DamienCassou 4/9/2014 21:00" },
 	"instance" : {
-		"baseline:" : "DamienCassou 4/9/2014 21:03",
+		"baseline:" : "DamienCassou 4/10/2014 10:07",
 		"pillarDependency:" : "DamienCassou 4/9/2014 21:05",
-		"tideDependency:" : "DamienCassou 4/9/2014 21:03" } }
+		"tideDependency:" : "DamienCassou 4/9/2014 21:03",
+		"voyageDependency:" : "DamienCassou 4/10/2014 10:07" } }

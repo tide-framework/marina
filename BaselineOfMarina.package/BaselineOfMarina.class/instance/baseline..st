@@ -7,4 +7,5 @@ baseline: spec
 			spec repository: 'github://tide-framework/marina:master'.
 			self tideDependency: spec.
 			self pillarDependency: spec.
-			spec package: 'Marina' with: [ spec requires: #('Tide' 'Pillar') ] ]
+			self voyageDependency: spec.
+			spec package: 'Marina' with: [ spec requires: #('Tide' 'Pillar' 'Voyage') ] ]
