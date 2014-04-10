@@ -336,11 +336,55 @@ type
 	^ 'text'
 ! !
 
+Object subclass: #MRContext
+	instanceVariableNames: 'adminPresenter'
+	package: 'Marina-Widgets'!
+!MRContext commentStamp!
+I hold context objects related to the current Tide session.!
+
+!MRContext methodsFor: 'accessing'!
+
+adminPresenter
+	^ adminPresenter
+!
+
+adminPresenter: aPresenter
+	adminPresenter := aPresenter
+!
+
+root
+	^ self adminPresenter root
+!
+
+structures
+	^ self adminPresenter structures
+!
+
+templates
+	^ self adminPresenter templates
+!
+
+users
+	^ self adminPresenter users
+! !
+
+MRContext class instanceVariableNames: 'current'!
+
+!MRContext class methodsFor: 'accessing'!
+
+current
+	^ current ifNil: [ current := self new ]
+! !
+
 Object subclass: #MRLoginDispatcher
 	instanceVariableNames: 'presenter'
 	package: 'Marina-Widgets'!
 
 !MRLoginDispatcher methodsFor: 'accessing'!
+
+context
+	^ MRContext current
+!
 
 presenter
 	^ presenter
@@ -368,17 +412,10 @@ loginWidget
 		onLoginBlock: [ self renderAdminWidget ]
 !
 
-logout
-	self presenter 
-		logout;
-		then: [ self login ]
-!
-
 renderAdminWidget
 	self presenter adminPresenter then: [ :adminPresenter |
-		MRAdminFrameWidget new
-			presenter: adminPresenter;
-			render ]
+		self context adminPresenter: adminPresenter.
+		MRAdminFrameWidget new render ]
 !
 
 start
@@ -388,10 +425,6 @@ start
 ! !
 
 !MRLoginDispatcher class methodsFor: 'initialization'!
-
-initialize
-	self start
-!
 
 start
 	self new
@@ -404,6 +437,32 @@ Widget subclass: #MRWidget
 	package: 'Marina-Widgets'!
 !MRWidget commentStamp!
 I am the abstract superclass of all Marina widgets.!
+
+!MRWidget methodsFor: 'accessing'!
+
+adminPresenter
+	^ self context adminPresenter
+!
+
+context
+	^ MRContext current
+!
+
+root
+	^ self context root
+!
+
+structures
+	^ self context structures
+!
+
+templates
+	^ self context templates
+!
+
+users
+	^ self context users
+! !
 
 !MRWidget methodsFor: 'actions'!
 
@@ -422,23 +481,7 @@ confirm: aString ifTrue: aBlock ifFalse: anotherBlock
 		appendToJQuery: 'body' asJQuery
 ! !
 
-MRWidget subclass: #MRPresenterWidget
-	instanceVariableNames: 'presenter'
-	package: 'Marina-Widgets'!
-!MRPresenterWidget commentStamp!
-I am a widget holding a tide presenter.!
-
-!MRPresenterWidget methodsFor: 'accessing'!
-
-presenter
-	^ presenter
-!
-
-presenter: anObject
-	presenter := anObject
-! !
-
-MRPresenterWidget subclass: #MRFrameWidget
+MRWidget subclass: #MRFrameWidget
 	instanceVariableNames: 'wrapper'
 	package: 'Marina-Widgets'!
 !MRFrameWidget commentStamp!
@@ -486,8 +529,6 @@ I render the main administration page frame, with a header and main area.!
 
 headerWidget
 	^ MRHeaderWidget new
-		presenter: self presenter;
-		yourself
 !
 
 mainWidget
@@ -496,8 +537,6 @@ mainWidget
 
 structuresWidget
 	^ MRStructuresWidget new
-		presenter: self presenter structures;
-		yourself
 ! !
 
 !MRAdminFrameWidget methodsFor: 'rendering'!
@@ -511,7 +550,7 @@ renderContentOn: html
 ! !
 
 MRFrameWidget subclass: #MRLoginWidget
-	instanceVariableNames: 'errorDiv onLoginBlock'
+	instanceVariableNames: 'errorDiv onLoginBlock presenter'
 	package: 'Marina-Widgets'!
 
 !MRLoginWidget methodsFor: 'accessing'!
@@ -522,6 +561,14 @@ onLoginBlock
 
 onLoginBlock: aBlock
 	onLoginBlock := aBlock
+!
+
+presenter
+	^ presenter
+!
+
+presenter: aPresenter
+	presenter := aPresenter
 ! !
 
 !MRLoginWidget methodsFor: 'actions'!
@@ -672,11 +719,50 @@ renderTitleOn: html
 		html with: self title ]
 ! !
 
+MRMainFrameWidget subclass: #MRPageEditor
+	instanceVariableNames: 'page'
+	package: 'Marina-Widgets'!
+
+!MRPageEditor methodsFor: 'accessing'!
+
+icon
+	^ 'glyphicon glyphicon-pencil'
+!
+
+iconColor
+	^ '#B37113'
+!
+
+page
+	^ page
+!
+
+page: anObject
+	page := anObject
+!
+
+title
+	^ 'Edit page ', self page title
+! !
+
+!MRPageEditor methodsFor: 'rendering'!
+
+renderContentOn: html
+! !
+
 MRMainFrameWidget subclass: #MRStructuresWidget
-	instanceVariableNames: ''
+	instanceVariableNames: 'directory titleSpan titleEditorSpan'
 	package: 'Marina-Widgets'!
 
 !MRStructuresWidget methodsFor: 'accessing'!
+
+directory
+	^ directory ifNil: [ self root ]
+!
+
+directory: anObject
+	directory := anObject
+!
 
 icon
 	^ 'glyphicon glyphicon-list-alt'
@@ -686,8 +772,10 @@ iconColor
 	^ '#6F5499'
 !
 
-structures
-	^ self presenter
+iconFor: aStructure
+	^ aStructure isPage 
+		ifTrue: [ 'structure-icon glyphicon glyphicon-file' ]
+		ifFalse: [ 'structure-icon glyphicon glyphicon-folder-open' ]
 !
 
 title
@@ -696,33 +784,114 @@ title
 
 !MRStructuresWidget methodsFor: 'actions'!
 
+addStructure
+!
+
+cancelDirectoryTitleEdition
+	titleSpan asJQuery show.
+	titleEditorSpan asJQuery hide
+!
+
+editDirectoryTitle
+	titleSpan asJQuery hide.
+	titleEditorSpan asJQuery show.
+	titleEditorSpan asJQuery focus
+!
+
+editPage: aPage
+	MRPageEditor new
+		page: aPage;
+		render
+!
+
+openStructure: aStructure
+	aStructure isPage ifTrue: [ ^ self editPage: aStructure ].
+	
+	self 
+		directory: aStructure; 
+		refresh
+!
+
 removeStructure: aStructure
 	self 
 		confirm: 'Do you really want to remove ', aStructure title, '?'
 		ifTrue: [
 			aStructure remove then: [ 
 				self structures update then: [ self refresh ] ] ]
+!
+
+setDirectoryTitle: aString
+	self directory 
+		title: aString; 
+		then: [ self refresh ]
 ! !
 
 !MRStructuresWidget methodsFor: 'rendering'!
 
+renderBreadcrumbOn: html
+	self directory allParents then: [ :proxies |
+		proxies contents then: [ :parents | 
+			html ul class: 'breadcrumb'; with: [
+				html li with: [
+					html a 
+						with: 'Root directory';
+						onClick: [ self openStructure: self root ] ].
+				parents allButLast reversed do: [ :each |
+					html li with: [
+						html a 
+							with: each title;
+							onClick: [ self openStructure: each ] ] ].
+				self directory isRoot ifFalse: [
+					html li with: [
+						self renderDirectoryTitleOn: html ] ] ] ] ]
+!
+
 renderContentOn: html
-	self structures contents then: [ :structures |
-		html table 
-			class: 'table table-striped';
-			with: [
-				html tbody with: [
-					structures do: [ :each |
-						self renderStructureRow: each on: html ] ] ] ]
+	self renderBreadcrumbOn: html copy.
+	self directory children contents then: [ :structures |
+		self renderStructures: structures on: html ]
+!
+
+renderDirectoryTitleOn: html
+	titleSpan := html span 
+		class: 'title';
+		with: [
+			html with: self directory title.
+			html button
+				class: 'btn btn-xs btn-default';
+				with: 'Edit title';
+				onClick: [ self editDirectoryTitle ].
+			html button
+				class: 'btn btn-xs btn-default';
+				with: 'Add structure';
+				onClick: [ self addStructure ] ].
+	titleEditorSpan := html span
+		class: 'title_editor';
+		with: [
+			| titleInput |
+			titleInput := html input
+				class: 'input-xs';
+				class: 'form-control';
+				type: 'text';
+				value: self directory title.
+			html button 
+				class: 'btn btn-default btn-xs';
+				with: 'Save';
+				onClick: [ self setDirectoryTitle: titleInput asJQuery val ].
+			html a 
+				with: 'Cancel';
+				onClick: [ self cancelDirectoryTitleEdition ] ].
+	titleEditorSpan asJQuery hide
 !
 
 renderStructureRow: aStructure on: html
 	html tr with: [
 		html td with: [
-			aStructure isPage 
-				ifTrue: [ html span class: 'structure-icon glyphicon glyphicon-file' ]
-				ifFalse: [ html span class: 'structure-icon glyphicon glyphicon-folder-open' ].
-			html with: aStructure title ].
+			html a 
+				with: [
+					html span class: (self iconFor: aStructure).
+					html with: aStructure title ];
+				onClick: [ self openStructure: aStructure ] ].
 		html td with: [
 			aStructure isPage ifTrue: [
 				aStructure published 
@@ -740,9 +909,18 @@ renderStructureRow: aStructure on: html
 			html a 
 				with: 'Remove';
 				onClick: [ self removeStructure: aStructure ] ] ]
+!
+
+renderStructures: aCollection on: html
+	html table 
+		class: 'table table-striped';
+		with: [
+			html tbody with: [
+				aCollection do: [ :each |
+					self renderStructureRow: each on: html ] ] ]
 ! !
 
-MRPresenterWidget subclass: #MRHeaderWidget
+MRWidget subclass: #MRHeaderWidget
 	instanceVariableNames: ''
 	package: 'Marina-Widgets'!
 !MRHeaderWidget commentStamp!
@@ -754,14 +932,12 @@ editUserSettings
 !
 
 logout
-	self presenter logout then: [ 
+	self adminPresenter logout then: [ 
 		MRLoginDispatcher start ]
 !
 
 showStructuresWidget
-	MRStructuresWidget new
-		presenter: self presenter structures;
-		render
+	MRStructuresWidget new render
 ! !
 
 !MRHeaderWidget methodsFor: 'rendering'!
@@ -823,7 +999,7 @@ renderRightItemsOn: html
 		html a 
 			with: [
 				html span class: 'glyphicon glyphicon-user'.
-				html with: ' ', self presenter user fullName ];
+				html with: ' ', self adminPresenter user fullName ];
 			onClick: [ self editUserSettings ] ].
 	html li with: [ 
 		html a 
@@ -854,7 +1030,7 @@ renderToggleOn: html
 					html with: ' Marina' ] ]
 ! !
 
-MRPresenterWidget subclass: #MRMainWidget
+MRWidget subclass: #MRMainWidget
 	instanceVariableNames: 'contentsDiv'
 	package: 'Marina-Widgets'!
 
