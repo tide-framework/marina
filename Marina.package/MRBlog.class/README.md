@@ -1,0 +1,1 @@
+I model a blog full of blog posts. I have a fixed (supposedly) unique id.

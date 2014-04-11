@@ -1,4 +1,4 @@
 accessing
 published
 	<state>
-	^ published ifNil: [ false ]
+	^ published ifNil: [ published := false ]

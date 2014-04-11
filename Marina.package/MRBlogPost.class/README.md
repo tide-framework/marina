@@ -1,0 +1,1 @@
+I'm a post on a blog. I have a fixed and supposedly unique id.

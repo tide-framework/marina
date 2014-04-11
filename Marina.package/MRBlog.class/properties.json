@@ -4,9 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "DamienCassou 4/11/2014 15:13",
 	"instvars" : [
-		"template" ],
+		"template",
+		"updatedDate",
+		"id" ],
 	"name" : "MRBlog",
 	"pools" : [
 		 ],

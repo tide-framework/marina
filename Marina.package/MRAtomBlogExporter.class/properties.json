@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-RSSAtom",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "DamienCassou 4/11/2014 15:15",
+	"instvars" : [
+		"publicationLocation" ],
+	"name" : "MRAtomBlogExporter",
+	"pools" : [
+		 ],
+	"super" : "MRXMLBlogExporter",
+	"type" : "normal" }

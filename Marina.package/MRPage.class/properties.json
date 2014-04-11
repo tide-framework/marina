@@ -8,7 +8,9 @@
 	"instvars" : [
 		"template",
 		"author",
-		"published" ],
+		"published",
+		"publicationDate",
+		"updateDate" ],
 	"name" : "MRPage",
 	"pools" : [
 		 ],

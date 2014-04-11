@@ -9,7 +9,9 @@
 		"indexPage",
 		"root",
 		"adminUser",
-		"defaultTemplate" ],
+		"defaultTemplate",
+		"blog",
+		"blogPost1" ],
 	"name" : "MRSetup",
 	"pools" : [
 		 ],

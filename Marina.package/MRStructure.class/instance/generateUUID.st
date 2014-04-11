@@ -1,0 +1,3 @@
+private
+generateUUID
+	^ UUID new

@@ -1,0 +1,1 @@
+I am an abstract superclass to export blogs (and their posts).

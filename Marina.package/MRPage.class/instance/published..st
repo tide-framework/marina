@@ -1,4 +1,7 @@
 accessing
 published: aBoolean
 	<action>
-	published := aBoolean
+	(self published not & aBoolean )
+		ifTrue: [ publicationDate := DateAndTime now ]
+		ifFalse: [ publicationDate := nil ].
+	published := aBoolean.

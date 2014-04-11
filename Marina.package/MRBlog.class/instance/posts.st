@@ -1,0 +1,3 @@
+accessing
+posts
+	^ self children

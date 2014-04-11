@@ -6,5 +6,6 @@ createRoot
 	root add: self indexPage.
 	root add: self adminUser.
 	root add: self defaultTemplate.
+	root add: self blog.
 	root save.
 	^ root

@@ -1,0 +1,1 @@
+I'm a blog exported specialized in writing to XML streams.
