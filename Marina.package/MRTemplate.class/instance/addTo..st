@@ -1,5 +1,6 @@
 adding/removing
 addTo: anObject
-	anObject addTemplate: self.
 	self parent: anObject.
+	self validate.
+	anObject addTemplate: self.
 	^ self

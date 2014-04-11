@@ -3,7 +3,7 @@
 		"isVoyageRoot" : "NicolasPetton 2/18/2014 16:37",
 		"label" : "NicolasPetton 4/10/2014 12:51" },
 	"instance" : {
-		"addTo:" : "NicolasPetton 4/10/2014 13:18",
+		"addTo:" : "NicolasPetton 4/10/2014 17:25",
 		"allParents" : "NicolasPetton 4/9/2014 16:31",
 		"generateUUID" : "DamienCassou 4/11/2014 09:39",
 		"isDirectory" : "NicolasPetton 2/19/2014 14:40",
@@ -11,11 +11,14 @@
 		"isPage" : "NicolasPetton 2/19/2014 14:41",
 		"isRoot" : "NicolasPetton 4/9/2014 16:12",
 		"isTemplate" : "NicolasPetton 2/19/2014 14:41",
-		"parent" : "NicolasPetton 4/8/2014 17:47",
+		"parent" : "NicolasPetton 4/9/2014 16:30",
 		"parent:" : "NicolasPetton 2/20/2014 11:22",
 		"path" : "NicolasPetton 2/19/2014 16:34",
 		"remove" : "NicolasPetton 4/8/2014 18:07",
 		"removeFrom:" : "NicolasPetton 4/9/2014 14:23",
 		"root" : "NicolasPetton 2/19/2014 17:22",
+		"setTitle:" : "NicolasPetton 4/10/2014 17:42",
 		"title" : "NicolasPetton 2/18/2014 16:42",
-		"title:" : "NicolasPetton 2/18/2014 16:43" } }
+		"title:" : "NicolasPetton 4/10/2014 17:34",
+		"validate" : "NicolasPetton 4/10/2014 17:41",
+		"withAllParents" : "NicolasPetton 4/10/2014 17:22" } }

@@ -13,5 +13,5 @@
 	"name" : "MRUser",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "MRValidatedObject",
 	"type" : "normal" }

@@ -4,12 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "NicolasPetton 2/20/2014 10:54",
+	"commentStamp" : "DamienCassou 4/10/2014 17:55",
 	"instvars" : [
-		"title",
-		"parent" ],
-	"name" : "MRStructure",
+		 ],
+	"name" : "MRValidatedObject",
 	"pools" : [
 		 ],
-	"super" : "MRValidatedObject",
+	"super" : "Object",
 	"type" : "normal" }

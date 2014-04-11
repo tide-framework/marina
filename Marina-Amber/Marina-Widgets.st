@@ -603,6 +603,22 @@ confirm: aString ifTrue: aBlock ifFalse: anotherBlock
 		okBlock: aBlock;
 		cancelBlock: anotherBlock;
 		appendToJQuery: 'body' asJQuery
+!
+
+notifyError: anError
+	'#notification' asJQuery empty.
+	[ :html | 
+		html div
+			class: 'alert alert-danger alert-dismissable'; 
+			with: [
+				html button
+					class: 'close';
+					type: 'button';
+					at: 'data-dismiss' put: 'alert';
+					at: 'aria-hidden' put: 'true';
+					with: '×'.
+				html with: anError messageText ] ]
+		appendToJQuery: '#notification' asJQuery.
 ! !
 
 MRWidget subclass: #MRFrameWidget
@@ -832,6 +848,7 @@ renderOn: html
 		class: 'main_frame'; 
 		with: [
 			self renderTitleOn: html.
+			html div id: 'notification'.
 			self renderContentOn: html ]
 !
 
@@ -888,13 +905,16 @@ updatePageWithTitle: aTitle template: aTemplateTitle contents: contents publishe
 	template := self templates detect: [ :each | 
 		each title = aTemplateTitle ].
 		
-	self page
-		updateTitle: aTitle
-		template: template
-		contents: contents
-		published: aBoolean;
-		then: [
-			self showStructureListWidget ]
+	[
+		self page
+			updateTitle: aTitle
+			template: template
+			contents: contents
+			published: aBoolean;
+			then: [
+				self showStructureListWidget ]
+	] onPromiseFailureDo: [ :ex | 
+		self notifyError: ex ]
 ! !
 
 !MRPageEditorWidget methodsFor: 'rendering'!
@@ -987,9 +1007,12 @@ validStructureTypes
 !MRStructureCreatorWidget methodsFor: 'actions'!
 
 createStructureOfType: aType title: aTitle
-	self directory 
-		addStructureOfType: aType title: aTitle;
-		then: [ self showStructureListWidget ]
+	[
+		self directory 
+			addStructureOfType: aType title: aTitle;
+			then: [ self showStructureListWidget ] 
+	] onPromiseFailureDo: [ :ex | 
+		self notifyError: ex ]
 !
 
 showStructureListWidget
@@ -1101,9 +1124,12 @@ removeStructure: aStructure
 !
 
 setDirectoryTitle: aString
-	self directory 
-		title: aString; 
-		then: [ self refresh ]
+	[ 
+		self directory 
+			setTitle: aString; 
+			then: [ self refresh ] 
+	] onPromiseFailureDo: [ :error |
+		self notifyError: error ]
 ! !
 
 !MRStructureListWidget methodsFor: 'rendering'!
@@ -1330,7 +1356,8 @@ renderOn: html
 				with: [
 					contentsDiv := html div 
 						class: 'main col-md-8 col-md-offset-2 col-xs-12';
-						with: [ html div id: self mainAreaId ] ] ]
+						with: [
+							html div id: self mainAreaId ] ] ]
 ! !
 
 !MRMainWidget class methodsFor: 'rendering'!
