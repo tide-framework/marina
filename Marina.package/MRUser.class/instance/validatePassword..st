@@ -1,3 +1,3 @@
 testing
 validatePassword: aString
-	^ (self hashPassword: aString) = password
+	^ (self hashPassword: aString) asArray = password asArray

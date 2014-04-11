@@ -4,11 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "DamienCassou 4/10/2014 17:55",
+	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "MRValidatedObject",
+		"template" ],
+	"name" : "MRBlog",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "MRDirectory",
 	"type" : "normal" }
