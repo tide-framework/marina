@@ -3,4 +3,6 @@
 		"isAbstract" : "DamienCassou 4/11/2014 15:10" },
 	"instance" : {
 		"classToBeTested" : "DamienCassou 4/11/2014 14:44",
+		"testFindPage" : "DamienCassou 4/11/2014 17:02",
+		"testFindPageWithDuplicatedTitles" : "DamienCassou 4/11/2014 17:07",
 		"testFindPageWithSpacesInTitle" : "DamienCassou 4/11/2014 16:53" } }
