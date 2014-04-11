@@ -1,5 +1,10 @@
 {
 	"class" : {
-		 },
+		"isAbstract" : "DamienCassou 4/11/2014 17:20" },
 	"instance" : {
-		"classToBeTested" : "DamienCassou 4/11/2014 14:44" } }
+		"classToBeTested" : "DamienCassou 4/11/2014 14:44",
+		"testFindIndexPage" : "DamienCassou 4/11/2014 17:22",
+		"testFindPage" : "DamienCassou 4/11/2014 17:19",
+		"testFindPageWithDuplicatedTitles" : "DamienCassou 4/11/2014 17:19",
+		"testFindPageWithIncorrectPath" : "DamienCassou 4/11/2014 17:38",
+		"testFindPageWithSpacesInTitle" : "DamienCassou 4/11/2014 17:20" } }

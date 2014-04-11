@@ -2,4 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
-		"classToBeTested" : "DamienCassou 4/11/2014 14:44" } }
+		"classToBeTested" : "DamienCassou 4/11/2014 14:44",
+		"testFullPath" : "DamienCassou 4/11/2014 17:51",
+		"testPathIsEncoded" : "DamienCassou 4/11/2014 18:12",
+		"testWithAllParents" : "DamienCassou 4/11/2014 17:57" } }

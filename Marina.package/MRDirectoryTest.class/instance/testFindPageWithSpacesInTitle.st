@@ -1,6 +1,6 @@
 tests
 testFindPageWithSpacesInTitle
-	| page directory root pageTitle directoryTitle |
+	| page directory pageTitle directoryTitle |
 	pageTitle := 'With a space'.
 	page := MRPage new
 		title: pageTitle;
@@ -10,5 +10,11 @@ testFindPageWithSpacesInTitle
 		title: directoryTitle;
 		add: page;
 		yourself.
-	root := MRRoot new add: directory; yourself.
-	self assert: (root findPageForPath: { directoryTitle . pageTitle }) equals: page
+	object add: directory.
+	self
+		assert:
+			(object
+				findPageForPath:
+					{directoryTitle.
+					pageTitle})
+		equals: page

@@ -1,6 +1,6 @@
 tests
 testFindPageWithDuplicatedTitles
-	| root pageTitle pageInSubDir pageAtRoot directory directoryTitle |
+	| pageTitle pageInSubDir pageAtRoot directory directoryTitle |
 	pageTitle := 'With a space'.
 	pageInSubDir := MRPage new
 		title: pageTitle;
@@ -11,15 +11,14 @@ testFindPageWithDuplicatedTitles
 		title: directoryTitle;
 		add: pageInSubDir;
 		yourself.
-	root := MRRoot new
+	object
 		add: pageAtRoot;
-		add: directory;
-		yourself.
+		add: directory.
 	self deny: pageAtRoot == pageInSubDir.
-	self assert: (root findPageForPath: {pageTitle}) == pageAtRoot.
+	self assert: (object findPageForPath: {pageTitle}) == pageAtRoot.
 	self
 		assert:
-			(root
+			(object
 				findPageForPath:
 					{directoryTitle.
 					pageTitle}) == pageInSubDir
