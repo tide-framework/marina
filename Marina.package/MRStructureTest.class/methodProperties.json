@@ -6,3 +6,7 @@
 		"testFullPath" : "DamienCassou 4/11/2014 17:51",
 		"testPathIsEncoded" : "DamienCassou 4/11/2014 18:12",
 		"testWithAllParents" : "DamienCassou 4/11/2014 17:57" } }
+		"assertIsValid" : "NicolasPetton 4/11/2014 17:12",
+		"denyIsValid" : "NicolasPetton 4/11/2014 17:12",
+		"testEmptyTitleValidation" : "NicolasPetton 4/11/2014 17:13",
+		"testUniqueTitleValidation" : "NicolasPetton 4/11/2014 17:30" } }
