@@ -607,10 +607,18 @@ confirm: aString ifTrue: aBlock ifFalse: anotherBlock
 
 notifyError: anError
 	'#notification' asJQuery empty.
-	[ :html | html p class: 'bg-danger'; with: anError messageText ]
+	[ :html | 
+		html div
+			class: 'alert alert-danger alert-dismissable'; 
+			with: [
+				html button
+					class: 'close';
+					type: 'button';
+					at: 'data-dismiss' put: 'alert';
+					at: 'aria-hidden' put: 'true';
+					with: '×'.
+				html with: anError messageText ] ]
 		appendToJQuery: '#notification' asJQuery.
-		
-	[ '#notification p' asJQuery fadeOut: 500 ] valueWithTimeout: 2000
 ! !
 
 MRWidget subclass: #MRFrameWidget

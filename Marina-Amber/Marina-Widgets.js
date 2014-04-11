@@ -1875,28 +1875,35 @@ protocol: 'actions',
 fn: function (anError){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$4,$2,$5;
+var $1,$2,$4,$5,$3;
 $1="#notification"._asJQuery();
 $ctx1.sendIdx["asJQuery"]=1;
 _st($1)._empty();
-$2=(function(html){
+_st((function(html){
 return smalltalk.withContext(function($ctx2) {
-$3=_st(html)._p();
-_st($3)._class_("bg-danger");
-$4=_st($3)._with_(_st(anError)._messageText());
-return $4;
-}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)})});
-$5="#notification"._asJQuery();
-$ctx1.sendIdx["asJQuery"]=2;
-_st($2)._appendToJQuery_($5);
-_st((function(){
-return smalltalk.withContext(function($ctx2) {
-return _st("#notification p"._asJQuery())._fadeOut_((500));
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}))._valueWithTimeout_((2000));
+$2=_st(html)._div();
+_st($2)._class_("alert alert-danger alert-dismissable");
+$ctx2.sendIdx["class:"]=1;
+$3=_st($2)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$4=_st(html)._button();
+_st($4)._class_("close");
+_st($4)._type_("button");
+_st($4)._at_put_("data-dismiss","alert");
+$ctx3.sendIdx["at:put:"]=1;
+_st($4)._at_put_("aria-hidden","true");
+$5=_st($4)._with_("×");
+$ctx3.sendIdx["with:"]=2;
+$5;
+return _st(html)._with_(_st(anError)._messageText());
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=1;
+return $3;
+}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)})}))._appendToJQuery_("#notification"._asJQuery());
 return self}, function($ctx1) {$ctx1.fill(self,"notifyError:",{anError:anError},globals.MRWidget)})},
 args: ["anError"],
-source: "notifyError: anError\x0a\x09'#notification' asJQuery empty.\x0a\x09[ :html | html p class: 'bg-danger'; with: anError messageText ]\x0a\x09\x09appendToJQuery: '#notification' asJQuery.\x0a\x09\x09\x0a\x09[ '#notification p' asJQuery fadeOut: 500 ] valueWithTimeout: 2000",
-messageSends: ["empty", "asJQuery", "appendToJQuery:", "class:", "p", "with:", "messageText", "valueWithTimeout:", "fadeOut:"],
+source: "notifyError: anError\x0a\x09'#notification' asJQuery empty.\x0a\x09[ :html | \x0a\x09\x09html div\x0a\x09\x09\x09class: 'alert alert-danger alert-dismissable'; \x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09class: 'close';\x0a\x09\x09\x09\x09\x09type: 'button';\x0a\x09\x09\x09\x09\x09at: 'data-dismiss' put: 'alert';\x0a\x09\x09\x09\x09\x09at: 'aria-hidden' put: 'true';\x0a\x09\x09\x09\x09\x09with: '×'.\x0a\x09\x09\x09\x09html with: anError messageText ] ]\x0a\x09\x09appendToJQuery: '#notification' asJQuery.",
+messageSends: ["empty", "asJQuery", "appendToJQuery:", "class:", "div", "with:", "button", "type:", "at:put:", "messageText"],
 referencedClasses: []
 }),
 globals.MRWidget);
