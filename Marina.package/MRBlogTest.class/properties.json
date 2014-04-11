@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "MRBlogTest",
+	"pools" : [
+		 ],
+	"super" : "MRDirectoryTest",
+	"type" : "normal" }

@@ -1,0 +1,9 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"assertXMLEquals:" : "DamienCassou 4/11/2014 15:06",
+		"assertXMLIncludes:" : "DamienCassou 4/11/2014 15:19",
+		"exportedXML" : "DamienCassou 4/11/2014 15:06",
+		"testDontWriteUnpublishedPosts" : "DamienCassou 4/11/2014 15:16",
+		"testStartWithXMLMarkup" : "DamienCassou 4/11/2014 15:32" } }

@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "DamienCassou 4/11/2014 14:09",
+	"instvars" : [
+		 ],
+	"name" : "MRAtomBlogExporterTest",
+	"pools" : [
+		 ],
+	"super" : "MRXMLBlogExporterTest",
+	"type" : "normal" }

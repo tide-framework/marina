@@ -1,0 +1,1 @@
+A MRTemplateTest is a test class for testing the behavior of MRTemplate

@@ -1,0 +1,1 @@
+A MRUserTest is a test class for testing the behavior of MRUser
