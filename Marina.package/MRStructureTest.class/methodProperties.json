@@ -2,4 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
-		"classToBeTested" : "DamienCassou 4/11/2014 14:44" } }
+		"assertIsValid" : "NicolasPetton 4/11/2014 17:12",
+		"classToBeTested" : "DamienCassou 4/11/2014 14:44",
+		"denyIsValid" : "NicolasPetton 4/11/2014 17:12",
+		"testEmptyTitleValidation" : "NicolasPetton 4/11/2014 17:13" } }
