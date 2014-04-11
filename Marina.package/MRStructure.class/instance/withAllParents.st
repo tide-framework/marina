@@ -1,3 +1,3 @@
 accessing
 withAllParents
-	^ { self }, self allParents
+	^ {self} , self allParents
