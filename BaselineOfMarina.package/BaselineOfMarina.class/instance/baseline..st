@@ -8,4 +8,5 @@ baseline: spec
 			self tideDependency: spec.
 			self pillarDependency: spec.
 			self voyageDependency: spec.
-			spec package: 'Marina' with: [ spec requires: #('Tide' 'Pillar' 'Voyage') ] ]
+			self xmlWriterDependency: spec.
+			spec package: 'Marina' with: [ spec requires: #('Tide' 'Pillar' 'Voyage' 'XMLWriter') ] ]

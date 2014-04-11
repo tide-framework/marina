@@ -6,5 +6,5 @@ pillarDependency: spec
 			spec
 				className: 'ConfigurationOfPillar';
 				versionString: #stable;
-				loads: #('html exporter');
+				loads: #('html exporter' 'text exporter');
 				repository: 'http://smalltalkhub.com/mc/Pier/Pillar/main/' ]
