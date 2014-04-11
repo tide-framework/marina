@@ -2595,16 +2595,18 @@ var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 $1=_st(html)._div();
+$ctx1.sendIdx["div"]=1;
 _st($1)._class_("main_frame");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 self._renderTitleOn_(html);
+_st(_st(html)._div())._id_("notification");
 return self._renderContentOn_(html);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRMainFrameWidget)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'main_frame'; \x0a\x09\x09with: [\x0a\x09\x09\x09self renderTitleOn: html.\x0a\x09\x09\x09self renderContentOn: html ]",
-messageSends: ["class:", "div", "with:", "renderTitleOn:", "renderContentOn:"],
+source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'main_frame'; \x0a\x09\x09with: [\x0a\x09\x09\x09self renderTitleOn: html.\x0a\x09\x09\x09html div id: 'notification'.\x0a\x09\x09\x09self renderContentOn: html ]",
+messageSends: ["class:", "div", "with:", "renderTitleOn:", "id:", "renderContentOn:"],
 referencedClasses: []
 }),
 globals.MRMainFrameWidget);
@@ -4095,7 +4097,7 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$7,$6,$4,$2;
+var $1,$3,$5,$6,$4,$2;
 $1=_st(html)._div();
 $ctx1.sendIdx["div"]=1;
 _st($1)._class_("container-fluid");
@@ -4113,10 +4115,6 @@ $ctx3.sendIdx["div"]=3;
 _st($5)._class_("main col-md-8 col-md-offset-2 col-xs-12");
 $6=_st($5)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
-$7=_st(html)._div();
-$ctx4.sendIdx["div"]=4;
-_st($7)._id_("notification");
-$ctx4.sendIdx["id:"]=1;
 return _st(_st(html)._div())._id_(self._mainAreaId());
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 self["@contentsDiv"]=$6;
@@ -4128,7 +4126,7 @@ return $4;
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.MRMainWidget)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'container-fluid';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'row';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09contentsDiv := html div \x0a\x09\x09\x09\x09\x09\x09class: 'main col-md-8 col-md-offset-2 col-xs-12';\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html div id: 'notification'.\x0a\x09\x09\x09\x09\x09\x09\x09html div id: self mainAreaId ] ] ]",
+source: "renderOn: html\x0a\x09html div \x0a\x09\x09class: 'container-fluid';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'row';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09contentsDiv := html div \x0a\x09\x09\x09\x09\x09\x09class: 'main col-md-8 col-md-offset-2 col-xs-12';\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html div id: self mainAreaId ] ] ]",
 messageSends: ["class:", "div", "with:", "id:", "mainAreaId"],
 referencedClasses: []
 }),

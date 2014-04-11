@@ -848,6 +848,7 @@ renderOn: html
 		class: 'main_frame'; 
 		with: [
 			self renderTitleOn: html.
+			html div id: 'notification'.
 			self renderContentOn: html ]
 !
 
@@ -1356,7 +1357,6 @@ renderOn: html
 					contentsDiv := html div 
 						class: 'main col-md-8 col-md-offset-2 col-xs-12';
 						with: [
-							html div id: 'notification'.
 							html div id: self mainAreaId ] ] ]
 ! !
 
