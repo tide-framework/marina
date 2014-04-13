@@ -1,0 +1,3 @@
+actions
+asPage
+	^ self indexPage

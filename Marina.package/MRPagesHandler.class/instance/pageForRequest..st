@@ -1,4 +1,4 @@
 request handling
 pageForRequest: aRequest
 	^ self root ifNotNil: [ :root | 
-		root findPageForPath: aRequest requestLine uri segments allButFirst ]
+		 aRequest requestLine uri segments allButFirst asMRPath findPageFrom: root ]

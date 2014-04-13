@@ -6,4 +6,4 @@ testFindPageWithIncorrectPath
 		title: pageTitle;
 		yourself.
 	object add: page.
-	self assert: (object findPageForPath: {pageTitle . pageTitle}) isNil
+	self assert: ({pageTitle . pageTitle} asMRPath findFrom: object) isNil

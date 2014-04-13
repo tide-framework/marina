@@ -1,0 +1,3 @@
+accessing
+childNamed: aString
+	^ nil

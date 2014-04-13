@@ -3,5 +3,5 @@ indexPage
 	"Answer the structure named index, if it is found and it is a page"
 	
 	^ self children 
-		detect: [ :each | each path = 'index' and: [ each isPage ] ]
-		ifNone: [ nil ]
+		detect: [ :each | each title = 'index' and: [ each isPage ] ]
+		ifNone: [ self defaultIndexPage ]

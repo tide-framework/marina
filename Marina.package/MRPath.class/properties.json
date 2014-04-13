@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"segments" ],
+	"name" : "MRPath",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

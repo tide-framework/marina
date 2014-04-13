@@ -16,8 +16,8 @@ testFullPath
 	dirSub add: object.
 	root add: dirRoot.
 	self
-		assert: object fullPath
+		assert: object path
 		equals:
 			{dirRootTitle.
 			dirSubTitle.
-			objectTitle}
+			objectTitle} asMRPath

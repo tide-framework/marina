@@ -1,3 +1,3 @@
 tests
 testFullPath
-	self assert: object fullPath equals: {}
+	self assert: object path equals: MRPath newRoot

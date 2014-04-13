@@ -13,8 +13,6 @@ testFindPageWithSpacesInTitle
 	object add: directory.
 	self
 		assert:
-			(object
-				findPageForPath:
-					{directoryTitle.
-					pageTitle})
+			({directoryTitle.
+					pageTitle} asMRPath findFrom: object)
 		equals: page
