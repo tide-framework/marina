@@ -1,6 +1,8 @@
 accessing
 setTitle: aString
 	<action>
-	title := aString.
-	self validate.
-	self save
+	self validateTitle: aString.
+	
+	self 
+		title: aString; 
+		save
