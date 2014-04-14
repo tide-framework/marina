@@ -7,5 +7,6 @@ createRoot
 	root add: self adminUser.
 	root add: self defaultTemplate.
 	root add: self blog.
+	root add: self docDirectory.
 	root save.
 	^ root

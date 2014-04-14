@@ -11,7 +11,9 @@
 		"adminUser",
 		"defaultTemplate",
 		"blog",
-		"blogPost1" ],
+		"blogPost1",
+		"docDirectory",
+		"docPage" ],
 	"name" : "MRSetup",
 	"pools" : [
 		 ],
