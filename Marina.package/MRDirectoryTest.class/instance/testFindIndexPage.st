@@ -4,6 +4,7 @@ testFindIndexPage
 	pageTitle := 'index'.
 	page := MRPage new
 		title: pageTitle;
+		contents: 'foobar';
 		yourself.
 	object add: page.
-	self assert: ({} asMRPath findFrom: object) asPage equals: page
+	self assert: ({} asMRPath findFrom: object) webContents equals: page webContents

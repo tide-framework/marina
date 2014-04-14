@@ -1,3 +1,3 @@
 accessing
 webContents
-	^ self indexPage webContents
+	^ self indexPage ifNotNil: [ :page | page webContents ]

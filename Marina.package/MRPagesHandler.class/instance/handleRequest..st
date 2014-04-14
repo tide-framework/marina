@@ -1,8 +1,10 @@
 request handling
 handleRequest: aRequest
-	| page |
-	page := self pageForRequest: aRequest.
-	page ifNil: [ self pageNotFound: aRequest ].
-	page published ifFalse: [ self pageNotFound: aRequest ].
-	
-	self respond: (ZnResponse ok: (ZnEntity html: page webContents))
+	| structure |
+	structure := self pageForRequest: aRequest.
+	structure ifNil: [ self pageNotFound: aRequest ].
+	structure published
+		ifFalse: [ self pageNotFound: aRequest ].
+	structure webContents
+		ifNil: [ self pageNotFound: aRequest ]
+		ifNotNil: [ :contents | self respond: (ZnResponse ok: (ZnEntity html: contents)) ]
