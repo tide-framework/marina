@@ -3308,18 +3308,13 @@ protocol: 'accessing',
 fn: function (aStructure){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $2,$1;
-$2=_st(aStructure)._isPage();
-if(smalltalk.assert($2)){
-$1="structure-icon glyphicon glyphicon-file";
-} else {
-$1="structure-icon glyphicon glyphicon-folder-open";
-};
+var $1;
+$1=_st(aStructure)._icon();
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"iconFor:",{aStructure:aStructure},globals.MRStructureListWidget)})},
 args: ["aStructure"],
-source: "iconFor: aStructure\x0a\x09^ aStructure isPage \x0a\x09\x09ifTrue: [ 'structure-icon glyphicon glyphicon-file' ]\x0a\x09\x09ifFalse: [ 'structure-icon glyphicon glyphicon-folder-open' ]",
-messageSends: ["ifTrue:ifFalse:", "isPage"],
+source: "iconFor: aStructure\x0a\x09^ aStructure icon",
+messageSends: ["icon"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);

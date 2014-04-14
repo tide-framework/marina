@@ -1073,9 +1073,7 @@ iconColor
 !
 
 iconFor: aStructure
-	^ aStructure isPage 
-		ifTrue: [ 'structure-icon glyphicon glyphicon-file' ]
-		ifFalse: [ 'structure-icon glyphicon glyphicon-folder-open' ]
+	^ aStructure icon
 !
 
 title
