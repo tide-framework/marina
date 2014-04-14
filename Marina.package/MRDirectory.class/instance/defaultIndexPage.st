@@ -6,5 +6,4 @@ defaultIndexPage
 	page contents: self contentsForDefaultIndexPage.
 	page published: true.
 	page parent: self.
-	Halt now.
 	^ page

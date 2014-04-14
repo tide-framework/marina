@@ -1,4 +1,4 @@
-actions
+private
 findFrom: aStructure segments: segments
 	aStructure isNil ifTrue: [ ^ nil ].
 	^segments

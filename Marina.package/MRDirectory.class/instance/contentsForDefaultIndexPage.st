@@ -3,12 +3,12 @@ contentsForDefaultIndexPage
 	^ String streamContents: [ :stream 
 		|
 		stream nextPutAll: '! Index of ', self title; lf.
-		self children do: [ :child | 
+		self children do: [ :child |
 			stream
-				nextPutAll: '- *';
+				nextPutAll: '-*';
 				nextPutAll: child  title;
-				nextPutAll: '>/';
-				nextPutAll: child fullPath;
+				nextPutAll: '>';
+				nextPutAll: child path serverPath;
 				nextPutAll: '*'
 			 ] separatedBy: [ stream lf ]
 		 ]
