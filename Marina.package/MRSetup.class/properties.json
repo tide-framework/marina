@@ -13,7 +13,8 @@
 		"blog",
 		"blogPost1",
 		"docDirectory",
-		"docPage" ],
+		"docPage",
+		"blogTemplate" ],
 	"name" : "MRSetup",
 	"pools" : [
 		 ],
