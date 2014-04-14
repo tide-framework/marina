@@ -3,7 +3,7 @@
 		"isAbstract" : "DamienCassou 4/11/2014 17:20" },
 	"instance" : {
 		"classToBeTested" : "DamienCassou 4/11/2014 14:44",
-		"testFindIndexPage" : "DamienCassou 4/14/2014 13:24",
+		"testFindIndexPage" : "DamienCassou 4/14/2014 14:23",
 		"testFindPage" : "DamienCassou 4/13/2014 16:09",
 		"testFindPageWithDuplicatedTitles" : "DamienCassou 4/13/2014 16:14",
 		"testFindPageWithIncorrectPath" : "DamienCassou 4/13/2014 16:15",
