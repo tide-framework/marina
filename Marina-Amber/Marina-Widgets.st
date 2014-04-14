@@ -480,16 +480,8 @@ root
 	^ self adminPresenter root
 !
 
-structures
-	^ self adminPresenter structures
-!
-
 templates
-	^ self adminPresenter templates
-!
-
-users
-	^ self adminPresenter users
+	^ self root templates
 ! !
 
 MRContext class instanceVariableNames: 'current'!
@@ -574,18 +566,6 @@ context
 
 root
 	^ self context root
-!
-
-structures
-	^ self context structures
-!
-
-templates
-	^ self context templates
-!
-
-users
-	^ self context users
 ! !
 
 !MRWidget methodsFor: 'actions'!
@@ -861,7 +841,7 @@ renderTitleOn: html
 ! !
 
 MRMainFrameWidget subclass: #MRPageEditorWidget
-	instanceVariableNames: 'page'
+	instanceVariableNames: 'page templates'
 	package: 'Marina-Widgets'!
 
 !MRPageEditorWidget methodsFor: 'accessing'!
@@ -884,6 +864,14 @@ page: anObject
 
 templateTitles
 	^ self templates collect: [ :each | each title ]
+!
+
+templates
+	^ templates ifNil: [ #() ]
+!
+
+templates: aCollection
+	templates := aCollection
 !
 
 title
@@ -1100,9 +1088,12 @@ editDirectoryTitle
 !
 
 editPage: aPage
-	MRPageEditorWidget new
-		page: aPage;
-		render
+	self root templates then: [ :proxy |
+		proxy contents then: [ :templates |
+			MRPageEditorWidget new
+				page: aPage;
+				templates: templates;
+				render ] ]
 !
 
 openStructure: aStructure
@@ -1142,7 +1133,7 @@ renderAddStructureOn: html
 renderBreadcrumbOn: html
 	self directory allParents then: [ :proxies |
 		proxies contents then: [ :parents | 
-			html ul class: 'breadcrumb'; with: [
+			html ul class: 'head breadcrumb'; with: [
 				html li with: [
 					html a 
 						with: 'Root directory';
@@ -1225,6 +1216,228 @@ renderStructures: aCollection on: html
 					self renderStructureRow: each on: html ] ] ]
 ! !
 
+MRMainFrameWidget subclass: #MRTemplateCreatorWidget
+	instanceVariableNames: 'templates'
+	package: 'Marina-Widgets'!
+
+!MRTemplateCreatorWidget methodsFor: 'accessing'!
+
+icon
+	^ 'glyphicon glyphicon-plus-sign'
+!
+
+iconColor
+	^ '#178F34'
+!
+
+templateTitle
+	^ templateTitle
+!
+
+templateTitle: anObject
+	templateTitle := anObject
+!
+
+templates
+	^ templates
+!
+
+templates: anObject
+	templates := anObject
+!
+
+title
+	^ 'New template'
+! !
+
+!MRTemplateCreatorWidget methodsFor: 'actions'!
+
+createTemplateTitle: aString
+	[ self root 
+		createTemplateTitle: aString;
+		then: [ self showTemplateListWidget ] ]
+		onPromiseFailureDo: [ :ex |
+			self notifyError: ex ]
+!
+
+showTemplateListWidget
+	MRTemplateListWidget new
+		render
+! !
+
+!MRTemplateCreatorWidget methodsFor: 'rendering'!
+
+renderContentOn: html
+	| form titleInput |
+	
+	form := MRBootstrapForm new.
+	
+	titleInput := form textInput
+		placeholder: 'Title';
+		label: 'Title';
+		yourself.
+		
+	form submitAction: [
+		self createTemplateTitle: titleInput value ].
+
+	form cancelAction: [ self showTemplateListWidget ].
+	
+	html with: form
+! !
+
+MRMainFrameWidget subclass: #MRTemplateEditorWidget
+	instanceVariableNames: 'template'
+	package: 'Marina-Widgets'!
+
+!MRTemplateEditorWidget methodsFor: 'accessing'!
+
+icon
+	^ 'glyphicon glyphicon-pencil'
+!
+
+iconColor
+	^ '#B37113'
+!
+
+template
+	^ template
+!
+
+template: anObject
+	template := anObject
+!
+
+title
+	^ 'Edit template ', self template title
+! !
+
+!MRTemplateEditorWidget methodsFor: 'actions'!
+
+showTemplateListWidget
+	MRTemplateListWidget new
+		render
+!
+
+updateTemplateWithTitle: aTitle contents: contents
+	[
+		self template
+			updateTitle: aTitle
+			contents: contents;
+			then: [
+				self showTemplateListWidget ]
+	] onPromiseFailureDo: [ :ex | 
+		self notifyError: ex ]
+! !
+
+!MRTemplateEditorWidget methodsFor: 'rendering'!
+
+renderContentOn: html
+	| form titleInput contentsInput |
+	
+	form := MRBootstrapForm new.
+	
+	titleInput := form textInput
+		placeholder: 'Title';
+		defaultValue: self template title;
+		label: 'Title';
+		yourself.
+	
+	contentsInput := form textareaInput
+		label: 'Contents';
+		defaultValue: self template contents;
+		yourself.
+
+	form submitAction: [
+		self 
+			updateTemplateWithTitle: titleInput value
+			contents: contentsInput value ].
+
+	form cancelAction: [ self showTemplateListWidget ].
+	
+	html with: form
+! !
+
+MRMainFrameWidget subclass: #MRTemplateListWidget
+	instanceVariableNames: ''
+	package: 'Marina-Widgets'!
+!MRTemplateListWidget commentStamp!
+I display a list of templates.!
+
+!MRTemplateListWidget methodsFor: 'accessing'!
+
+icon
+	^ 'glyphicon glyphicon-list-alt'
+!
+
+iconColor
+	^ '#EB2292'
+!
+
+title
+	^ 'Templates'
+! !
+
+!MRTemplateListWidget methodsFor: 'actions'!
+
+addTemplate
+	MRTemplateCreatorWidget new
+		render
+!
+
+editTemplate: aTemplate
+	MRTemplateEditorWidget new
+		template: aTemplate;
+		render
+!
+
+removeTemplate: aTemplate
+	self 
+		confirm: 'Do you really want to remove ', aTemplate title, '?'
+		ifTrue: [
+			aTemplate remove then: [ 
+				self refresh ] ]
+! !
+
+!MRTemplateListWidget methodsFor: 'rendering'!
+
+renderAddTemplateOn: html
+	html div class: 'head'; with: [
+		html button
+			class: 'btn btn-xs btn-default';
+			with: 'New Template';
+			onClick: [ self addTemplate ] ]
+!
+
+renderContentOn: html
+	self root templates then: [ :proxy |
+		proxy contents then: [ :templates |
+			self renderAddTemplateOn: html.
+			self renderTemplates: templates on: html ] ]
+!
+
+renderTemplateRow: aTemplate on: html
+	html tr with: [
+		html td with: [
+			html a 
+				with: [
+					html span class: aTemplate icon.
+					html with: aTemplate title ];
+				onClick: [ self editTemplate: aTemplate ] ].
+		html td class: 'align-right'; with: [
+			html a 
+				with: 'Remove';
+				onClick: [ self removeTemplate: aTemplate ] ] ]
+!
+
+renderTemplates: aCollection on: html
+	html table 
+		class: 'table table-striped';
+		with: [
+			html tbody with: [
+				aCollection do: [ :each |
+					self renderTemplateRow: each on: html ] ] ]
+! !
+
 MRWidget subclass: #MRHeaderWidget
 	instanceVariableNames: ''
 	package: 'Marina-Widgets'!
@@ -1243,6 +1456,10 @@ logout
 
 showStructureListWidget
 	MRStructureListWidget new render
+!
+
+showTemplateListWidget
+	MRTemplateListWidget new render
 ! !
 
 !MRHeaderWidget methodsFor: 'rendering'!

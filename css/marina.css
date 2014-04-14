@@ -78,16 +78,24 @@ body .main .breadcrumb a {
 body .main .breadcrumb button.btn-xs {
   margin-left: 5px;
 }
-body .main .breadcrumb .title_editor input {
+body .main .head {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+}
+body .main .beadcrumb .title_editor input,
+body .main .head .title_editor input {
   display: inline;
   width: auto;
   font-size: 0.8em;
   height: 25px;
 }
-body .main .breadcrumb .title_editor button.btn {
+body .main .beadcrumb .title_editor button.btn,
+body .main .head .title_editor button.btn {
   margin-right: 5px;
 }
-body .main .breadcrumb .title_editor a {
+body .main .beadcrumb .title_editor a,
+body .main .head .title_editor a {
   font-size: 12px;
   font-weight: normal;
 }

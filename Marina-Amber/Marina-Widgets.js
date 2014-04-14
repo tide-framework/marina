@@ -1530,54 +1530,18 @@ globals.MRContext);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "structures",
-protocol: 'accessing',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st(self._adminPresenter())._structures();
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"structures",{},globals.MRContext)})},
-args: [],
-source: "structures\x0a\x09^ self adminPresenter structures",
-messageSends: ["structures", "adminPresenter"],
-referencedClasses: []
-}),
-globals.MRContext);
-
-smalltalk.addMethod(
-smalltalk.method({
 selector: "templates",
 protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=_st(self._adminPresenter())._templates();
+$1=_st(self._root())._templates();
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"templates",{},globals.MRContext)})},
 args: [],
-source: "templates\x0a\x09^ self adminPresenter templates",
-messageSends: ["templates", "adminPresenter"],
-referencedClasses: []
-}),
-globals.MRContext);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "users",
-protocol: 'accessing',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st(self._adminPresenter())._users();
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"users",{},globals.MRContext)})},
-args: [],
-source: "users\x0a\x09^ self adminPresenter users",
-messageSends: ["users", "adminPresenter"],
+source: "templates\x0a\x09^ self root templates",
+messageSends: ["templates", "root"],
 referencedClasses: []
 }),
 globals.MRContext);
@@ -1922,60 +1886,6 @@ return $1;
 args: [],
 source: "root\x0a\x09^ self context root",
 messageSends: ["root", "context"],
-referencedClasses: []
-}),
-globals.MRWidget);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "structures",
-protocol: 'accessing',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st(self._context())._structures();
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"structures",{},globals.MRWidget)})},
-args: [],
-source: "structures\x0a\x09^ self context structures",
-messageSends: ["structures", "context"],
-referencedClasses: []
-}),
-globals.MRWidget);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "templates",
-protocol: 'accessing',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st(self._context())._templates();
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"templates",{},globals.MRWidget)})},
-args: [],
-source: "templates\x0a\x09^ self context templates",
-messageSends: ["templates", "context"],
-referencedClasses: []
-}),
-globals.MRWidget);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "users",
-protocol: 'accessing',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st(self._context())._users();
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"users",{},globals.MRWidget)})},
-args: [],
-source: "users\x0a\x09^ self context users",
-messageSends: ["users", "context"],
 referencedClasses: []
 }),
 globals.MRWidget);
@@ -2656,7 +2566,7 @@ globals.MRMainFrameWidget);
 
 
 
-smalltalk.addClass('MRPageEditorWidget', globals.MRMainFrameWidget, ['page'], 'Marina-Widgets');
+smalltalk.addClass('MRPageEditorWidget', globals.MRMainFrameWidget, ['page', 'templates'], 'Marina-Widgets');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "icon",
@@ -2843,6 +2753,44 @@ globals.MRPageEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "templates",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@templates"];
+if(($receiver = $2) == nil || $receiver == null){
+$1=[];
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"templates",{},globals.MRPageEditorWidget)})},
+args: [],
+source: "templates\x0a\x09^ templates ifNil: [ #() ]",
+messageSends: ["ifNil:"],
+referencedClasses: []
+}),
+globals.MRPageEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "templates:",
+protocol: 'accessing',
+fn: function (aCollection){
+var self=this;
+self["@templates"]=aCollection;
+return self},
+args: ["aCollection"],
+source: "templates: aCollection\x0a\x09templates := aCollection",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRPageEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "title",
 protocol: 'accessing',
 fn: function (){
@@ -2887,7 +2835,7 @@ return self._notifyError_(ex);
 }, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,4)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"updatePageWithTitle:template:contents:published:",{aTitle:aTitle,aTemplateTitle:aTemplateTitle,contents:contents,aBoolean:aBoolean,template:template},globals.MRPageEditorWidget)})},
 args: ["aTitle", "aTemplateTitle", "contents", "aBoolean"],
-source: "updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean\x0a\x09| template |\x0a\x09\x0a\x09template := self templates detect: [ :each | \x0a\x09\x09each title = aTemplateTitle ].\x0a\x09\x09\x0a\x09[\x0a\x09\x09self page\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09template: template\x0a\x09\x09\x09contents: contents\x0a\x09\x09\x09published: aBoolean;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showStructureListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]\x09\x09",
+source: "updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean\x0a\x09| template |\x0a\x09\x0a\x09template := self templates detect: [ :each | \x0a\x09\x09each title = aTemplateTitle ].\x0a\x09\x09\x0a\x09[\x0a\x09\x09self page\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09template: template\x0a\x09\x09\x09contents: contents\x0a\x09\x09\x09published: aBoolean;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showStructureListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]",
 messageSends: ["detect:", "templates", "=", "title", "onPromiseFailureDo:", "updateTitle:template:contents:published:", "page", "then:", "showStructureListWidget", "notifyError:"],
 referencedClasses: []
 }),
@@ -3260,13 +3208,22 @@ var self=this;
 function $MRPageEditorWidget(){return globals.MRPageEditorWidget||(typeof MRPageEditorWidget=="undefined"?nil:MRPageEditorWidget)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
+_st(_st(self._root())._templates())._then_((function(proxy){
+return smalltalk.withContext(function($ctx2) {
+return _st(_st(proxy)._contents())._then_((function(templates){
+return smalltalk.withContext(function($ctx3) {
 $1=_st($MRPageEditorWidget())._new();
 _st($1)._page_(aPage);
+_st($1)._templates_(templates);
 $2=_st($1)._render();
+return $2;
+}, function($ctx3) {$ctx3.fillBlock({templates:templates},$ctx2,2)})}));
+}, function($ctx2) {$ctx2.fillBlock({proxy:proxy},$ctx1,1)})}));
+$ctx1.sendIdx["then:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"editPage:",{aPage:aPage},globals.MRStructureListWidget)})},
 args: ["aPage"],
-source: "editPage: aPage\x0a\x09MRPageEditorWidget new\x0a\x09\x09page: aPage;\x0a\x09\x09render",
-messageSends: ["page:", "new", "render"],
+source: "editPage: aPage\x0a\x09self root templates then: [ :proxy |\x0a\x09\x09proxy contents then: [ :templates |\x0a\x09\x09\x09MRPageEditorWidget new\x0a\x09\x09\x09\x09page: aPage;\x0a\x09\x09\x09\x09templates: templates;\x0a\x09\x09\x09\x09render ] ]",
+messageSends: ["then:", "templates", "root", "contents", "page:", "new", "templates:", "render"],
 referencedClasses: ["MRPageEditorWidget"]
 }),
 globals.MRStructureListWidget);
@@ -3406,7 +3363,7 @@ return smalltalk.withContext(function($ctx2) {
 return _st(_st(proxies)._contents())._then_((function(parents){
 return smalltalk.withContext(function($ctx3) {
 $3=_st(html)._ul();
-_st($3)._class_("breadcrumb");
+_st($3)._class_("head breadcrumb");
 $4=_st($3)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
 $5=_st(html)._li();
@@ -3459,7 +3416,7 @@ return $4;
 $ctx1.sendIdx["then:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderBreadcrumbOn:",{html:html},globals.MRStructureListWidget)})},
 args: ["html"],
-source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :proxies |\x0a\x09\x09proxies contents then: [ :parents | \x0a\x09\x09\x09html ul class: 'breadcrumb'; with: [\x0a\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: 'Root directory';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09html li with: [\x09\x0a\x09\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ].\x0a\x09\x09\x09\x09\x09self renderAddStructureOn: html ] ] ] ]",
+source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :proxies |\x0a\x09\x09proxies contents then: [ :parents | \x0a\x09\x09\x09html ul class: 'head breadcrumb'; with: [\x0a\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: 'Root directory';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09html li with: [\x09\x0a\x09\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ].\x0a\x09\x09\x09\x09\x09self renderAddStructureOn: html ] ] ] ]",
 messageSends: ["then:", "allParents", "directory", "contents", "class:", "ul", "with:", "li", "a", "onClick:", "openStructure:", "root", "do:", "reversed", "allButLast", "title", "ifFalse:", "isRoot", "renderDirectoryTitleOn:", "renderAddStructureOn:"],
 referencedClasses: []
 }),
@@ -3727,6 +3684,625 @@ messageSends: [],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
+
+
+
+smalltalk.addClass('MRTemplateCreatorWidget', globals.MRMainFrameWidget, ['templates'], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "createTemplateTitle:",
+protocol: 'actions',
+fn: function (aString){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+_st((function(){
+return smalltalk.withContext(function($ctx2) {
+$1=self._root();
+_st($1)._createTemplateTitle_(aString);
+$2=_st($1)._then_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._showTemplateListWidget();
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}))._onPromiseFailureDo_((function(ex){
+return smalltalk.withContext(function($ctx2) {
+return self._notifyError_(ex);
+}, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,3)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"createTemplateTitle:",{aString:aString},globals.MRTemplateCreatorWidget)})},
+args: ["aString"],
+source: "createTemplateTitle: aString\x0a\x09[ self root \x0a\x09\x09createTemplateTitle: aString;\x0a\x09\x09then: [ self showTemplateListWidget ] ]\x0a\x09\x09onPromiseFailureDo: [ :ex |\x0a\x09\x09\x09self notifyError: ex ]",
+messageSends: ["onPromiseFailureDo:", "createTemplateTitle:", "root", "then:", "showTemplateListWidget", "notifyError:"],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "icon",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "glyphicon glyphicon-plus-sign";
+},
+args: [],
+source: "icon\x0a\x09^ 'glyphicon glyphicon-plus-sign'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "iconColor",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "#178F34";
+},
+args: [],
+source: "iconColor\x0a\x09^ '#178F34'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderContentOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+var form,titleInput;
+function $MRBootstrapForm(){return globals.MRBootstrapForm||(typeof MRBootstrapForm=="undefined"?nil:MRBootstrapForm)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+form=_st($MRBootstrapForm())._new();
+$1=_st(form)._textInput();
+_st($1)._placeholder_("Title");
+_st($1)._label_("Title");
+$2=_st($1)._yourself();
+titleInput=$2;
+_st(form)._submitAction_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._createTemplateTitle_(_st(titleInput)._value());
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+_st(form)._cancelAction_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._showTemplateListWidget();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+_st(html)._with_(form);
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput},globals.MRTemplateCreatorWidget)})},
+args: ["html"],
+source: "renderContentOn: html\x0a\x09| form titleInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09form submitAction: [\x0a\x09\x09self createTemplateTitle: titleInput value ].\x0a\x0a\x09form cancelAction: [ self showTemplateListWidget ].\x0a\x09\x0a\x09html with: form",
+messageSends: ["new", "placeholder:", "textInput", "label:", "yourself", "submitAction:", "createTemplateTitle:", "value", "cancelAction:", "showTemplateListWidget", "with:"],
+referencedClasses: ["MRBootstrapForm"]
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "showTemplateListWidget",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRTemplateListWidget(){return globals.MRTemplateListWidget||(typeof MRTemplateListWidget=="undefined"?nil:MRTemplateListWidget)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st($MRTemplateListWidget())._new())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"showTemplateListWidget",{},globals.MRTemplateCreatorWidget)})},
+args: [],
+source: "showTemplateListWidget\x0a\x09MRTemplateListWidget new\x0a\x09\x09render",
+messageSends: ["render", "new"],
+referencedClasses: ["MRTemplateListWidget"]
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "templateTitle",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@templateTitle"];
+return $1;
+},
+args: [],
+source: "templateTitle\x0a\x09^ templateTitle",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "templateTitle:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@templateTitle"]=anObject;
+return self},
+args: ["anObject"],
+source: "templateTitle: anObject\x0a\x09templateTitle := anObject",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "templates",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@templates"];
+return $1;
+},
+args: [],
+source: "templates\x0a\x09^ templates",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "templates:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@templates"]=anObject;
+return self},
+args: ["anObject"],
+source: "templates: anObject\x0a\x09templates := anObject",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "title",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "New template";
+},
+args: [],
+source: "title\x0a\x09^ 'New template'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateCreatorWidget);
+
+
+
+smalltalk.addClass('MRTemplateEditorWidget', globals.MRMainFrameWidget, ['template'], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "icon",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "glyphicon glyphicon-pencil";
+},
+args: [],
+source: "icon\x0a\x09^ 'glyphicon glyphicon-pencil'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "iconColor",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "#B37113";
+},
+args: [],
+source: "iconColor\x0a\x09^ '#B37113'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderContentOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+var form,titleInput,contentsInput;
+function $MRBootstrapForm(){return globals.MRBootstrapForm||(typeof MRBootstrapForm=="undefined"?nil:MRBootstrapForm)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$4,$3,$5,$6,$7,$8;
+form=_st($MRBootstrapForm())._new();
+$1=_st(form)._textInput();
+_st($1)._placeholder_("Title");
+$2=$1;
+$4=self._template();
+$ctx1.sendIdx["template"]=1;
+$3=_st($4)._title();
+_st($2)._defaultValue_($3);
+$ctx1.sendIdx["defaultValue:"]=1;
+_st($1)._label_("Title");
+$ctx1.sendIdx["label:"]=1;
+$5=_st($1)._yourself();
+$ctx1.sendIdx["yourself"]=1;
+titleInput=$5;
+$6=_st(form)._textareaInput();
+_st($6)._label_("Contents");
+_st($6)._defaultValue_(_st(self._template())._contents());
+$7=_st($6)._yourself();
+contentsInput=$7;
+_st(form)._submitAction_((function(){
+return smalltalk.withContext(function($ctx2) {
+$8=_st(titleInput)._value();
+$ctx2.sendIdx["value"]=1;
+return self._updateTemplateWithTitle_contents_($8,_st(contentsInput)._value());
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+_st(form)._cancelAction_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._showTemplateListWidget();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+_st(html)._with_(form);
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput,contentsInput:contentsInput},globals.MRTemplateEditorWidget)})},
+args: ["html"],
+source: "renderContentOn: html\x0a\x09| form titleInput contentsInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self template title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self template contents;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updateTemplateWithTitle: titleInput value\x0a\x09\x09\x09contents: contentsInput value ].\x0a\x0a\x09form cancelAction: [ self showTemplateListWidget ].\x0a\x09\x0a\x09html with: form",
+messageSends: ["new", "placeholder:", "textInput", "defaultValue:", "title", "template", "label:", "yourself", "textareaInput", "contents", "submitAction:", "updateTemplateWithTitle:contents:", "value", "cancelAction:", "showTemplateListWidget", "with:"],
+referencedClasses: ["MRBootstrapForm"]
+}),
+globals.MRTemplateEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "showTemplateListWidget",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRTemplateListWidget(){return globals.MRTemplateListWidget||(typeof MRTemplateListWidget=="undefined"?nil:MRTemplateListWidget)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st($MRTemplateListWidget())._new())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"showTemplateListWidget",{},globals.MRTemplateEditorWidget)})},
+args: [],
+source: "showTemplateListWidget\x0a\x09MRTemplateListWidget new\x0a\x09\x09render",
+messageSends: ["render", "new"],
+referencedClasses: ["MRTemplateListWidget"]
+}),
+globals.MRTemplateEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "template",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@template"];
+return $1;
+},
+args: [],
+source: "template\x0a\x09^ template",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "template:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@template"]=anObject;
+return self},
+args: ["anObject"],
+source: "template: anObject\x0a\x09template := anObject",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "title",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1="Edit template ".__comma(_st(self._template())._title());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"title",{},globals.MRTemplateEditorWidget)})},
+args: [],
+source: "title\x0a\x09^ 'Edit template ', self template title",
+messageSends: [",", "title", "template"],
+referencedClasses: []
+}),
+globals.MRTemplateEditorWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "updateTemplateWithTitle:contents:",
+protocol: 'actions',
+fn: function (aTitle,contents){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+_st((function(){
+return smalltalk.withContext(function($ctx2) {
+$1=self._template();
+_st($1)._updateTitle_contents_(aTitle,contents);
+$2=_st($1)._then_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._showTemplateListWidget();
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+return $2;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}))._onPromiseFailureDo_((function(ex){
+return smalltalk.withContext(function($ctx2) {
+return self._notifyError_(ex);
+}, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,3)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"updateTemplateWithTitle:contents:",{aTitle:aTitle,contents:contents},globals.MRTemplateEditorWidget)})},
+args: ["aTitle", "contents"],
+source: "updateTemplateWithTitle: aTitle contents: contents\x0a\x09[\x0a\x09\x09self template\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09contents: contents;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showTemplateListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]\x09\x09",
+messageSends: ["onPromiseFailureDo:", "updateTitle:contents:", "template", "then:", "showTemplateListWidget", "notifyError:"],
+referencedClasses: []
+}),
+globals.MRTemplateEditorWidget);
+
+
+
+smalltalk.addClass('MRTemplateListWidget', globals.MRMainFrameWidget, [], 'Marina-Widgets');
+globals.MRTemplateListWidget.comment="I display a list of templates.";
+smalltalk.addMethod(
+smalltalk.method({
+selector: "addTemplate",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRTemplateCreatorWidget(){return globals.MRTemplateCreatorWidget||(typeof MRTemplateCreatorWidget=="undefined"?nil:MRTemplateCreatorWidget)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st($MRTemplateCreatorWidget())._new())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"addTemplate",{},globals.MRTemplateListWidget)})},
+args: [],
+source: "addTemplate\x0a\x09MRTemplateCreatorWidget new\x0a\x09\x09render",
+messageSends: ["render", "new"],
+referencedClasses: ["MRTemplateCreatorWidget"]
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "editTemplate:",
+protocol: 'actions',
+fn: function (aTemplate){
+var self=this;
+function $MRTemplateEditorWidget(){return globals.MRTemplateEditorWidget||(typeof MRTemplateEditorWidget=="undefined"?nil:MRTemplateEditorWidget)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st($MRTemplateEditorWidget())._new();
+_st($1)._template_(aTemplate);
+$2=_st($1)._render();
+return self}, function($ctx1) {$ctx1.fill(self,"editTemplate:",{aTemplate:aTemplate},globals.MRTemplateListWidget)})},
+args: ["aTemplate"],
+source: "editTemplate: aTemplate\x0a\x09MRTemplateEditorWidget new\x0a\x09\x09template: aTemplate;\x0a\x09\x09render",
+messageSends: ["template:", "new", "render"],
+referencedClasses: ["MRTemplateEditorWidget"]
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "icon",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "glyphicon glyphicon-list-alt";
+},
+args: [],
+source: "icon\x0a\x09^ 'glyphicon glyphicon-list-alt'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "iconColor",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "#EB2292";
+},
+args: [],
+source: "iconColor\x0a\x09^ '#EB2292'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "removeTemplate:",
+protocol: 'actions',
+fn: function (aTemplate){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st("Do you really want to remove ".__comma(_st(aTemplate)._title())).__comma("?");
+$ctx1.sendIdx[","]=1;
+self._confirm_ifTrue_($1,(function(){
+return smalltalk.withContext(function($ctx2) {
+return _st(_st(aTemplate)._remove())._then_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._refresh();
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"removeTemplate:",{aTemplate:aTemplate},globals.MRTemplateListWidget)})},
+args: ["aTemplate"],
+source: "removeTemplate: aTemplate\x0a\x09self \x0a\x09\x09confirm: 'Do you really want to remove ', aTemplate title, '?'\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09aTemplate remove then: [ \x0a\x09\x09\x09\x09self refresh ] ]",
+messageSends: ["confirm:ifTrue:", ",", "title", "then:", "remove", "refresh"],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderAddTemplateOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$3,$4,$2;
+$1=_st(html)._div();
+_st($1)._class_("head");
+$ctx1.sendIdx["class:"]=1;
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$3=_st(html)._button();
+_st($3)._class_("btn btn-xs btn-default");
+_st($3)._with_("New Template");
+$4=_st($3)._onClick_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._addTemplate();
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+return $4;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderAddTemplateOn:",{html:html},globals.MRTemplateListWidget)})},
+args: ["html"],
+source: "renderAddTemplateOn: html\x0a\x09html div class: 'head'; with: [\x0a\x09\x09html button\x0a\x09\x09\x09class: 'btn btn-xs btn-default';\x0a\x09\x09\x09with: 'New Template';\x0a\x09\x09\x09onClick: [ self addTemplate ] ]",
+messageSends: ["class:", "div", "with:", "button", "onClick:", "addTemplate"],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderContentOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(self._root())._templates())._then_((function(proxy){
+return smalltalk.withContext(function($ctx2) {
+return _st(_st(proxy)._contents())._then_((function(templates){
+return smalltalk.withContext(function($ctx3) {
+self._renderAddTemplateOn_(html);
+return self._renderTemplates_on_(templates,html);
+}, function($ctx3) {$ctx3.fillBlock({templates:templates},$ctx2,2)})}));
+}, function($ctx2) {$ctx2.fillBlock({proxy:proxy},$ctx1,1)})}));
+$ctx1.sendIdx["then:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRTemplateListWidget)})},
+args: ["html"],
+source: "renderContentOn: html\x0a\x09self root templates then: [ :proxy |\x0a\x09\x09proxy contents then: [ :templates |\x0a\x09\x09\x09self renderAddTemplateOn: html.\x0a\x09\x09\x09self renderTemplates: templates on: html ] ]",
+messageSends: ["then:", "templates", "root", "contents", "renderAddTemplateOn:", "renderTemplates:on:"],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderTemplateRow:on:",
+protocol: 'rendering',
+fn: function (aTemplate,html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3,$4,$6,$7,$5;
+_st(_st(html)._tr())._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$1=_st(html)._td();
+$ctx2.sendIdx["td"]=1;
+_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$2=_st(html)._a();
+$ctx3.sendIdx["a"]=1;
+_st($2)._with_((function(){
+return smalltalk.withContext(function($ctx4) {
+_st(_st(html)._span())._class_(_st(aTemplate)._icon());
+$ctx4.sendIdx["class:"]=1;
+return _st(html)._with_(_st(aTemplate)._title());
+$ctx4.sendIdx["with:"]=4;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
+$ctx3.sendIdx["with:"]=3;
+$3=_st($2)._onClick_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._editTemplate_(aTemplate);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,4)})}));
+$ctx3.sendIdx["onClick:"]=1;
+return $3;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
+$4=_st(html)._td();
+_st($4)._class_("align-right");
+$5=_st($4)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$6=_st(html)._a();
+_st($6)._with_("Remove");
+$7=_st($6)._onClick_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._removeTemplate_(aTemplate);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,6)})}));
+return $7;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
+$ctx2.sendIdx["with:"]=5;
+return $5;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderTemplateRow:on:",{aTemplate:aTemplate,html:html},globals.MRTemplateListWidget)})},
+args: ["aTemplate", "html"],
+source: "renderTemplateRow: aTemplate on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span class: aTemplate icon.\x0a\x09\x09\x09\x09\x09html with: aTemplate title ];\x0a\x09\x09\x09\x09onClick: [ self editTemplate: aTemplate ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeTemplate: aTemplate ] ] ]",
+messageSends: ["with:", "tr", "td", "a", "class:", "span", "icon", "title", "onClick:", "editTemplate:", "removeTemplate:"],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderTemplates:on:",
+protocol: 'rendering',
+fn: function (aCollection,html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st(html)._table();
+_st($1)._class_("table table-striped");
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+return _st(_st(html)._tbody())._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+return _st(aCollection)._do_((function(each){
+return smalltalk.withContext(function($ctx4) {
+return self._renderTemplateRow_on_(each,html);
+}, function($ctx4) {$ctx4.fillBlock({each:each},$ctx3,3)})}));
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderTemplates:on:",{aCollection:aCollection,html:html},globals.MRTemplateListWidget)})},
+args: ["aCollection", "html"],
+source: "renderTemplates: aCollection on: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09aCollection do: [ :each |\x0a\x09\x09\x09\x09\x09self renderTemplateRow: each on: html ] ] ]",
+messageSends: ["class:", "table", "with:", "tbody", "do:", "renderTemplateRow:on:"],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "title",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "Templates";
+},
+args: [],
+source: "title\x0a\x09^ 'Templates'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRTemplateListWidget);
 
 
 
@@ -4061,6 +4637,23 @@ args: [],
 source: "showStructureListWidget\x0a\x09MRStructureListWidget new render",
 messageSends: ["render", "new"],
 referencedClasses: ["MRStructureListWidget"]
+}),
+globals.MRHeaderWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "showTemplateListWidget",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRTemplateListWidget(){return globals.MRTemplateListWidget||(typeof MRTemplateListWidget=="undefined"?nil:MRTemplateListWidget)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st($MRTemplateListWidget())._new())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"showTemplateListWidget",{},globals.MRHeaderWidget)})},
+args: [],
+source: "showTemplateListWidget\x0a\x09MRTemplateListWidget new render",
+messageSends: ["render", "new"],
+referencedClasses: ["MRTemplateListWidget"]
 }),
 globals.MRHeaderWidget);
 

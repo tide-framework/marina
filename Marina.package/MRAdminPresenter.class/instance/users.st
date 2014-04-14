@@ -1,4 +1,4 @@
 accessing
 users
-	<state>
+	<action>
 	^ MRUser selectAll

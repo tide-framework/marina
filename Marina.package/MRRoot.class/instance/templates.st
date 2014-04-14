@@ -1,4 +1,4 @@
 accessing
 templates
-	<state>
+	<action>
 	^ templates
