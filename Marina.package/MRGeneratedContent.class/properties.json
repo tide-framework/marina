@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "MRGeneratedContent",
+	"pools" : [
+		 ],
+	"super" : "MRDocument",
+	"type" : "normal" }

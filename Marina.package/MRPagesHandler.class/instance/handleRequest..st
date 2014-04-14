@@ -5,4 +5,4 @@ handleRequest: aRequest
 	page ifNil: [ self pageNotFound: aRequest ].
 	page published ifFalse: [ self pageNotFound: aRequest ].
 	
-	self respond: (ZnResponse ok: (ZnEntity html: page htmlContentsWithTemplate))
+	self respond: (ZnResponse ok: (ZnEntity html: page webContents))
