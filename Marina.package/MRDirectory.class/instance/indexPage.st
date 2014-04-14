@@ -4,4 +4,4 @@ indexPage
 	
 	^ self children 
 		detect: [ :each | each title = 'index' and: [ each isPage ] ]
-		ifNone: [ self defaultIndexPage ]
+		ifNone: [ nil ]
