@@ -59,6 +59,9 @@ body .main .main_frame h2 .glyphicon {
   font-size: 22px;
   margin-right: 10px;
 }
+body .main table .glyphicon {
+  width: 22px;
+}
 body .main button.btn {
   margin-right: 5px;
 }
@@ -87,9 +90,6 @@ body .main .breadcrumb .title_editor button.btn {
 body .main .breadcrumb .title_editor a {
   font-size: 12px;
   font-weight: normal;
-}
-body .main .structure-icon {
-  width: 22px;
 }
 body .main .align-right {
   text-align: right;
