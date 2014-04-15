@@ -6,5 +6,5 @@ voyageDependency: spec
 			spec
 				className: 'ConfigurationOfVoyageMongo';
 				versionString: #stable;
-				loads: #('Mongo');
+				loads: #('Mongo' 'Memory' "the dependency on Memory is only for tests");
 				repository: 'http://smalltalkhub.com/mc/estebanlm/Voyage/main' ]
