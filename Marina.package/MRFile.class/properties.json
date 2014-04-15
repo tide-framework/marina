@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"reference" ],
+	"name" : "MRFile",
+	"pools" : [
+		 ],
+	"super" : "MRDocument",
+	"type" : "normal" }

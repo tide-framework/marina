@@ -1,0 +1,12 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addFileTo:title:" : "NicolasPetton 4/15/2014 15:02",
+		"forbidden" : "NicolasPetton 4/15/2014 14:13",
+		"handleRequest:" : "NicolasPetton 4/15/2014 14:32",
+		"methodNotAllowed" : "NicolasPetton 4/15/2014 14:12",
+		"resourcesDirectory" : "NicolasPetton 4/15/2014 13:49",
+		"root" : "NicolasPetton 4/15/2014 14:55",
+		"saveFileFromParts:" : "NicolasPetton 4/15/2014 14:52",
+		"saveOnDisk:" : "NicolasPetton 4/15/2014 15:03" } }

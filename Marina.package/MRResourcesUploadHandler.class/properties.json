@@ -1,0 +1,14 @@
+{
+	"category" : "Marina-Tide",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "NicolasPetton 4/15/2014 13:10",
+	"instvars" : [
+		 ],
+	"name" : "MRResourcesUploadHandler",
+	"pools" : [
+		 ],
+	"super" : "TDContextHandler",
+	"type" : "normal" }
