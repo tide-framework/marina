@@ -3,7 +3,11 @@
 		 },
 	"instance" : {
 		"canBeEdited" : "NicolasPetton 4/15/2014 15:27",
+		"contentType" : "NicolasPetton 4/15/2014 17:09",
+		"contentType:" : "NicolasPetton 4/15/2014 17:09",
+		"defaultContentType" : "NicolasPetton 4/15/2014 17:09",
 		"icon" : "NicolasPetton 4/15/2014 15:26",
 		"reference" : "NicolasPetton 4/15/2014 14:59",
 		"reference:" : "NicolasPetton 4/15/2014 14:59",
-		"remove" : "NicolasPetton 4/15/2014 15:40" } }
+		"remove" : "NicolasPetton 4/15/2014 15:40",
+		"webContents" : "NicolasPetton 4/15/2014 17:10" } }

@@ -1,5 +1,5 @@
 uploading
-addFileTo: aPath title: aTitle
+addFileTo: aPath title: aTitle contentType: aContentType
 	"directory and file are instance of MRDirectory and MRFile respectively, not files on disk"
 	
 	| directory file |
@@ -9,6 +9,7 @@ addFileTo: aPath title: aTitle
 	
 	file := MRFile new
 		title: aTitle;
+		contentType: aContentType;
 		yourself.
 		
 	directory add: file.

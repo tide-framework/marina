@@ -7,4 +7,4 @@ handleRequest: aRequest
 		ifFalse: [ self pageNotFound: aRequest ].
 	structure webContents
 		ifNil: [ self pageNotFound: aRequest ]
-		ifNotNil: [ :contents | self respond: (ZnResponse ok: (ZnEntity html: contents)) ]
+		ifNotNil: [ :contents | self respond: (ZnResponse ok: contents) ]
