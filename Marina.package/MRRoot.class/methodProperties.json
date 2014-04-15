@@ -2,6 +2,7 @@
 	"class" : {
 		"default" : "NicolasPetton 4/10/2014 12:46",
 		"defaultName" : "NicolasPetton 2/19/2014 14:29",
+		"defaultTemplate" : "DamienCassou 4/15/2014 11:27",
 		"isVoyageRoot" : "NicolasPetton 2/19/2014 14:27",
 		"setup" : "NicolasPetton 4/10/2014 12:46" },
 	"instance" : {
@@ -9,6 +10,7 @@
 		"addUser:" : "NicolasPetton 4/10/2014 13:18",
 		"allParents" : "NicolasPetton 4/9/2014 16:35",
 		"createTemplateTitle:" : "NicolasPetton 4/14/2014 16:29",
+		"defaultTemplate" : "DamienCassou 4/15/2014 11:26",
 		"initialize" : "NicolasPetton 4/10/2014 12:39",
 		"isRoot" : "NicolasPetton 4/9/2014 16:12",
 		"path" : "DamienCassou 4/13/2014 16:04",

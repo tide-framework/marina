@@ -1,4 +1,4 @@
 accessing
 mustacheContext
-	^ {('posts' -> self indexPageContents).
+	^ {('contents' -> self indexPageContents).
 	('title' -> self title)} asDictionary

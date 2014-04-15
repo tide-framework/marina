@@ -1,4 +1,4 @@
 accessing
 defaultTemplate
 	<state>
-	^ defaultTemplate ifNil: [ self root templates first ]
+	^ defaultTemplate ifNil: [ self root defaultTemplate ]

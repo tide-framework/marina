@@ -4,4 +4,5 @@
 	"instance" : {
 		"classToBeTested" : "DamienCassou 4/11/2014 14:45",
 		"newInstance" : "DamienCassou 4/11/2014 14:46",
-		"setUp" : "DamienCassou 4/11/2014 14:50" } }
+		"setUp" : "DamienCassou 4/15/2014 11:07",
+		"tearDown" : "DamienCassou 4/15/2014 11:08" } }

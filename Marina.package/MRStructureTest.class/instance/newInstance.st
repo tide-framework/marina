@@ -1,5 +1,9 @@
 instance creation
 newInstance
-	^ super newInstance
+	| parent newStructure |
+	parent := self newParent.
+	newStructure := super newInstance
 		title: 'foobar';
-		yourself
+		yourself.
+	parent add: newStructure.
+	^ newStructure

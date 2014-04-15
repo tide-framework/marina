@@ -2,6 +2,6 @@ accessing
 indexPage
 	^ MRGeneratedContent new
 		title: self title;
-		contents: (self indexTemplate valueFromContext: self mustacheContext);
+		contents: self htmlContentsWithTemplate;
 		parent: self;
 		yourself
