@@ -2,6 +2,6 @@ exporting
 mustacheContext
 	^ { 
 		'contents' -> self htmlContents.
-		'author' -> self author.
+		'author' -> self author fullName.
 		'title' -> self title
 	 } asDictionary
