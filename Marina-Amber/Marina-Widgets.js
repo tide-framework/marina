@@ -3354,7 +3354,7 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $2,$1,$3,$5,$6,$7,$8,$9,$10,$11,$4;
+var $2,$1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$4;
 $2=self._directory();
 $ctx1.sendIdx["directory"]=1;
 $1=_st($2)._allParents();
@@ -3406,7 +3406,9 @@ $11=_st(self._directory())._isRoot();
 if(! smalltalk.assert($11)){
 self._renderDirectoryTitleOn_(html);
 };
-return self._renderAddStructureOn_(html);
+self._renderAddStructureOn_(html);
+$12=self._renderUploadOn_(html);
+return $12;
 }, function($ctx5) {$ctx5.fillBlock({},$ctx4,9)})}));
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 $ctx3.sendIdx["with:"]=1;
@@ -3416,8 +3418,8 @@ return $4;
 $ctx1.sendIdx["then:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderBreadcrumbOn:",{html:html},globals.MRStructureListWidget)})},
 args: ["html"],
-source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :proxies |\x0a\x09\x09proxies contents then: [ :parents | \x0a\x09\x09\x09html ul class: 'head breadcrumb'; with: [\x0a\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: 'Root directory';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09html li with: [\x09\x0a\x09\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ].\x0a\x09\x09\x09\x09\x09self renderAddStructureOn: html ] ] ] ]",
-messageSends: ["then:", "allParents", "directory", "contents", "class:", "ul", "with:", "li", "a", "onClick:", "openStructure:", "root", "do:", "reversed", "allButLast", "title", "ifFalse:", "isRoot", "renderDirectoryTitleOn:", "renderAddStructureOn:"],
+source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :proxies |\x0a\x09\x09proxies contents then: [ :parents | \x0a\x09\x09\x09html ul class: 'head breadcrumb'; with: [\x0a\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: 'Root directory';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09html li with: [\x09\x0a\x09\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ].\x0a\x09\x09\x09\x09\x09self \x0a\x09\x09\x09\x09\x09\x09renderAddStructureOn: html;\x0a\x09\x09\x09\x09\x09\x09renderUploadOn: html ] ] ] ]",
+messageSends: ["then:", "allParents", "directory", "contents", "class:", "ul", "with:", "li", "a", "onClick:", "openStructure:", "root", "do:", "reversed", "allButLast", "title", "ifFalse:", "isRoot", "renderDirectoryTitleOn:", "renderAddStructureOn:", "renderUploadOn:"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
@@ -3542,24 +3544,25 @@ $1=_st(html)._td();
 $ctx2.sendIdx["td"]=1;
 _st($1)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-$2=_st(html)._a();
+$2=_st(aStructure)._canBeEdited();
+if(smalltalk.assert($2)){
+$3=_st(html)._a();
 $ctx3.sendIdx["a"]=1;
-_st($2)._with_((function(){
+_st($3)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
-$3=_st(html)._span();
-$ctx4.sendIdx["span"]=1;
-_st($3)._class_(self._iconFor_(aStructure));
-$ctx4.sendIdx["class:"]=1;
-return _st(html)._with_(_st(aStructure)._title());
-$ctx4.sendIdx["with:"]=4;
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
+return self._renderStructureTitle_on_(aStructure,html);
+$ctx4.sendIdx["renderStructureTitle:on:"]=1;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,4)})}));
 $ctx3.sendIdx["with:"]=3;
-$4=_st($2)._onClick_((function(){
+$4=_st($3)._onClick_((function(){
 return smalltalk.withContext(function($ctx4) {
 return self._openStructure_(aStructure);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,4)})}));
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,5)})}));
 $ctx3.sendIdx["onClick:"]=1;
 return $4;
+} else {
+return self._renderStructureTitle_on_(aStructure,html);
+};
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["with:"]=2;
 $5=_st(html)._td();
@@ -3571,23 +3574,23 @@ if(smalltalk.assert($6)){
 $7=_st(aStructure)._published();
 if(smalltalk.assert($7)){
 $8=_st(html)._span();
-$ctx3.sendIdx["span"]=2;
+$ctx3.sendIdx["span"]=1;
 _st($8)._class_("label label-success");
-$ctx3.sendIdx["class:"]=2;
+$ctx3.sendIdx["class:"]=1;
 $9=_st($8)._with_("Published");
-$ctx3.sendIdx["with:"]=6;
+$ctx3.sendIdx["with:"]=5;
 return $9;
 } else {
 $10=_st(html)._span();
 _st($10)._class_("label label-warning");
-$ctx3.sendIdx["class:"]=3;
+$ctx3.sendIdx["class:"]=2;
 $11=_st($10)._with_("draft");
-$ctx3.sendIdx["with:"]=7;
+$ctx3.sendIdx["with:"]=6;
 return $11;
 };
 };
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
-$ctx2.sendIdx["with:"]=5;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,7)})}));
+$ctx2.sendIdx["with:"]=4;
 $12=_st(html)._td();
 _st($12)._class_("align-right");
 $13=_st($12)._with_((function(){
@@ -3597,17 +3600,34 @@ _st($14)._with_("Remove");
 $15=_st($14)._onClick_((function(){
 return smalltalk.withContext(function($ctx4) {
 return self._removeStructure_(aStructure);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,10)})}));
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,12)})}));
 return $15;
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,9)})}));
-$ctx2.sendIdx["with:"]=8;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,11)})}));
+$ctx2.sendIdx["with:"]=7;
 return $13;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderStructureRow:on:",{aStructure:aStructure,html:html},globals.MRStructureListWidget)})},
 args: ["aStructure", "html"],
-source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span class: (self iconFor: aStructure).\x0a\x09\x09\x09\x09\x09html with: aStructure title ];\x0a\x09\x09\x09\x09onClick: [ self openStructure: aStructure ] ].\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage ifTrue: [\x0a\x09\x09\x09\x09aStructure published \x0a\x09\x09\x09\x09\x09ifTrue: [ html span \x0a\x09\x09\x09\x09\x09\x09class: 'label label-success';\x0a\x09\x09\x09\x09\x09\x09with: 'Published' ]\x0a\x09\x09\x09\x09\x09ifFalse: [ html span\x0a\x09\x09\x09\x09\x09\x09class: 'label label-warning';\x0a\x09\x09\x09\x09\x09\x09with: 'draft' ] ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
-messageSends: ["with:", "tr", "td", "a", "class:", "span", "iconFor:", "title", "onClick:", "openStructure:", "ifTrue:", "isPage", "ifTrue:ifFalse:", "published", "removeStructure:"],
+source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure canBeEdited \x0a\x09\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09self renderStructureTitle: aStructure on: html ];\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: aStructure ] ]\x0a\x09\x09\x09\x09ifFalse: [ self renderStructureTitle: aStructure on: html ] ].\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage ifTrue: [\x0a\x09\x09\x09\x09aStructure published \x0a\x09\x09\x09\x09\x09ifTrue: [ html span \x0a\x09\x09\x09\x09\x09\x09class: 'label label-success';\x0a\x09\x09\x09\x09\x09\x09with: 'Published' ]\x0a\x09\x09\x09\x09\x09ifFalse: [ html span\x0a\x09\x09\x09\x09\x09\x09class: 'label label-warning';\x0a\x09\x09\x09\x09\x09\x09with: 'draft' ] ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
+messageSends: ["with:", "tr", "td", "ifTrue:ifFalse:", "canBeEdited", "a", "renderStructureTitle:on:", "onClick:", "openStructure:", "ifTrue:", "isPage", "published", "class:", "span", "removeStructure:"],
+referencedClasses: []
+}),
+globals.MRStructureListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderStructureTitle:on:",
+protocol: 'rendering',
+fn: function (aStructure,html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(html)._span())._class_(self._iconFor_(aStructure));
+_st(html)._with_(_st(aStructure)._title());
+return self}, function($ctx1) {$ctx1.fill(self,"renderStructureTitle:on:",{aStructure:aStructure,html:html},globals.MRStructureListWidget)})},
+args: ["aStructure", "html"],
+source: "renderStructureTitle: aStructure on: html\x0a\x09html span class: (self iconFor: aStructure).\x0a\x09html with: aStructure title",
+messageSends: ["class:", "span", "iconFor:", "with:", "title"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
@@ -3637,6 +3657,29 @@ return self}, function($ctx1) {$ctx1.fill(self,"renderStructures:on:",{aCollecti
 args: ["aCollection", "html"],
 source: "renderStructures: aCollection on: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09aCollection do: [ :each |\x0a\x09\x09\x09\x09\x09self renderStructureRow: each on: html ] ] ]",
 messageSends: ["class:", "table", "with:", "tbody", "do:", "renderStructureRow:on:"],
+referencedClasses: []
+}),
+globals.MRStructureListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderUploadOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st(html)._button();
+_st($1)._class_("btn btn-xs btn-default");
+_st($1)._with_("Upload");
+$2=_st($1)._onClick_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._upload();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"renderUploadOn:",{html:html},globals.MRStructureListWidget)})},
+args: ["html"],
+source: "renderUploadOn: html\x0a\x09html button\x0a\x09\x09class: 'btn btn-xs btn-default';\x0a\x09\x09with: 'Upload';\x0a\x09\x09onClick: [ self upload ]",
+messageSends: ["class:", "button", "with:", "onClick:", "upload"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
@@ -3682,6 +3725,26 @@ args: [],
 source: "title\x0a\x09^ 'Pages'",
 messageSends: [],
 referencedClasses: []
+}),
+globals.MRStructureListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "upload",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRUploadWidget(){return globals.MRUploadWidget||(typeof MRUploadWidget=="undefined"?nil:MRUploadWidget)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st($MRUploadWidget())._new();
+_st($1)._directory_(self._directory());
+$2=_st($1)._render();
+return self}, function($ctx1) {$ctx1.fill(self,"upload",{},globals.MRStructureListWidget)})},
+args: [],
+source: "upload\x0a\x09MRUploadWidget new \x0a\x09\x09directory: self directory;\x0a\x09\x09render",
+messageSends: ["directory:", "new", "directory", "render"],
+referencedClasses: ["MRUploadWidget"]
 }),
 globals.MRStructureListWidget);
 
@@ -4303,6 +4366,279 @@ messageSends: [],
 referencedClasses: []
 }),
 globals.MRTemplateListWidget);
+
+
+
+smalltalk.addClass('MRUploadWidget', globals.MRMainFrameWidget, ['fileInput', 'directory'], 'Marina-Widgets');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "cancel",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRStructureListWidget(){return globals.MRStructureListWidget||(typeof MRStructureListWidget=="undefined"?nil:MRStructureListWidget)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st($MRStructureListWidget())._new();
+_st($1)._directory_(self._directory());
+$2=_st($1)._render();
+return self}, function($ctx1) {$ctx1.fill(self,"cancel",{},globals.MRUploadWidget)})},
+args: [],
+source: "cancel\x0a\x09MRStructureListWidget new\x0a\x09\x09directory: self directory;\x0a\x09\x09render",
+messageSends: ["directory:", "new", "directory", "render"],
+referencedClasses: ["MRStructureListWidget"]
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "directory",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@directory"];
+return $1;
+},
+args: [],
+source: "directory\x0a\x09^ directory",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "directory:",
+protocol: 'accessing',
+fn: function (aDirectory){
+var self=this;
+self["@directory"]=aDirectory;
+return self},
+args: ["aDirectory"],
+source: "directory: aDirectory\x0a\x09directory := aDirectory",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "fileInput",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@fileInput"];
+return $1;
+},
+args: [],
+source: "fileInput\x0a\x09^ fileInput",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "fileInput:",
+protocol: 'accessing',
+fn: function (anObject){
+var self=this;
+self["@fileInput"]=anObject;
+return self},
+args: ["anObject"],
+source: "fileInput: anObject\x0a\x09fileInput := anObject",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "icon",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "glyphicon glyphicon-open";
+},
+args: [],
+source: "icon\x0a\x09^ 'glyphicon glyphicon-open'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "iconColor",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "#2AB963";
+},
+args: [],
+source: "iconColor\x0a\x09^ '#2AB963'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderContentOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$3,$4,$2,$5,$7,$8,$9,$10,$6;
+_st(_st(html)._form())._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+$1=_st(html)._div();
+$ctx2.sendIdx["div"]=1;
+_st($1)._class_("form-group");
+$ctx2.sendIdx["class:"]=1;
+$2=_st($1)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$3=_st(html)._input();
+_st($3)._type_("file");
+$ctx3.sendIdx["type:"]=1;
+$4=_st($3)._yourself();
+self["@fileInput"]=$4;
+return self["@fileInput"];
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["with:"]=2;
+$2;
+$5=_st(html)._div();
+_st($5)._class_("form-group");
+$ctx2.sendIdx["class:"]=2;
+$6=_st($5)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$7=_st(html)._button();
+$ctx3.sendIdx["button"]=1;
+_st($7)._class_("btn btn-default");
+$ctx3.sendIdx["class:"]=3;
+_st($7)._type_("submit");
+$ctx3.sendIdx["type:"]=2;
+_st($7)._onClick_((function(event){
+return smalltalk.withContext(function($ctx4) {
+_st(event)._preventDefault();
+$ctx4.sendIdx["preventDefault"]=1;
+return self._upload();
+}, function($ctx4) {$ctx4.fillBlock({event:event},$ctx3,4)})}));
+$ctx3.sendIdx["onClick:"]=1;
+$8=_st($7)._with_("Upload");
+$ctx3.sendIdx["with:"]=4;
+$8;
+$9=_st(html)._button();
+_st($9)._class_("btn");
+_st($9)._type_("cancel");
+_st($9)._onClick_((function(event){
+return smalltalk.withContext(function($ctx4) {
+_st(event)._preventDefault();
+return self._cancel();
+}, function($ctx4) {$ctx4.fillBlock({event:event},$ctx3,5)})}));
+$10=_st($9)._with_("Cancel");
+return $10;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
+$ctx2.sendIdx["with:"]=3;
+return $6;
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["with:"]=1;
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRUploadWidget)})},
+args: ["html"],
+source: "renderContentOn: html\x0a\x09html form with: [\x0a\x09\x09html div \x0a\x09\x09\x09class: 'form-group';\x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09fileInput := html input\x0a\x09\x09\x09\x09\x09type: 'file';\x0a\x09\x09\x09\x09\x09yourself ].\x0a\x09\x09html div \x0a\x09\x09\x09class: 'form-group';\x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09class: 'btn btn-default';\x0a\x09\x09\x09\x09\x09type: 'submit';\x0a\x09\x09\x09\x09\x09onClick: [ :event |\x0a\x09\x09\x09\x09\x09\x09event preventDefault.\x0a\x09\x09\x09\x09\x09\x09self upload ];\x0a\x09\x09\x09\x09\x09with: 'Upload'.\x0a\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09class: 'btn';\x0a\x09\x09\x09\x09\x09type: 'cancel';\x0a\x09\x09\x09\x09\x09onClick: [ :event |\x0a\x09\x09\x09\x09\x09\x09event preventDefault.\x0a\x09\x09\x09\x09\x09\x09self cancel ];\x0a\x09\x09\x09\x09\x09with: 'Cancel' ] ]",
+messageSends: ["with:", "form", "class:", "div", "type:", "input", "yourself", "button", "onClick:", "preventDefault", "upload", "cancel"],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "title",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return "Upload a file";
+},
+args: [],
+source: "title\x0a\x09^ 'Upload a file'",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "upload",
+protocol: 'actions',
+fn: function (){
+var self=this;
+var htmlInput,file,formData;
+function $FormData(){return globals.FormData||(typeof FormData=="undefined"?nil:FormData)}
+function $Error(){return globals.Error||(typeof Error=="undefined"?nil:Error)}
+return smalltalk.withContext(function($ctx1) { 
+htmlInput=_st(_st(self["@fileInput"])._asJQuery())._get_((0));
+file=_st(_st(htmlInput)._at_("files"))._at_((0));
+$ctx1.sendIdx["at:"]=1;
+formData=_st($FormData())._new();
+$ctx1.sendIdx["new"]=1;
+_st(formData)._append_path_("path",_st(self._directory())._pathString());
+_st(formData)._append_file_("file",file);
+_st(jQuery)._ajax_(globals.HashedCollection._newFromPairs_(["url","/upload","type","POST","data",formData,"cache",false,"contentType",false,"processData",false,"success",(function(){
+return smalltalk.withContext(function($ctx2) {
+return self._cancel();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}),"error",(function(xhr){
+return smalltalk.withContext(function($ctx2) {
+return self._notifyError_(_st(_st($Error())._new())._messageText_(_st(xhr)._responseText()));
+}, function($ctx2) {$ctx2.fillBlock({xhr:xhr},$ctx1,2)})})]));
+return self}, function($ctx1) {$ctx1.fill(self,"upload",{htmlInput:htmlInput,file:file,formData:formData},globals.MRUploadWidget)})},
+args: [],
+source: "upload\x0a\x09| htmlInput file formData |\x0a\x09\x0a\x09htmlInput := fileInput asJQuery get: 0.\x0a\x09file := (htmlInput at: 'files') at: 0.\x0a\x09\x0a\x09formData := FormData new.\x0a\x09formData append: 'path' path: self directory pathString.\x0a\x09formData append: 'file' file: file.\x0a\x09\x0a\x09jQuery ajax: #{\x0a\x09\x09'url' -> '/upload'.\x0a\x09\x09'type' -> 'POST'.\x0a\x09\x09'data' -> formData.\x0a\x09\x09'cache' -> false.\x0a        'contentType' -> false.\x0a        'processData' -> false.\x0a\x09\x09'success' -> [ self cancel ].\x0a\x09\x09'error' -> [ :xhr |\x0a\x09\x09\x09self notifyError: (Error new messageText: xhr responseText) ]\x0a\x09}",
+messageSends: ["get:", "asJQuery", "at:", "new", "append:path:", "pathString", "directory", "append:file:", "ajax:", "cancel", "notifyError:", "messageText:", "responseText"],
+referencedClasses: ["FormData", "Error"]
+}),
+globals.MRUploadWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "upload2",
+protocol: 'actions',
+fn: function (){
+var self=this;
+var htmlInput,file,formData;
+function $FormData(){return globals.FormData||(typeof FormData=="undefined"?nil:FormData)}
+function $XMLHttpRequest(){return globals.XMLHttpRequest||(typeof XMLHttpRequest=="undefined"?nil:XMLHttpRequest)}
+function $Error(){return globals.Error||(typeof Error=="undefined"?nil:Error)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+htmlInput=_st(_st(self["@fileInput"])._asJQuery())._get_((0));
+file=_st(_st(htmlInput)._at_("files"))._at_((0));
+$ctx1.sendIdx["at:"]=1;
+formData=_st($FormData())._new();
+$ctx1.sendIdx["new"]=1;
+_st(formData)._append_path_("path",_st(self._directory())._pathString());
+_st(formData)._append_file_("file",file);
+$1=_st($XMLHttpRequest())._new();
+$ctx1.sendIdx["new"]=2;
+_st($1)._open_path_async_("POST","/upload",true);
+_st($1)._at_put_("onload",(function(){
+return smalltalk.withContext(function($ctx2) {
+return self._aqa();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["at:put:"]=1;
+_st($1)._at_put_("onerror",(function(){
+return smalltalk.withContext(function($ctx2) {
+return self._notifyError_(_st(_st($Error())._new())._messageText_("nope"));
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+$2=_st($1)._send_(formData);
+return self}, function($ctx1) {$ctx1.fill(self,"upload2",{htmlInput:htmlInput,file:file,formData:formData},globals.MRUploadWidget)})},
+args: [],
+source: "upload2\x0a\x09| htmlInput file formData |\x0a\x09\x0a\x09htmlInput := fileInput asJQuery get: 0.\x0a\x09file := (htmlInput at: 'files') at: 0.\x0a\x09\x0a\x09formData := FormData new.\x0a\x09formData append: 'path' path: self directory pathString.\x0a\x09formData append: 'file' file: file.\x0a\x09\x0a\x09XMLHttpRequest new\x0a\x09\x09open: 'POST' path: '/upload' async: true;\x0a\x09\x09at: 'onload' put: [ self aqa ];\x0a\x09\x09at: 'onerror' put: [ self notifyError: (Error new messageText: 'nope') ];\x0a\x09\x09send: formData",
+messageSends: ["get:", "asJQuery", "at:", "new", "append:path:", "pathString", "directory", "append:file:", "open:path:async:", "at:put:", "aqa", "notifyError:", "messageText:", "send:"],
+referencedClasses: ["FormData", "XMLHttpRequest", "Error"]
+}),
+globals.MRUploadWidget);
 
 
 

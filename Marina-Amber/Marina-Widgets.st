@@ -1119,6 +1119,12 @@ setDirectoryTitle: aString
 			then: [ self refresh ] 
 	] onPromiseFailureDo: [ :error |
 		self notifyError: error ]
+!
+
+upload
+	MRUploadWidget new 
+		directory: self directory;
+		render
 ! !
 
 !MRStructureListWidget methodsFor: 'rendering'!
@@ -1146,7 +1152,9 @@ renderBreadcrumbOn: html
 				html li with: [	
 					self directory isRoot ifFalse: [
 						self renderDirectoryTitleOn: html ].
-					self renderAddStructureOn: html ] ] ] ]
+					self 
+						renderAddStructureOn: html;
+						renderUploadOn: html ] ] ] ]
 !
 
 renderContentOn: html
@@ -1187,11 +1195,13 @@ renderDirectoryTitleOn: html
 renderStructureRow: aStructure on: html
 	html tr with: [
 		html td with: [
-			html a 
-				with: [
-					html span class: (self iconFor: aStructure).
-					html with: aStructure title ];
-				onClick: [ self openStructure: aStructure ] ].
+			aStructure canBeEdited 
+				ifTrue: [
+					html a 
+						with: [
+							self renderStructureTitle: aStructure on: html ];
+						onClick: [ self openStructure: aStructure ] ]
+				ifFalse: [ self renderStructureTitle: aStructure on: html ] ].
 		html td with: [
 			aStructure isPage ifTrue: [
 				aStructure published 
@@ -1207,6 +1217,11 @@ renderStructureRow: aStructure on: html
 				onClick: [ self removeStructure: aStructure ] ] ]
 !
 
+renderStructureTitle: aStructure on: html
+	html span class: (self iconFor: aStructure).
+	html with: aStructure title
+!
+
 renderStructures: aCollection on: html
 	html table 
 		class: 'table table-striped';
@@ -1214,6 +1229,13 @@ renderStructures: aCollection on: html
 			html tbody with: [
 				aCollection do: [ :each |
 					self renderStructureRow: each on: html ] ] ]
+!
+
+renderUploadOn: html
+	html button
+		class: 'btn btn-xs btn-default';
+		with: 'Upload';
+		onClick: [ self upload ]
 ! !
 
 MRMainFrameWidget subclass: #MRTemplateCreatorWidget
@@ -1436,6 +1458,117 @@ renderTemplates: aCollection on: html
 			html tbody with: [
 				aCollection do: [ :each |
 					self renderTemplateRow: each on: html ] ] ]
+! !
+
+MRMainFrameWidget subclass: #MRUploadWidget
+	instanceVariableNames: 'fileInput directory'
+	package: 'Marina-Widgets'!
+
+!MRUploadWidget methodsFor: 'accessing'!
+
+directory
+	^ directory
+!
+
+directory: aDirectory
+	directory := aDirectory
+!
+
+fileInput
+	^ fileInput
+!
+
+fileInput: anObject
+	fileInput := anObject
+!
+
+icon
+	^ 'glyphicon glyphicon-open'
+!
+
+iconColor
+	^ '#2AB963'
+!
+
+title
+	^ 'Upload a file'
+! !
+
+!MRUploadWidget methodsFor: 'actions'!
+
+cancel
+	MRStructureListWidget new
+		directory: self directory;
+		render
+!
+
+upload
+	| htmlInput file formData |
+	
+	htmlInput := fileInput asJQuery get: 0.
+	file := (htmlInput at: 'files') at: 0.
+	
+	formData := FormData new.
+	formData append: 'path' path: self directory pathString.
+	formData append: 'file' file: file.
+	
+	jQuery ajax: #{
+		'url' -> '/upload'.
+		'type' -> 'POST'.
+		'data' -> formData.
+		'cache' -> false.
+        'contentType' -> false.
+        'processData' -> false.
+		'success' -> [ self cancel ].
+		'error' -> [ :xhr |
+			self notifyError: (Error new messageText: xhr responseText) ]
+	}
+!
+
+upload2
+	| htmlInput file formData |
+	
+	htmlInput := fileInput asJQuery get: 0.
+	file := (htmlInput at: 'files') at: 0.
+	
+	formData := FormData new.
+	formData append: 'path' path: self directory pathString.
+	formData append: 'file' file: file.
+	
+	XMLHttpRequest new
+		open: 'POST' path: '/upload' async: true;
+		at: 'onload' put: [ self aqa ];
+		at: 'onerror' put: [ self notifyError: (Error new messageText: 'nope') ];
+		send: formData
+! !
+
+!MRUploadWidget methodsFor: 'rendering'!
+
+renderContentOn: html
+	html form with: [
+		html div 
+			class: 'form-group';
+			with: [
+				fileInput := html input
+					type: 'file';
+					yourself ].
+		html div 
+			class: 'form-group';
+			with: [
+				html button
+					class: 'btn btn-default';
+					type: 'submit';
+					onClick: [ :event |
+						event preventDefault.
+						self upload ];
+					with: 'Upload'.
+				html button
+					class: 'btn';
+					type: 'cancel';
+					onClick: [ :event |
+						event preventDefault.
+						self cancel ];
+					with: 'Cancel' ] ]
 ! !
 
 MRWidget subclass: #MRHeaderWidget
