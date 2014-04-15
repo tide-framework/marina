@@ -1,0 +1,4 @@
+testing
+canBeEdited
+	<state>
+	^ true

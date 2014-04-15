@@ -4,7 +4,7 @@ addFileTo: aPath title: aTitle
 	
 	| directory file |
 	
-	directory := ($/ split: aPath) asMRPath findFrom: self root.
+	directory := (($/ split: aPath) reject: [ :each | each isEmpty ]) asMRPath findFrom: self root.
 	(directory isNil or: [ directory isDirectory not ]) ifTrue: [ self forbidden ].
 	
 	file := MRFile new
