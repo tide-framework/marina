@@ -1,6 +1,11 @@
 helpers
 newPost
-	^ MRBlogPost new
+	| blog post |
+	blog := self newBlog.
+	post := MRBlogPost new
 		contents: '';
+		title: 'new post';
 		published: true;
-		yourself
+		yourself.
+	blog add: post.
+	^ post
