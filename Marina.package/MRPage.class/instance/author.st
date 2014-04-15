@@ -1,3 +1,3 @@
 accessing
 author
-	^ author
+	^ author ifNil: [ self defaultAuthor ]
