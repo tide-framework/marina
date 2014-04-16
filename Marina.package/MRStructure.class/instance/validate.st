@@ -1,4 +1,4 @@
 validating
 validate
-	self validateTitle: self title.
+	self validateLocalPath: self title.
 	super validate

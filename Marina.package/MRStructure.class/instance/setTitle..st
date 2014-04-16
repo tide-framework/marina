@@ -1,7 +1,7 @@
 accessing
 setTitle: aString
 	<action>
-	self validateTitle: aString.
+	self validateLocalPath: aString.
 	
 	self 
 		title: aString; 

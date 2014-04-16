@@ -867,7 +867,8 @@ page: anObject
 !
 
 templateTitles
-	^ self templates collect: [ :each | each title ]
+	^ (self templates reject: [ :each | each partial ])
+		collect: [ :each | each title ]
 !
 
 templates
@@ -891,7 +892,7 @@ showStructureListWidget
 			render ]
 !
 
-updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean
+updatePageWithTitle: aTitle path: aPath template: aTemplateTitle contents: contents published: aBoolean
 	| template |
 	
 	template := self templates detect: [ :each | 
@@ -900,6 +901,7 @@ updatePageWithTitle: aTitle template: aTemplateTitle contents: contents publishe
 	[
 		self page
 			updateTitle: aTitle
+			path: aPath
 			template: template
 			contents: contents
 			published: aBoolean;
@@ -912,7 +914,7 @@ updatePageWithTitle: aTitle template: aTemplateTitle contents: contents publishe
 !MRPageEditorWidget methodsFor: 'rendering'!
 
 renderContentOn: html
-	| form titleInput templateInput contentsInput publishedInput |
+	| form titleInput pathInput templateInput contentsInput publishedInput |
 	
 	form := MRBootstrapForm new.
 	
@@ -920,6 +922,12 @@ renderContentOn: html
 		placeholder: 'Title';
 		defaultValue: self page title;
 		label: 'Title';
+		yourself.
+		
+	pathInput := form textInput
+		placeholder: 'Path';
+		defaultValue: self page localPath;
+		label: 'Path';
 		yourself.
 	
 	templateInput := form selectInput
@@ -941,6 +949,7 @@ renderContentOn: html
 	form submitAction: [
 		self 
 			updatePageWithTitle: titleInput value
+			path: pathInput value
 			template: templateInput value
 			contents: contentsInput value
 			published: publishedInput value ].
@@ -1344,11 +1353,12 @@ showTemplateListWidget
 		render
 !
 
-updateTemplateWithTitle: aTitle contents: contents
+updateTemplateWithTitle: aTitle contents: contents partial: aBoolean
 	[
 		self template
 			updateTitle: aTitle
-			contents: contents;
+			contents: contents
+			partial: aBoolean;
 			then: [
 				self showTemplateListWidget ]
 	] onPromiseFailureDo: [ :ex | 
@@ -1358,7 +1368,7 @@ updateTemplateWithTitle: aTitle contents: contents
 !MRTemplateEditorWidget methodsFor: 'rendering'!
 
 renderContentOn: html
-	| form titleInput contentsInput |
+	| form titleInput contentsInput partialInput |
 	
 	form := MRBootstrapForm new.
 	
@@ -1372,11 +1382,17 @@ renderContentOn: html
 		label: 'Contents';
 		defaultValue: self template contents;
 		yourself.
+		
+	partialInput := form checkboxInput
+		label: 'Partial';
+		checked: self template partial;
+		yourself.
 
 	form submitAction: [
 		self 
 			updateTemplateWithTitle: titleInput value
-			contents: contentsInput value ].
+			contents: contentsInput value
+			partial: partialInput value ].
 
 	form cancelAction: [ self showTemplateListWidget ].
 	
@@ -1449,6 +1465,14 @@ renderTemplateRow: aTemplate on: html
 					html span class: aTemplate icon.
 					html with: aTemplate title ];
 				onClick: [ self editTemplate: aTemplate ] ].
+		html td with: [
+			aTemplate partial
+				ifTrue: [ html span 
+					class: 'label label-warning';
+					with: 'Partial template' ]
+				ifFalse: [ html span
+					class: 'label label-success';
+					with: 'Main template' ] ].
 		html td class: 'align-right'; with: [
 			html a 
 				with: 'Remove';

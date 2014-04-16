@@ -1,0 +1,3 @@
+accessing
+localPath
+	^ self title

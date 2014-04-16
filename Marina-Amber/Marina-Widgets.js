@@ -2667,13 +2667,15 @@ selector: "renderContentOn:",
 protocol: 'rendering',
 fn: function (html){
 var self=this;
-var form,titleInput,templateInput,contentsInput,publishedInput;
+var form,titleInput,pathInput,templateInput,contentsInput,publishedInput;
 function $MRBootstrapForm(){return globals.MRBootstrapForm||(typeof MRBootstrapForm=="undefined"?nil:MRBootstrapForm)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$4,$3,$5,$6,$7,$10,$9,$8,$11,$12,$13,$15,$14,$16,$17,$18,$19,$20,$21;
+var $1,$2,$4,$3,$5,$6,$7,$9,$8,$10,$11,$12,$15,$14,$13,$16,$17,$18,$20,$19,$21,$22,$23,$24,$25,$26,$27;
 form=_st($MRBootstrapForm())._new();
 $1=_st(form)._textInput();
+$ctx1.sendIdx["textInput"]=1;
 _st($1)._placeholder_("Title");
+$ctx1.sendIdx["placeholder:"]=1;
 $2=$1;
 $4=self._page();
 $ctx1.sendIdx["page"]=1;
@@ -2686,54 +2688,69 @@ $ctx1.sendIdx["label:"]=1;
 $5=_st($1)._yourself();
 $ctx1.sendIdx["yourself"]=1;
 titleInput=$5;
-$6=_st(form)._selectInput();
-_st($6)._options_(self._templateTitles());
+$6=_st(form)._textInput();
+_st($6)._placeholder_("Path");
 $7=$6;
-$10=self._page();
+$9=self._page();
 $ctx1.sendIdx["page"]=2;
-$9=_st($10)._template();
-$8=_st($9)._title();
-_st($7)._selectedOption_($8);
-_st($6)._label_("Template");
+$8=_st($9)._localPath();
+_st($7)._defaultValue_($8);
+$ctx1.sendIdx["defaultValue:"]=2;
+_st($6)._label_("Path");
 $ctx1.sendIdx["label:"]=2;
-$11=_st($6)._yourself();
+$10=_st($6)._yourself();
 $ctx1.sendIdx["yourself"]=2;
-templateInput=$11;
-$12=_st(form)._textareaInput();
-_st($12)._label_("Contents");
-$ctx1.sendIdx["label:"]=3;
-$13=$12;
+pathInput=$10;
+$11=_st(form)._selectInput();
+_st($11)._options_(self._templateTitles());
+$12=$11;
 $15=self._page();
 $ctx1.sendIdx["page"]=3;
-$14=_st($15)._contents();
-_st($13)._defaultValue_($14);
-$16=_st($12)._yourself();
+$14=_st($15)._template();
+$13=_st($14)._title();
+_st($12)._selectedOption_($13);
+_st($11)._label_("Template");
+$ctx1.sendIdx["label:"]=3;
+$16=_st($11)._yourself();
 $ctx1.sendIdx["yourself"]=3;
-contentsInput=$16;
-$17=_st(form)._checkboxInput();
-_st($17)._label_("Published");
-_st($17)._checked_(_st(self._page())._published());
-$18=_st($17)._yourself();
-publishedInput=$18;
+templateInput=$16;
+$17=_st(form)._textareaInput();
+_st($17)._label_("Contents");
+$ctx1.sendIdx["label:"]=4;
+$18=$17;
+$20=self._page();
+$ctx1.sendIdx["page"]=4;
+$19=_st($20)._contents();
+_st($18)._defaultValue_($19);
+$21=_st($17)._yourself();
+$ctx1.sendIdx["yourself"]=4;
+contentsInput=$21;
+$22=_st(form)._checkboxInput();
+_st($22)._label_("Published");
+_st($22)._checked_(_st(self._page())._published());
+$23=_st($22)._yourself();
+publishedInput=$23;
 _st(form)._submitAction_((function(){
 return smalltalk.withContext(function($ctx2) {
-$19=_st(titleInput)._value();
+$24=_st(titleInput)._value();
 $ctx2.sendIdx["value"]=1;
-$20=_st(templateInput)._value();
+$25=_st(pathInput)._value();
 $ctx2.sendIdx["value"]=2;
-$21=_st(contentsInput)._value();
+$26=_st(templateInput)._value();
 $ctx2.sendIdx["value"]=3;
-return self._updatePageWithTitle_template_contents_published_($19,$20,$21,_st(publishedInput)._value());
+$27=_st(contentsInput)._value();
+$ctx2.sendIdx["value"]=4;
+return self._updatePageWithTitle_path_template_contents_published_($24,$25,$26,$27,_st(publishedInput)._value());
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 _st(form)._cancelAction_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._showStructureListWidget();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
 _st(html)._with_(form);
-return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput,templateInput:templateInput,contentsInput:contentsInput,publishedInput:publishedInput},globals.MRPageEditorWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput,pathInput:pathInput,templateInput:templateInput,contentsInput:contentsInput,publishedInput:publishedInput},globals.MRPageEditorWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09| form titleInput templateInput contentsInput publishedInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self page title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x0a\x09templateInput := form selectInput\x0a\x09\x09options: self templateTitles;\x0a\x09\x09selectedOption: self page template title;\x0a\x09\x09label: 'Template';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self page contents;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09publishedInput := form checkboxInput\x0a\x09\x09label: 'Published';\x0a\x09\x09checked: self page published;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updatePageWithTitle: titleInput value\x0a\x09\x09\x09template: templateInput value\x0a\x09\x09\x09contents: contentsInput value\x0a\x09\x09\x09published: publishedInput value ].\x0a\x0a\x09form cancelAction: [ self showStructureListWidget ].\x0a\x09\x0a\x09html with: form",
-messageSends: ["new", "placeholder:", "textInput", "defaultValue:", "title", "page", "label:", "yourself", "options:", "selectInput", "templateTitles", "selectedOption:", "template", "textareaInput", "contents", "checkboxInput", "checked:", "published", "submitAction:", "updatePageWithTitle:template:contents:published:", "value", "cancelAction:", "showStructureListWidget", "with:"],
+source: "renderContentOn: html\x0a\x09| form titleInput pathInput templateInput contentsInput publishedInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self page title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09pathInput := form textInput\x0a\x09\x09placeholder: 'Path';\x0a\x09\x09defaultValue: self page localPath;\x0a\x09\x09label: 'Path';\x0a\x09\x09yourself.\x0a\x09\x0a\x09templateInput := form selectInput\x0a\x09\x09options: self templateTitles;\x0a\x09\x09selectedOption: self page template title;\x0a\x09\x09label: 'Template';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self page contents;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09publishedInput := form checkboxInput\x0a\x09\x09label: 'Published';\x0a\x09\x09checked: self page published;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updatePageWithTitle: titleInput value\x0a\x09\x09\x09path: pathInput value\x0a\x09\x09\x09template: templateInput value\x0a\x09\x09\x09contents: contentsInput value\x0a\x09\x09\x09published: publishedInput value ].\x0a\x0a\x09form cancelAction: [ self showStructureListWidget ].\x0a\x09\x0a\x09html with: form",
+messageSends: ["new", "placeholder:", "textInput", "defaultValue:", "title", "page", "label:", "yourself", "localPath", "options:", "selectInput", "templateTitles", "selectedOption:", "template", "textareaInput", "contents", "checkboxInput", "checked:", "published", "submitAction:", "updatePageWithTitle:path:template:contents:published:", "value", "cancelAction:", "showStructureListWidget", "with:"],
 referencedClasses: ["MRBootstrapForm"]
 }),
 globals.MRPageEditorWidget);
@@ -2770,15 +2787,18 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=_st(self._templates())._collect_((function(each){
+$1=_st(_st(self._templates())._reject_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st(each)._partial();
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})})))._collect_((function(each){
 return smalltalk.withContext(function($ctx2) {
 return _st(each)._title();
-}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,2)})}));
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"templateTitles",{},globals.MRPageEditorWidget)})},
 args: [],
-source: "templateTitles\x0a\x09^ self templates collect: [ :each | each title ]",
-messageSends: ["collect:", "templates", "title"],
+source: "templateTitles\x0a\x09^ (self templates reject: [ :each | each partial ])\x0a\x09\x09collect: [ :each | each title ]",
+messageSends: ["collect:", "reject:", "templates", "partial", "title"],
 referencedClasses: []
 }),
 globals.MRPageEditorWidget);
@@ -2841,9 +2861,9 @@ globals.MRPageEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "updatePageWithTitle:template:contents:published:",
+selector: "updatePageWithTitle:path:template:contents:published:",
 protocol: 'actions',
-fn: function (aTitle,aTemplateTitle,contents,aBoolean){
+fn: function (aTitle,aPath,aTemplateTitle,contents,aBoolean){
 var self=this;
 var template;
 return smalltalk.withContext(function($ctx1) { 
@@ -2855,7 +2875,7 @@ return _st(_st(each)._title()).__eq(aTemplateTitle);
 _st((function(){
 return smalltalk.withContext(function($ctx2) {
 $1=self._page();
-_st($1)._updateTitle_template_contents_published_(aTitle,template,contents,aBoolean);
+_st($1)._updateTitle_path_template_contents_published_(aTitle,aPath,template,contents,aBoolean);
 $2=_st($1)._then_((function(){
 return smalltalk.withContext(function($ctx3) {
 return self._showStructureListWidget();
@@ -2865,10 +2885,10 @@ return $2;
 return smalltalk.withContext(function($ctx2) {
 return self._notifyError_(ex);
 }, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,4)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"updatePageWithTitle:template:contents:published:",{aTitle:aTitle,aTemplateTitle:aTemplateTitle,contents:contents,aBoolean:aBoolean,template:template},globals.MRPageEditorWidget)})},
-args: ["aTitle", "aTemplateTitle", "contents", "aBoolean"],
-source: "updatePageWithTitle: aTitle template: aTemplateTitle contents: contents published: aBoolean\x0a\x09| template |\x0a\x09\x0a\x09template := self templates detect: [ :each | \x0a\x09\x09each title = aTemplateTitle ].\x0a\x09\x09\x0a\x09[\x0a\x09\x09self page\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09template: template\x0a\x09\x09\x09contents: contents\x0a\x09\x09\x09published: aBoolean;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showStructureListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]",
-messageSends: ["detect:", "templates", "=", "title", "onPromiseFailureDo:", "updateTitle:template:contents:published:", "page", "then:", "showStructureListWidget", "notifyError:"],
+return self}, function($ctx1) {$ctx1.fill(self,"updatePageWithTitle:path:template:contents:published:",{aTitle:aTitle,aPath:aPath,aTemplateTitle:aTemplateTitle,contents:contents,aBoolean:aBoolean,template:template},globals.MRPageEditorWidget)})},
+args: ["aTitle", "aPath", "aTemplateTitle", "contents", "aBoolean"],
+source: "updatePageWithTitle: aTitle path: aPath template: aTemplateTitle contents: contents published: aBoolean\x0a\x09| template |\x0a\x09\x0a\x09template := self templates detect: [ :each | \x0a\x09\x09each title = aTemplateTitle ].\x0a\x09\x09\x0a\x09[\x0a\x09\x09self page\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09path: aPath\x0a\x09\x09\x09template: template\x0a\x09\x09\x09contents: contents\x0a\x09\x09\x09published: aBoolean;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showStructureListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]",
+messageSends: ["detect:", "templates", "=", "title", "onPromiseFailureDo:", "updateTitle:path:template:contents:published:", "page", "then:", "showStructureListWidget", "notifyError:"],
 referencedClasses: []
 }),
 globals.MRPageEditorWidget);
@@ -4010,10 +4030,10 @@ selector: "renderContentOn:",
 protocol: 'rendering',
 fn: function (html){
 var self=this;
-var form,titleInput,contentsInput;
+var form,titleInput,contentsInput,partialInput;
 function $MRBootstrapForm(){return globals.MRBootstrapForm||(typeof MRBootstrapForm=="undefined"?nil:MRBootstrapForm)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$4,$3,$5,$6,$7,$8;
+var $1,$2,$4,$3,$5,$6,$7,$9,$8,$10,$11,$12,$13,$14;
 form=_st($MRBootstrapForm())._new();
 $1=_st(form)._textInput();
 _st($1)._placeholder_("Title");
@@ -4030,24 +4050,37 @@ $ctx1.sendIdx["yourself"]=1;
 titleInput=$5;
 $6=_st(form)._textareaInput();
 _st($6)._label_("Contents");
-_st($6)._defaultValue_(_st(self._template())._contents());
-$7=_st($6)._yourself();
-contentsInput=$7;
+$ctx1.sendIdx["label:"]=2;
+$7=$6;
+$9=self._template();
+$ctx1.sendIdx["template"]=2;
+$8=_st($9)._contents();
+_st($7)._defaultValue_($8);
+$10=_st($6)._yourself();
+$ctx1.sendIdx["yourself"]=2;
+contentsInput=$10;
+$11=_st(form)._checkboxInput();
+_st($11)._label_("Partial");
+_st($11)._checked_(_st(self._template())._partial());
+$12=_st($11)._yourself();
+partialInput=$12;
 _st(form)._submitAction_((function(){
 return smalltalk.withContext(function($ctx2) {
-$8=_st(titleInput)._value();
+$13=_st(titleInput)._value();
 $ctx2.sendIdx["value"]=1;
-return self._updateTemplateWithTitle_contents_($8,_st(contentsInput)._value());
+$14=_st(contentsInput)._value();
+$ctx2.sendIdx["value"]=2;
+return self._updateTemplateWithTitle_contents_partial_($13,$14,_st(partialInput)._value());
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 _st(form)._cancelAction_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._showTemplateListWidget();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
 _st(html)._with_(form);
-return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput,contentsInput:contentsInput},globals.MRTemplateEditorWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html,form:form,titleInput:titleInput,contentsInput:contentsInput,partialInput:partialInput},globals.MRTemplateEditorWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09| form titleInput contentsInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self template title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self template contents;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updateTemplateWithTitle: titleInput value\x0a\x09\x09\x09contents: contentsInput value ].\x0a\x0a\x09form cancelAction: [ self showTemplateListWidget ].\x0a\x09\x0a\x09html with: form",
-messageSends: ["new", "placeholder:", "textInput", "defaultValue:", "title", "template", "label:", "yourself", "textareaInput", "contents", "submitAction:", "updateTemplateWithTitle:contents:", "value", "cancelAction:", "showTemplateListWidget", "with:"],
+source: "renderContentOn: html\x0a\x09| form titleInput contentsInput partialInput |\x0a\x09\x0a\x09form := MRBootstrapForm new.\x0a\x09\x0a\x09titleInput := form textInput\x0a\x09\x09placeholder: 'Title';\x0a\x09\x09defaultValue: self template title;\x0a\x09\x09label: 'Title';\x0a\x09\x09yourself.\x0a\x09\x0a\x09contentsInput := form textareaInput\x0a\x09\x09label: 'Contents';\x0a\x09\x09defaultValue: self template contents;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09partialInput := form checkboxInput\x0a\x09\x09label: 'Partial';\x0a\x09\x09checked: self template partial;\x0a\x09\x09yourself.\x0a\x0a\x09form submitAction: [\x0a\x09\x09self \x0a\x09\x09\x09updateTemplateWithTitle: titleInput value\x0a\x09\x09\x09contents: contentsInput value\x0a\x09\x09\x09partial: partialInput value ].\x0a\x0a\x09form cancelAction: [ self showTemplateListWidget ].\x0a\x09\x0a\x09html with: form",
+messageSends: ["new", "placeholder:", "textInput", "defaultValue:", "title", "template", "label:", "yourself", "textareaInput", "contents", "checkboxInput", "checked:", "partial", "submitAction:", "updateTemplateWithTitle:contents:partial:", "value", "cancelAction:", "showTemplateListWidget", "with:"],
 referencedClasses: ["MRBootstrapForm"]
 }),
 globals.MRTemplateEditorWidget);
@@ -4121,16 +4154,16 @@ globals.MRTemplateEditorWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "updateTemplateWithTitle:contents:",
+selector: "updateTemplateWithTitle:contents:partial:",
 protocol: 'actions',
-fn: function (aTitle,contents){
+fn: function (aTitle,contents,aBoolean){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 _st((function(){
 return smalltalk.withContext(function($ctx2) {
 $1=self._template();
-_st($1)._updateTitle_contents_(aTitle,contents);
+_st($1)._updateTitle_contents_partial_(aTitle,contents,aBoolean);
 $2=_st($1)._then_((function(){
 return smalltalk.withContext(function($ctx3) {
 return self._showTemplateListWidget();
@@ -4140,10 +4173,10 @@ return $2;
 return smalltalk.withContext(function($ctx2) {
 return self._notifyError_(ex);
 }, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,3)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"updateTemplateWithTitle:contents:",{aTitle:aTitle,contents:contents},globals.MRTemplateEditorWidget)})},
-args: ["aTitle", "contents"],
-source: "updateTemplateWithTitle: aTitle contents: contents\x0a\x09[\x0a\x09\x09self template\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09contents: contents;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showTemplateListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]\x09\x09",
-messageSends: ["onPromiseFailureDo:", "updateTitle:contents:", "template", "then:", "showTemplateListWidget", "notifyError:"],
+return self}, function($ctx1) {$ctx1.fill(self,"updateTemplateWithTitle:contents:partial:",{aTitle:aTitle,contents:contents,aBoolean:aBoolean},globals.MRTemplateEditorWidget)})},
+args: ["aTitle", "contents", "aBoolean"],
+source: "updateTemplateWithTitle: aTitle contents: contents partial: aBoolean\x0a\x09[\x0a\x09\x09self template\x0a\x09\x09\x09updateTitle: aTitle\x0a\x09\x09\x09contents: contents\x0a\x09\x09\x09partial: aBoolean;\x0a\x09\x09\x09then: [\x0a\x09\x09\x09\x09self showTemplateListWidget ]\x0a\x09] onPromiseFailureDo: [ :ex | \x0a\x09\x09self notifyError: ex ]\x09\x09",
+messageSends: ["onPromiseFailureDo:", "updateTitle:contents:partial:", "template", "then:", "showTemplateListWidget", "notifyError:"],
 referencedClasses: []
 }),
 globals.MRTemplateEditorWidget);
@@ -4306,7 +4339,7 @@ protocol: 'rendering',
 fn: function (aTemplate,html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$6,$7,$5;
+var $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$13,$14,$12;
 _st(_st(html)._tr())._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 $1=_st(html)._td();
@@ -4317,40 +4350,65 @@ $2=_st(html)._a();
 $ctx3.sendIdx["a"]=1;
 _st($2)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
-_st(_st(html)._span())._class_(_st(aTemplate)._icon());
+$3=_st(html)._span();
+$ctx4.sendIdx["span"]=1;
+_st($3)._class_(_st(aTemplate)._icon());
 $ctx4.sendIdx["class:"]=1;
 return _st(html)._with_(_st(aTemplate)._title());
 $ctx4.sendIdx["with:"]=4;
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 $ctx3.sendIdx["with:"]=3;
-$3=_st($2)._onClick_((function(){
+$4=_st($2)._onClick_((function(){
 return smalltalk.withContext(function($ctx4) {
 return self._editTemplate_(aTemplate);
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,4)})}));
 $ctx3.sendIdx["onClick:"]=1;
-return $3;
+return $4;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["with:"]=2;
-$4=_st(html)._td();
-_st($4)._class_("align-right");
-$5=_st($4)._with_((function(){
+$5=_st(html)._td();
+$ctx2.sendIdx["td"]=2;
+_st($5)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-$6=_st(html)._a();
-_st($6)._with_("Remove");
-$7=_st($6)._onClick_((function(){
-return smalltalk.withContext(function($ctx4) {
-return self._removeTemplate_(aTemplate);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,6)})}));
-return $7;
+$6=_st(aTemplate)._partial();
+if(smalltalk.assert($6)){
+$7=_st(html)._span();
+$ctx3.sendIdx["span"]=2;
+_st($7)._class_("label label-warning");
+$ctx3.sendIdx["class:"]=2;
+$8=_st($7)._with_("Partial template");
+$ctx3.sendIdx["with:"]=6;
+return $8;
+} else {
+$9=_st(html)._span();
+_st($9)._class_("label label-success");
+$ctx3.sendIdx["class:"]=3;
+$10=_st($9)._with_("Main template");
+$ctx3.sendIdx["with:"]=7;
+return $10;
+};
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)})}));
 $ctx2.sendIdx["with:"]=5;
-return $5;
+$11=_st(html)._td();
+_st($11)._class_("align-right");
+$12=_st($11)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$13=_st(html)._a();
+_st($13)._with_("Remove");
+$14=_st($13)._onClick_((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._removeTemplate_(aTemplate);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,9)})}));
+return $14;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,8)})}));
+$ctx2.sendIdx["with:"]=8;
+return $12;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderTemplateRow:on:",{aTemplate:aTemplate,html:html},globals.MRTemplateListWidget)})},
 args: ["aTemplate", "html"],
-source: "renderTemplateRow: aTemplate on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span class: aTemplate icon.\x0a\x09\x09\x09\x09\x09html with: aTemplate title ];\x0a\x09\x09\x09\x09onClick: [ self editTemplate: aTemplate ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeTemplate: aTemplate ] ] ]",
-messageSends: ["with:", "tr", "td", "a", "class:", "span", "icon", "title", "onClick:", "editTemplate:", "removeTemplate:"],
+source: "renderTemplateRow: aTemplate on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span class: aTemplate icon.\x0a\x09\x09\x09\x09\x09html with: aTemplate title ];\x0a\x09\x09\x09\x09onClick: [ self editTemplate: aTemplate ] ].\x0a\x09\x09html td with: [\x0a\x09\x09\x09aTemplate partial\x0a\x09\x09\x09\x09ifTrue: [ html span \x0a\x09\x09\x09\x09\x09class: 'label label-warning';\x0a\x09\x09\x09\x09\x09with: 'Partial template' ]\x0a\x09\x09\x09\x09ifFalse: [ html span\x0a\x09\x09\x09\x09\x09class: 'label label-success';\x0a\x09\x09\x09\x09\x09with: 'Main template' ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeTemplate: aTemplate ] ] ]",
+messageSends: ["with:", "tr", "td", "a", "class:", "span", "icon", "title", "onClick:", "editTemplate:", "ifTrue:ifFalse:", "partial", "removeTemplate:"],
 referencedClasses: []
 }),
 globals.MRTemplateListWidget);
