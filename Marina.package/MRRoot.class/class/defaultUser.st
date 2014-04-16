@@ -1,7 +1,6 @@
 defaults
 defaultUser
 	^ MRUser new
-		username: 'admin';
-		password: 'admin';
+		email: 'damien.cassou@gmail.com';
 		fullName: 'admin';
 		yourself

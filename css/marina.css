@@ -27,6 +27,16 @@ body .login h1 .logo {
   font-weight: bold;
   display: block;
 }
+body .login .form-group {
+  text-align: center;
+}
+body .login .form-group .persona_login {
+  background: url('../img/persona.png') top left no-repeat;
+  width: 204px;
+  height: 25px;
+  border: none;
+  margin: 20px;
+}
 body .bg-danger {
   padding: 10px;
   border: 1px solid #ffaaaa;

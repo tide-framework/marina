@@ -1,17 +1,11 @@
 {
 	"class" : {
 		"isVoyageRoot" : "NicolasPetton 2/18/2014 16:36",
-		"userNamed:" : "NicolasPetton 2/18/2014 17:01" },
+		"userFromEmail:" : "DamienCassou 4/16/2014 14:54" },
 	"instance" : {
-		"addTo:" : "NicolasPetton 4/10/2014 13:19",
+		"addTo:" : "DamienCassou 4/16/2014 15:06",
 		"email" : "NicolasPetton 2/18/2014 16:36",
 		"email:" : "NicolasPetton 2/18/2014 16:36",
 		"fullName" : "NicolasPetton 4/4/2014 16:04",
 		"fullName:" : "NicolasPetton 4/4/2014 16:04",
-		"hashPassword:" : "NicolasPetton 2/18/2014 16:07",
-		"password" : "NicolasPetton 2/18/2014 16:05",
-		"password:" : "NicolasPetton 2/18/2014 16:36",
-		"removeFrom:" : "NicolasPetton 2/19/2014 14:45",
-		"username" : "NicolasPetton 2/18/2014 16:36",
-		"username:" : "NicolasPetton 2/18/2014 16:36",
-		"validatePassword:" : "DamienCassou 4/10/2014 17:56" } }
+		"removeFrom:" : "NicolasPetton 2/19/2014 14:45" } }

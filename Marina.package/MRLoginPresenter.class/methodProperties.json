@@ -6,8 +6,10 @@
 		"adminPresenter" : "NicolasPetton 4/9/2014 14:09",
 		"initialize" : "NicolasPetton 4/9/2014 14:09",
 		"isLoggedIn" : "NicolasPetton 4/4/2014 11:05",
-		"loginError" : "NicolasPetton 2/19/2014 17:23",
-		"loginUsername:password:" : "NicolasPetton 4/15/2014 11:38",
+		"loginError" : "DamienCassou 4/16/2014 14:51",
+		"loginUserWithEmail:" : "DamienCassou 4/16/2014 14:57",
+		"queryDataFromAssertion:" : "DamienCassou 4/16/2014 14:44",
 		"root" : "NicolasPetton 4/15/2014 11:38",
 		"userNamed:" : "NicolasPetton 4/15/2014 11:38",
-		"users" : "NicolasPetton 4/15/2014 11:37" } }
+		"users" : "NicolasPetton 4/15/2014 11:37",
+		"validateMozillaPersonaAssertion:" : "DamienCassou 4/16/2014 14:48" } }

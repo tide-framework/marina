@@ -1,3 +1,3 @@
 error handling
 loginError
-	MRLoginError signal: 'Wrong username or password'
+	MRLoginError signal: 'Could not login. Please try again.'
