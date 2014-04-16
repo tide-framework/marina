@@ -1215,6 +1215,7 @@ renderStructureRow: aStructure on: html
 							self renderStructureTitle: aStructure on: html ];
 						onClick: [ self openStructure: aStructure ] ]
 				ifFalse: [ self renderStructureTitle: aStructure on: html ] ].
+		html td with: aStructure localPath.
 		html td with: [
 			aStructure isPage ifTrue: [
 				aStructure published 
@@ -1240,8 +1241,9 @@ renderStructures: aCollection on: html
 		class: 'table table-striped';
 		with: [
 			html tbody with: [
-				aCollection do: [ :each |
-					self renderStructureRow: each on: html ] ] ]
+				(aCollection sorted: [ :a :b | a title < b title ])
+					do: [ :each |
+						self renderStructureRow: each on: html ] ] ]
 !
 
 renderUploadOn: html
@@ -1484,7 +1486,8 @@ renderTemplates: aCollection on: html
 		class: 'table table-striped';
 		with: [
 			html tbody with: [
-				aCollection do: [ :each |
+				(aCollection sorted: [ :a :b | a title < b title ])
+					do: [ :each |
 					self renderTemplateRow: each on: html ] ] ]
 ! !
 

@@ -3589,7 +3589,7 @@ protocol: 'rendering',
 fn: function (aStructure,html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$14,$15,$13;
+var $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$15,$16,$14;
 _st(_st(html)._tr())._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 $1=_st(html)._td();
@@ -3619,50 +3619,54 @@ return self._renderStructureTitle_on_(aStructure,html);
 $ctx2.sendIdx["with:"]=2;
 $5=_st(html)._td();
 $ctx2.sendIdx["td"]=2;
-_st($5)._with_((function(){
+_st($5)._with_(_st(aStructure)._localPath());
+$ctx2.sendIdx["with:"]=4;
+$6=_st(html)._td();
+$ctx2.sendIdx["td"]=3;
+_st($6)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-$6=_st(aStructure)._isPage();
-if(smalltalk.assert($6)){
-$7=_st(aStructure)._published();
+$7=_st(aStructure)._isPage();
 if(smalltalk.assert($7)){
-$8=_st(html)._span();
+$8=_st(aStructure)._published();
+if(smalltalk.assert($8)){
+$9=_st(html)._span();
 $ctx3.sendIdx["span"]=1;
-_st($8)._class_("label label-success");
+_st($9)._class_("label label-success");
 $ctx3.sendIdx["class:"]=1;
-$9=_st($8)._with_("Published");
-$ctx3.sendIdx["with:"]=5;
-return $9;
-} else {
-$10=_st(html)._span();
-_st($10)._class_("label label-warning");
-$ctx3.sendIdx["class:"]=2;
-$11=_st($10)._with_("draft");
+$10=_st($9)._with_("Published");
 $ctx3.sendIdx["with:"]=6;
-return $11;
+return $10;
+} else {
+$11=_st(html)._span();
+_st($11)._class_("label label-warning");
+$ctx3.sendIdx["class:"]=2;
+$12=_st($11)._with_("draft");
+$ctx3.sendIdx["with:"]=7;
+return $12;
 };
 };
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,7)})}));
-$ctx2.sendIdx["with:"]=4;
-$12=_st(html)._td();
-_st($12)._class_("align-right");
-$13=_st($12)._with_((function(){
+$ctx2.sendIdx["with:"]=5;
+$13=_st(html)._td();
+_st($13)._class_("align-right");
+$14=_st($13)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-$14=_st(html)._a();
-_st($14)._with_("Remove");
-$15=_st($14)._onClick_((function(){
+$15=_st(html)._a();
+_st($15)._with_("Remove");
+$16=_st($15)._onClick_((function(){
 return smalltalk.withContext(function($ctx4) {
 return self._removeStructure_(aStructure);
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,12)})}));
-return $15;
+return $16;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,11)})}));
-$ctx2.sendIdx["with:"]=7;
-return $13;
+$ctx2.sendIdx["with:"]=8;
+return $14;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderStructureRow:on:",{aStructure:aStructure,html:html},globals.MRStructureListWidget)})},
 args: ["aStructure", "html"],
-source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure canBeEdited \x0a\x09\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09self renderStructureTitle: aStructure on: html ];\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: aStructure ] ]\x0a\x09\x09\x09\x09ifFalse: [ self renderStructureTitle: aStructure on: html ] ].\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage ifTrue: [\x0a\x09\x09\x09\x09aStructure published \x0a\x09\x09\x09\x09\x09ifTrue: [ html span \x0a\x09\x09\x09\x09\x09\x09class: 'label label-success';\x0a\x09\x09\x09\x09\x09\x09with: 'Published' ]\x0a\x09\x09\x09\x09\x09ifFalse: [ html span\x0a\x09\x09\x09\x09\x09\x09class: 'label label-warning';\x0a\x09\x09\x09\x09\x09\x09with: 'draft' ] ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
-messageSends: ["with:", "tr", "td", "ifTrue:ifFalse:", "canBeEdited", "a", "renderStructureTitle:on:", "onClick:", "openStructure:", "ifTrue:", "isPage", "published", "class:", "span", "removeStructure:"],
+source: "renderStructureRow: aStructure on: html\x0a\x09html tr with: [\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure canBeEdited \x0a\x09\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09self renderStructureTitle: aStructure on: html ];\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: aStructure ] ]\x0a\x09\x09\x09\x09ifFalse: [ self renderStructureTitle: aStructure on: html ] ].\x0a\x09\x09html td with: aStructure localPath.\x0a\x09\x09html td with: [\x0a\x09\x09\x09aStructure isPage ifTrue: [\x0a\x09\x09\x09\x09aStructure published \x0a\x09\x09\x09\x09\x09ifTrue: [ html span \x0a\x09\x09\x09\x09\x09\x09class: 'label label-success';\x0a\x09\x09\x09\x09\x09\x09with: 'Published' ]\x0a\x09\x09\x09\x09\x09ifFalse: [ html span\x0a\x09\x09\x09\x09\x09\x09class: 'label label-warning';\x0a\x09\x09\x09\x09\x09\x09with: 'draft' ] ] ].\x0a\x09\x09html td class: 'align-right'; with: [\x0a\x09\x09\x09html a \x0a\x09\x09\x09\x09with: 'Remove';\x0a\x09\x09\x09\x09onClick: [ self removeStructure: aStructure ] ] ]",
+messageSends: ["with:", "tr", "td", "ifTrue:ifFalse:", "canBeEdited", "a", "renderStructureTitle:on:", "onClick:", "openStructure:", "localPath", "ifTrue:", "isPage", "published", "class:", "span", "removeStructure:"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
@@ -3691,24 +3695,29 @@ protocol: 'rendering',
 fn: function (aCollection,html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2;
+var $1,$3,$2;
 $1=_st(html)._table();
 _st($1)._class_("table table-striped");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 return _st(_st(html)._tbody())._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-return _st(aCollection)._do_((function(each){
+return _st(_st(aCollection)._sorted_((function(a,b){
+return smalltalk.withContext(function($ctx4) {
+$3=_st(a)._title();
+$ctx4.sendIdx["title"]=1;
+return _st($3).__lt(_st(b)._title());
+}, function($ctx4) {$ctx4.fillBlock({a:a,b:b},$ctx3,3)})})))._do_((function(each){
 return smalltalk.withContext(function($ctx4) {
 return self._renderStructureRow_on_(each,html);
-}, function($ctx4) {$ctx4.fillBlock({each:each},$ctx3,3)})}));
+}, function($ctx4) {$ctx4.fillBlock({each:each},$ctx3,4)})}));
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderStructures:on:",{aCollection:aCollection,html:html},globals.MRStructureListWidget)})},
 args: ["aCollection", "html"],
-source: "renderStructures: aCollection on: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09aCollection do: [ :each |\x0a\x09\x09\x09\x09\x09self renderStructureRow: each on: html ] ] ]",
-messageSends: ["class:", "table", "with:", "tbody", "do:", "renderStructureRow:on:"],
+source: "renderStructures: aCollection on: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09(aCollection sorted: [ :a :b | a title < b title ])\x0a\x09\x09\x09\x09\x09do: [ :each |\x0a\x09\x09\x09\x09\x09\x09self renderStructureRow: each on: html ] ] ]",
+messageSends: ["class:", "table", "with:", "tbody", "do:", "sorted:", "<", "title", "renderStructureRow:on:"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
@@ -4420,24 +4429,29 @@ protocol: 'rendering',
 fn: function (aCollection,html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2;
+var $1,$3,$2;
 $1=_st(html)._table();
 _st($1)._class_("table table-striped");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 return _st(_st(html)._tbody())._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-return _st(aCollection)._do_((function(each){
+return _st(_st(aCollection)._sorted_((function(a,b){
+return smalltalk.withContext(function($ctx4) {
+$3=_st(a)._title();
+$ctx4.sendIdx["title"]=1;
+return _st($3).__lt(_st(b)._title());
+}, function($ctx4) {$ctx4.fillBlock({a:a,b:b},$ctx3,3)})})))._do_((function(each){
 return smalltalk.withContext(function($ctx4) {
 return self._renderTemplateRow_on_(each,html);
-}, function($ctx4) {$ctx4.fillBlock({each:each},$ctx3,3)})}));
+}, function($ctx4) {$ctx4.fillBlock({each:each},$ctx3,4)})}));
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderTemplates:on:",{aCollection:aCollection,html:html},globals.MRTemplateListWidget)})},
 args: ["aCollection", "html"],
-source: "renderTemplates: aCollection on: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09aCollection do: [ :each |\x0a\x09\x09\x09\x09\x09self renderTemplateRow: each on: html ] ] ]",
-messageSends: ["class:", "table", "with:", "tbody", "do:", "renderTemplateRow:on:"],
+source: "renderTemplates: aCollection on: html\x0a\x09html table \x0a\x09\x09class: 'table table-striped';\x0a\x09\x09with: [\x0a\x09\x09\x09html tbody with: [\x0a\x09\x09\x09\x09(aCollection sorted: [ :a :b | a title < b title ])\x0a\x09\x09\x09\x09\x09do: [ :each |\x0a\x09\x09\x09\x09\x09self renderTemplateRow: each on: html ] ] ]",
+messageSends: ["class:", "table", "with:", "tbody", "do:", "sorted:", "<", "title", "renderTemplateRow:on:"],
 referencedClasses: []
 }),
 globals.MRTemplateListWidget);
