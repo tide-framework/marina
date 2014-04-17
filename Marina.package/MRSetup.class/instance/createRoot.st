@@ -4,6 +4,7 @@ createRoot
 	root := MRRoot default.
 	root initialize.
 	root save.
+	root add: self adminUser.
 	root add: self indexPage.
 	root add: self defaultTemplate.
 	root add: self blogTemplate.

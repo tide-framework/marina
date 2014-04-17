@@ -1,3 +1,3 @@
 public
 setupWebsite
-	^ self new root
+	^ self new setupWebsite

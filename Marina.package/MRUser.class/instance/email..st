@@ -1,4 +1,5 @@
 accessing
 email: aString
 	<action>
-	email := aString
+	email := aString.
+	self validate
