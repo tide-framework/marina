@@ -13,4 +13,4 @@ indexPageContentsFor: aPost on: html
 										with: aPost title ].
 					html tag
 						name: 'p';
-						with: [ self summaryFor: aPost on: html ] ]
+						with: [ self contentsFor: aPost on: html ] ]

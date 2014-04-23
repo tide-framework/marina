@@ -1,4 +1,4 @@
 accessing
 localPath
 	<state>
-	^ self title
+	^ self title urlEncoded

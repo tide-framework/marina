@@ -1,3 +1,3 @@
 accessing
 webContents
-	^ (ZnEntity html: self contents)
+	^ ZnEntity html: self contents

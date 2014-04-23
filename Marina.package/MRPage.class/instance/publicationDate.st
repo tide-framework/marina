@@ -1,3 +1,3 @@
 accessing
 publicationDate
-	^ publicationDate
+	^ publicationDate ifNil: [ self updateDate ]
