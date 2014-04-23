@@ -1614,6 +1614,7 @@ editUserSettings
 !
 
 logout
+	navigator id logout.
 	self adminPresenter logout then: [ 
 		MRLoginDispatcher start ]
 !

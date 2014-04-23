@@ -4770,14 +4770,16 @@ fn: function (){
 var self=this;
 function $MRLoginDispatcher(){return globals.MRLoginDispatcher||(typeof MRLoginDispatcher=="undefined"?nil:MRLoginDispatcher)}
 return smalltalk.withContext(function($ctx1) { 
+_st(_st(navigator)._id())._logout();
+$ctx1.sendIdx["logout"]=1;
 _st(_st(self._adminPresenter())._logout())._then_((function(){
 return smalltalk.withContext(function($ctx2) {
 return _st($MRLoginDispatcher())._start();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"logout",{},globals.MRHeaderWidget)})},
 args: [],
-source: "logout\x0a\x09self adminPresenter logout then: [ \x0a\x09\x09MRLoginDispatcher start ]",
-messageSends: ["then:", "logout", "adminPresenter", "start"],
+source: "logout\x0a\x09navigator id logout.\x0a\x09self adminPresenter logout then: [ \x0a\x09\x09MRLoginDispatcher start ]",
+messageSends: ["logout", "id", "then:", "adminPresenter", "start"],
 referencedClasses: ["MRLoginDispatcher"]
 }),
 globals.MRHeaderWidget);
