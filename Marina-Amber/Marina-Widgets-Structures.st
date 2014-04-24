@@ -256,12 +256,11 @@ editDirectoryTitle
 !
 
 editPage: aPage
-	self root templates then: [ :proxy |
-		proxy contents then: [ :templates |
+	self root templates contents then: [ :templates |
 			MRPageEditorWidget new
 				page: aPage;
 				templates: templates;
-				render ] ]
+				render ]
 !
 
 openStructure: aStructure
@@ -305,31 +304,59 @@ renderAddStructureOn: html
 !
 
 renderBreadcrumbOn: html
-	self directory allParents then: [ :proxies |
-		proxies contents then: [ :parents | 
-			html ul class: 'head breadcrumb'; with: [
-				html li with: [
-					html a 
-						with: 'Root directory';
-						onClick: [ self openStructure: self root ] ].
-				parents allButLast reversed do: [ :each |
-					html li with: [
-						html a 
-							with: each title;
-							onClick: [ self openStructure: each ] ] ].
-				html li with: [	
-					self directory isRoot ifFalse: [
-						self renderDirectoryTitleOn: html ].
-					self 
-						renderAddStructureOn: html;
-						renderUploadOn: html ] ] ] ]
+	self directory allParents then: [ :parentProxies |
+		parentProxies contents then: [ :parents | 
+			self context templates then: [ :templatesProxies |
+				templatesProxies contents then: [ :templates |
+					html ul class: 'head breadcrumb'; with: [
+						html li with: [
+							html a 
+								with: 'Root';
+								onClick: [ self openStructure: self root ] ].
+						parents allButLast reversed do: [ :each |
+							html li with: [
+								html a 
+									with: each title;
+									onClick: [ self openStructure: each ] ] ].
+						html li with: [	
+							self directory isRoot ifFalse: [
+								self renderDirectoryTitleOn: html ].
+							self 
+								renderAddStructureOn: html;
+								renderUploadOn: html;
+								renderDefaultTemplateWith: templates on: html ] ] ] ] ] ]
 !
 
 renderContentOn: html
 	self renderBreadcrumbOn: html copy.
-	self directory children then: [ :children |
-			children contents then: [ :structures |
-				self renderStructures: structures on: html ] ]
+	self directory children then: [ :proxy |
+		proxy contents then: [ :structures |
+			self renderStructures: structures on: html ] ]
+!
+
+renderDefaultTemplateWith: aCollection on: html
+	| templates select |
+	 
+	templates := aCollection reject: [ :each | each partial ].
+	
+	html label with: 'Default template:'.
+	
+	select := html select
+		class: 'form-control small';
+		yourself.
+		
+	select with: [
+		(templates collect: [ :each | 
+			each title ]) do: [ :each | | option |
+			option := html option 
+				value: each;
+				with: each.
+			(self directory defaultTemplate title = each)
+				ifTrue: [ option at: 'selected' put: 'selected' ] ] ].
+		
+	select onChange: [
+		self directory setDefaultTemplate: (templates detect: [ :each |
+			each title = select asJQuery val]) ]
 !
 
 renderDirectoryTitleOn: html

@@ -664,22 +664,18 @@ var self=this;
 function $MRPageEditorWidget(){return globals.MRPageEditorWidget||(typeof MRPageEditorWidget=="undefined"?nil:MRPageEditorWidget)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
-_st(_st(self._root())._templates())._then_((function(proxy){
+_st(_st(_st(self._root())._templates())._contents())._then_((function(templates){
 return smalltalk.withContext(function($ctx2) {
-return _st(_st(proxy)._contents())._then_((function(templates){
-return smalltalk.withContext(function($ctx3) {
 $1=_st($MRPageEditorWidget())._new();
 _st($1)._page_(aPage);
 _st($1)._templates_(templates);
 $2=_st($1)._render();
 return $2;
-}, function($ctx3) {$ctx3.fillBlock({templates:templates},$ctx2,2)})}));
-}, function($ctx2) {$ctx2.fillBlock({proxy:proxy},$ctx1,1)})}));
-$ctx1.sendIdx["then:"]=1;
+}, function($ctx2) {$ctx2.fillBlock({templates:templates},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"editPage:",{aPage:aPage},globals.MRStructureListWidget)})},
 args: ["aPage"],
-source: "editPage: aPage\x0a\x09self root templates then: [ :proxy |\x0a\x09\x09proxy contents then: [ :templates |\x0a\x09\x09\x09MRPageEditorWidget new\x0a\x09\x09\x09\x09page: aPage;\x0a\x09\x09\x09\x09templates: templates;\x0a\x09\x09\x09\x09render ] ]",
-messageSends: ["then:", "templates", "root", "contents", "page:", "new", "templates:", "render"],
+source: "editPage: aPage\x0a\x09self root templates contents then: [ :templates |\x0a\x09\x09\x09MRPageEditorWidget new\x0a\x09\x09\x09\x09page: aPage;\x0a\x09\x09\x09\x09templates: templates;\x0a\x09\x09\x09\x09render ]",
+messageSends: ["then:", "contents", "templates", "root", "page:", "new", "templates:", "render"],
 referencedClasses: ["MRPageEditorWidget"]
 }),
 globals.MRStructureListWidget);
@@ -810,72 +806,83 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $2,$1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$4;
+var $2,$1,$3,$4,$6,$7,$8,$9,$10,$11,$12,$13,$5;
 $2=self._directory();
 $ctx1.sendIdx["directory"]=1;
 $1=_st($2)._allParents();
-_st($1)._then_((function(proxies){
+_st($1)._then_((function(parentProxies){
 return smalltalk.withContext(function($ctx2) {
-return _st(_st(proxies)._contents())._then_((function(parents){
+$3=_st(parentProxies)._contents();
+$ctx2.sendIdx["contents"]=1;
+return _st($3)._then_((function(parents){
 return smalltalk.withContext(function($ctx3) {
-$3=_st(html)._ul();
-_st($3)._class_("head breadcrumb");
-$4=_st($3)._with_((function(){
+return _st(_st(self._context())._templates())._then_((function(templatesProxies){
 return smalltalk.withContext(function($ctx4) {
-$5=_st(html)._li();
-$ctx4.sendIdx["li"]=1;
-_st($5)._with_((function(){
+return _st(_st(templatesProxies)._contents())._then_((function(templates){
 return smalltalk.withContext(function($ctx5) {
-$6=_st(html)._a();
-$ctx5.sendIdx["a"]=1;
-_st($6)._with_("Root directory");
-$ctx5.sendIdx["with:"]=3;
-$7=_st($6)._onClick_((function(){
+$4=_st(html)._ul();
+_st($4)._class_("head breadcrumb");
+$5=_st($4)._with_((function(){
 return smalltalk.withContext(function($ctx6) {
-return self._openStructure_(self._root());
-$ctx6.sendIdx["openStructure:"]=1;
-}, function($ctx6) {$ctx6.fillBlock({},$ctx5,5)})}));
-$ctx5.sendIdx["onClick:"]=1;
-return $7;
-}, function($ctx5) {$ctx5.fillBlock({},$ctx4,4)})}));
-$ctx4.sendIdx["with:"]=2;
-_st(_st(_st(parents)._allButLast())._reversed())._do_((function(each){
-return smalltalk.withContext(function($ctx5) {
-$8=_st(html)._li();
-$ctx5.sendIdx["li"]=2;
-return _st($8)._with_((function(){
-return smalltalk.withContext(function($ctx6) {
-$9=_st(html)._a();
-_st($9)._with_(_st(each)._title());
-$ctx6.sendIdx["with:"]=5;
-$10=_st($9)._onClick_((function(){
+$6=_st(html)._li();
+$ctx6.sendIdx["li"]=1;
+_st($6)._with_((function(){
 return smalltalk.withContext(function($ctx7) {
+$7=_st(html)._a();
+$ctx7.sendIdx["a"]=1;
+_st($7)._with_("Root");
+$ctx7.sendIdx["with:"]=3;
+$8=_st($7)._onClick_((function(){
+return smalltalk.withContext(function($ctx8) {
+return self._openStructure_(self._root());
+$ctx8.sendIdx["openStructure:"]=1;
+}, function($ctx8) {$ctx8.fillBlock({},$ctx7,7)})}));
+$ctx7.sendIdx["onClick:"]=1;
+return $8;
+}, function($ctx7) {$ctx7.fillBlock({},$ctx6,6)})}));
+$ctx6.sendIdx["with:"]=2;
+_st(_st(_st(parents)._allButLast())._reversed())._do_((function(each){
+return smalltalk.withContext(function($ctx7) {
+$9=_st(html)._li();
+$ctx7.sendIdx["li"]=2;
+return _st($9)._with_((function(){
+return smalltalk.withContext(function($ctx8) {
+$10=_st(html)._a();
+_st($10)._with_(_st(each)._title());
+$ctx8.sendIdx["with:"]=5;
+$11=_st($10)._onClick_((function(){
+return smalltalk.withContext(function($ctx9) {
 return self._openStructure_(each);
-}, function($ctx7) {$ctx7.fillBlock({},$ctx6,8)})}));
-return $10;
-}, function($ctx6) {$ctx6.fillBlock({},$ctx5,7)})}));
-$ctx5.sendIdx["with:"]=4;
-}, function($ctx5) {$ctx5.fillBlock({each:each},$ctx4,6)})}));
+}, function($ctx9) {$ctx9.fillBlock({},$ctx8,10)})}));
+return $11;
+}, function($ctx8) {$ctx8.fillBlock({},$ctx7,9)})}));
+$ctx7.sendIdx["with:"]=4;
+}, function($ctx7) {$ctx7.fillBlock({each:each},$ctx6,8)})}));
 return _st(_st(html)._li())._with_((function(){
-return smalltalk.withContext(function($ctx5) {
-$11=_st(self._directory())._isRoot();
-if(! smalltalk.assert($11)){
+return smalltalk.withContext(function($ctx7) {
+$12=_st(self._directory())._isRoot();
+if(! smalltalk.assert($12)){
 self._renderDirectoryTitleOn_(html);
 };
 self._renderAddStructureOn_(html);
-$12=self._renderUploadOn_(html);
-return $12;
-}, function($ctx5) {$ctx5.fillBlock({},$ctx4,9)})}));
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
-$ctx3.sendIdx["with:"]=1;
-return $4;
+self._renderUploadOn_(html);
+$13=self._renderDefaultTemplateWith_on_(templates,html);
+return $13;
+}, function($ctx7) {$ctx7.fillBlock({},$ctx6,11)})}));
+}, function($ctx6) {$ctx6.fillBlock({},$ctx5,5)})}));
+$ctx5.sendIdx["with:"]=1;
+return $5;
+}, function($ctx5) {$ctx5.fillBlock({templates:templates},$ctx4,4)})}));
+}, function($ctx4) {$ctx4.fillBlock({templatesProxies:templatesProxies},$ctx3,3)})}));
+$ctx3.sendIdx["then:"]=3;
 }, function($ctx3) {$ctx3.fillBlock({parents:parents},$ctx2,2)})}));
-}, function($ctx2) {$ctx2.fillBlock({proxies:proxies},$ctx1,1)})}));
+$ctx2.sendIdx["then:"]=2;
+}, function($ctx2) {$ctx2.fillBlock({parentProxies:parentProxies},$ctx1,1)})}));
 $ctx1.sendIdx["then:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderBreadcrumbOn:",{html:html},globals.MRStructureListWidget)})},
 args: ["html"],
-source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :proxies |\x0a\x09\x09proxies contents then: [ :parents | \x0a\x09\x09\x09html ul class: 'head breadcrumb'; with: [\x0a\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09with: 'Root directory';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09html li with: [\x09\x0a\x09\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ].\x0a\x09\x09\x09\x09\x09self \x0a\x09\x09\x09\x09\x09\x09renderAddStructureOn: html;\x0a\x09\x09\x09\x09\x09\x09renderUploadOn: html ] ] ] ]",
-messageSends: ["then:", "allParents", "directory", "contents", "class:", "ul", "with:", "li", "a", "onClick:", "openStructure:", "root", "do:", "reversed", "allButLast", "title", "ifFalse:", "isRoot", "renderDirectoryTitleOn:", "renderAddStructureOn:", "renderUploadOn:"],
+source: "renderBreadcrumbOn: html\x0a\x09self directory allParents then: [ :parentProxies |\x0a\x09\x09parentProxies contents then: [ :parents | \x0a\x09\x09\x09self context templates then: [ :templatesProxies |\x0a\x09\x09\x09\x09templatesProxies contents then: [ :templates |\x0a\x09\x09\x09\x09\x09html ul class: 'head breadcrumb'; with: [\x0a\x09\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09\x09with: 'Root';\x0a\x09\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: self root ] ].\x0a\x09\x09\x09\x09\x09\x09parents allButLast reversed do: [ :each |\x0a\x09\x09\x09\x09\x09\x09\x09html li with: [\x0a\x09\x09\x09\x09\x09\x09\x09\x09html a \x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09with: each title;\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09onClick: [ self openStructure: each ] ] ].\x0a\x09\x09\x09\x09\x09\x09html li with: [\x09\x0a\x09\x09\x09\x09\x09\x09\x09self directory isRoot ifFalse: [\x0a\x09\x09\x09\x09\x09\x09\x09\x09self renderDirectoryTitleOn: html ].\x0a\x09\x09\x09\x09\x09\x09\x09self \x0a\x09\x09\x09\x09\x09\x09\x09\x09renderAddStructureOn: html;\x0a\x09\x09\x09\x09\x09\x09\x09\x09renderUploadOn: html;\x0a\x09\x09\x09\x09\x09\x09\x09\x09renderDefaultTemplateWith: templates on: html ] ] ] ] ] ]",
+messageSends: ["then:", "allParents", "directory", "contents", "templates", "context", "class:", "ul", "with:", "li", "a", "onClick:", "openStructure:", "root", "do:", "reversed", "allButLast", "title", "ifFalse:", "isRoot", "renderDirectoryTitleOn:", "renderAddStructureOn:", "renderUploadOn:", "renderDefaultTemplateWith:on:"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);
@@ -888,18 +895,79 @@ fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self._renderBreadcrumbOn_(_st(html)._copy());
-_st(_st(self._directory())._children())._then_((function(children){
+_st(_st(self._directory())._children())._then_((function(proxy){
 return smalltalk.withContext(function($ctx2) {
-return _st(_st(children)._contents())._then_((function(structures){
+return _st(_st(proxy)._contents())._then_((function(structures){
 return smalltalk.withContext(function($ctx3) {
 return self._renderStructures_on_(structures,html);
 }, function($ctx3) {$ctx3.fillBlock({structures:structures},$ctx2,2)})}));
-}, function($ctx2) {$ctx2.fillBlock({children:children},$ctx1,1)})}));
+}, function($ctx2) {$ctx2.fillBlock({proxy:proxy},$ctx1,1)})}));
 $ctx1.sendIdx["then:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},globals.MRStructureListWidget)})},
 args: ["html"],
-source: "renderContentOn: html\x0a\x09self renderBreadcrumbOn: html copy.\x0a\x09self directory children then: [ :children |\x0a\x09\x09\x09children contents then: [ :structures |\x0a\x09\x09\x09\x09self renderStructures: structures on: html ] ]",
+source: "renderContentOn: html\x0a\x09self renderBreadcrumbOn: html copy.\x0a\x09self directory children then: [ :proxy |\x0a\x09\x09proxy contents then: [ :structures |\x0a\x09\x09\x09self renderStructures: structures on: html ] ]",
 messageSends: ["renderBreadcrumbOn:", "copy", "then:", "children", "directory", "contents", "renderStructures:on:"],
+referencedClasses: []
+}),
+globals.MRStructureListWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderDefaultTemplateWith:on:",
+protocol: 'rendering',
+fn: function (aCollection,html){
+var self=this;
+var templates,select;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3,$4,$8,$7,$6,$5;
+templates=_st(aCollection)._reject_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st(each)._partial();
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
+_st(_st(html)._label())._with_("Default template:");
+$ctx1.sendIdx["with:"]=1;
+$1=_st(html)._select();
+_st($1)._class_("form-control small");
+$2=_st($1)._yourself();
+select=$2;
+_st(select)._with_((function(){
+return smalltalk.withContext(function($ctx2) {
+return _st(_st(templates)._collect_((function(each){
+return smalltalk.withContext(function($ctx3) {
+return _st(each)._title();
+$ctx3.sendIdx["title"]=1;
+}, function($ctx3) {$ctx3.fillBlock({each:each},$ctx2,3)})})))._do_((function(each){
+var option;
+return smalltalk.withContext(function($ctx3) {
+$3=_st(html)._option();
+_st($3)._value_(each);
+$4=_st($3)._with_(each);
+option=$4;
+option;
+$8=self._directory();
+$ctx3.sendIdx["directory"]=1;
+$7=_st($8)._defaultTemplate();
+$6=_st($7)._title();
+$ctx3.sendIdx["title"]=2;
+$5=_st($6).__eq(each);
+$ctx3.sendIdx["="]=1;
+if(smalltalk.assert($5)){
+return _st(option)._at_put_("selected","selected");
+};
+}, function($ctx3) {$ctx3.fillBlock({each:each,option:option},$ctx2,4)})}));
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+$ctx1.sendIdx["with:"]=2;
+_st(select)._onChange_((function(){
+return smalltalk.withContext(function($ctx2) {
+return _st(self._directory())._setDefaultTemplate_(_st(templates)._detect_((function(each){
+return smalltalk.withContext(function($ctx3) {
+return _st(_st(each)._title()).__eq(_st(_st(select)._asJQuery())._val());
+}, function($ctx3) {$ctx3.fillBlock({each:each},$ctx2,7)})})));
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,6)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"renderDefaultTemplateWith:on:",{aCollection:aCollection,html:html,templates:templates,select:select},globals.MRStructureListWidget)})},
+args: ["aCollection", "html"],
+source: "renderDefaultTemplateWith: aCollection on: html\x0a\x09| templates select |\x0a\x09 \x0a\x09templates := aCollection reject: [ :each | each partial ].\x0a\x09\x0a\x09html label with: 'Default template:'.\x0a\x09\x0a\x09select := html select\x0a\x09\x09class: 'form-control small';\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09select with: [\x0a\x09\x09(templates collect: [ :each | \x0a\x09\x09\x09each title ]) do: [ :each | | option |\x0a\x09\x09\x09option := html option \x0a\x09\x09\x09\x09value: each;\x0a\x09\x09\x09\x09with: each.\x0a\x09\x09\x09(self directory defaultTemplate title = each)\x0a\x09\x09\x09\x09ifTrue: [ option at: 'selected' put: 'selected' ] ] ].\x0a\x09\x09\x0a\x09select onChange: [\x0a\x09\x09self directory setDefaultTemplate: (templates detect: [ :each |\x0a\x09\x09\x09each title = select asJQuery val]) ]",
+messageSends: ["reject:", "partial", "with:", "label", "class:", "select", "yourself", "do:", "collect:", "title", "value:", "option", "ifTrue:", "=", "defaultTemplate", "directory", "at:put:", "onChange:", "setDefaultTemplate:", "detect:", "val", "asJQuery"],
 referencedClasses: []
 }),
 globals.MRStructureListWidget);

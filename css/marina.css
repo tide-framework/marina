@@ -1,5 +1,5 @@
 body {
-  background-color: #f4ebe1 !important;
+  background-color: #F3EDE1;
 }
 body .login,
 body .main {
@@ -87,6 +87,19 @@ body .main .breadcrumb a {
 }
 body .main .breadcrumb button.btn-xs {
   margin-left: 5px;
+}
+body .main .breadcrumb label {
+  font-weight: normal;
+  font-size: 12px;
+}
+body .main .breadcrumb select.form-control {
+  display: inline-block;
+  width: 170px;
+  font-size: 0.8em;
+  height: 24px;
+  line-height: 1;
+  padding: 0 3px;
+  margin: 0 5px;
 }
 body .main .head {
   padding: 8px 15px;
