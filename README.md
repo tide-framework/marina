@@ -38,7 +38,7 @@ Metacello new
 Then initialize everything:
 
 ```
-MRSetup setupWebsite
+MRSetup setupAll
 ```
 
 Then you can visit these 2 urls:
