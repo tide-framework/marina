@@ -1,22 +1,22 @@
 tests
 testFindPageWithDuplicatedTitles
-	| pageTitle pageInSubDir pageAtRoot directory directoryTitle |
-	pageTitle := 'With a space'.
+	| pagePath pageInSubDir pageAtRoot directory directoryPath |
 	pageInSubDir := MRPage new
-		title: pageTitle;
+		title: 'With a space'
 		yourself.
-	pageAtRoot := pageInSubDir copy.
-	directoryTitle := 'a directory'.
+	pagePath := pageInSubDir localPath.
+ 	pageAtRoot := pageInSubDir copy.
 	directory := MRDirectory new
-		title: directoryTitle;
+		title: 'a directory';
 		add: pageInSubDir;
 		yourself.
+	directoryPath := directory localPath.
 	object
 		add: pageAtRoot;
 		add: directory.
 	self deny: pageAtRoot == pageInSubDir.
-	self assert: ({pageTitle} asMRPath findFrom: object) == pageAtRoot.
+	self assert: ({pagePath} asMRPath findFrom: object) == pageAtRoot.
 	self
 		assert:
-			({directoryTitle.
-					pageTitle} asMRPath findFrom: object) == pageInSubDir
+			({directoryPath.
+					pagePath} asMRPath findFrom: object) == pageInSubDir

@@ -4,7 +4,7 @@
 	"instance" : {
 		"classToBeTested" : "DamienCassou 4/11/2014 14:44",
 		"testFindIndexPage" : "DamienCassou 4/14/2014 14:23",
-		"testFindPage" : "DamienCassou 4/13/2014 16:09",
-		"testFindPageWithDuplicatedTitles" : "DamienCassou 4/13/2014 16:14",
+		"testFindPage" : "NicolasPetton 4/24/2014 16:05",
+		"testFindPageWithDuplicatedTitles" : "NicolasPetton 4/24/2014 16:07",
 		"testFindPageWithIncorrectPath" : "DamienCassou 4/13/2014 16:15",
-		"testFindPageWithSpacesInTitle" : "DamienCassou 4/13/2014 16:15" } }
+		"testFindPageWithSpacesInTitle" : "NicolasPetton 4/24/2014 16:08" } }

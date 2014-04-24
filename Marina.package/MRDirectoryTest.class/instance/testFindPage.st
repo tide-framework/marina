@@ -6,4 +6,4 @@ testFindPage
 		title: pageTitle;
 		yourself.
 	object add: page.
-	self assert: ({pageTitle} asMRPath findFrom: object) equals: page
+	self assert: ({page localPath} asMRPath findFrom: object) equals: page
