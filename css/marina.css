@@ -1,5 +1,5 @@
 body {
-  background: transparent url("../img/old_map.png") top repeat;
+  background-color: #f4ebe1 !important;
 }
 body .login,
 body .main {
