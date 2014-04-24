@@ -1,4 +1,3 @@
 accessing
-defaultTemplate: aTemplate 
-	<action>
+defaultTemplate: aTemplate
 	defaultTemplate := aTemplate

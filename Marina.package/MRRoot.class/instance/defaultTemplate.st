@@ -1,3 +1,6 @@
 accessing
 defaultTemplate
-	^ self templates ifEmpty: [ self add: self class defaultTemplate ] ifNotEmpty: [ self templates first ]
+	^ defaultTemplate ifNil: [ 
+		self templates 
+			ifEmpty: [ self add: self class defaultTemplate ] 
+			ifNotEmpty: [ self templates first ] ]
