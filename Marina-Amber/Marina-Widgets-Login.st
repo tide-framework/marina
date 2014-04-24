@@ -116,66 +116,11 @@ renderFormOn: html
 !MRMozillaPersonaLoginWidget methodsFor: 'setup'!
 
 setupPersona
+	navigator id logout.
 	navigator id watch: #{
 		'loggedInUser' -> nil.
 		'onlogin' -> [ :assertion | self login: assertion ].
 		'onlogout' -> [ self logout ]
 	}
-! !
-
-Object subclass: #MRLoginDispatcher
-	instanceVariableNames: 'presenter'
-	package: 'Marina-Widgets-Login'!
-
-!MRLoginDispatcher methodsFor: 'accessing'!
-
-context
-	^ MRContext current
-!
-
-presenter
-	^ presenter
-!
-
-presenter: aTDProxy
-	presenter := aTDProxy
-! !
-
-!MRLoginDispatcher methodsFor: 'actions'!
-
-dispatchWithUser: anUser
-	anUser 
-		ifNil: [ self login ]
-		ifNotNil: [ self renderAdminWidget ]
-!
-
-login
-	self loginWidget render
-!
-
-loginWidget
-	^ MRMozillaPersonaLoginWidget new
-		presenter: self presenter;
-		onLoginBlock: [ self renderAdminWidget ]
-!
-
-renderAdminWidget
-	self presenter adminPresenter then: [ :adminPresenter |
-		self context adminPresenter: adminPresenter.
-		MRAdminFrameWidget new render ]
-!
-
-start
-	'body' asJQuery empty.
-	self presenter connect then: [
-		self dispatchWithUser: self presenter user ]
-! !
-
-!MRLoginDispatcher class methodsFor: 'initialization'!
-
-start
-	self new
-		presenter: (TDProxy on: '/marina');
-		start
 ! !
 

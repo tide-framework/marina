@@ -99,6 +99,209 @@ referencedClasses: []
 globals.MRContext.klass);
 
 
+smalltalk.addClass('MRLoginDispatcher', globals.Object, ['presenter'], 'Marina-Widgets-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "context",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+function $MRContext(){return globals.MRContext||(typeof MRContext=="undefined"?nil:MRContext)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st($MRContext())._current();
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"context",{},globals.MRLoginDispatcher)})},
+args: [],
+source: "context\x0a\x09^ MRContext current",
+messageSends: ["current"],
+referencedClasses: ["MRContext"]
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "dispatchWithUser:",
+protocol: 'actions',
+fn: function (anUser){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $receiver;
+if(($receiver = anUser) == nil || $receiver == null){
+self._login();
+} else {
+self._renderAdminWidget();
+};
+return self}, function($ctx1) {$ctx1.fill(self,"dispatchWithUser:",{anUser:anUser},globals.MRLoginDispatcher)})},
+args: ["anUser"],
+source: "dispatchWithUser: anUser\x0a\x09anUser \x0a\x09\x09ifNil: [ self login ]\x0a\x09\x09ifNotNil: [ self renderAdminWidget ]",
+messageSends: ["ifNil:ifNotNil:", "login", "renderAdminWidget"],
+referencedClasses: []
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "informSessionError",
+protocol: 'actions',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(window)._alert_("Your session has expired, you will be redirected.");
+return self}, function($ctx1) {$ctx1.fill(self,"informSessionError",{},globals.MRLoginDispatcher)})},
+args: [],
+source: "informSessionError\x0a\x09window alert: 'Your session has expired, you will be redirected.'",
+messageSends: ["alert:"],
+referencedClasses: []
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "login",
+protocol: 'actions',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(self._loginWidget())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"login",{},globals.MRLoginDispatcher)})},
+args: [],
+source: "login\x0a\x09self loginWidget render",
+messageSends: ["render", "loginWidget"],
+referencedClasses: []
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "loginWidget",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRMozillaPersonaLoginWidget(){return globals.MRMozillaPersonaLoginWidget||(typeof MRMozillaPersonaLoginWidget=="undefined"?nil:MRMozillaPersonaLoginWidget)}
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=_st($MRMozillaPersonaLoginWidget())._new();
+_st($2)._presenter_(self._presenter());
+$3=_st($2)._onLoginBlock_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._renderAdminWidget();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"loginWidget",{},globals.MRLoginDispatcher)})},
+args: [],
+source: "loginWidget\x0a\x09^ MRMozillaPersonaLoginWidget new\x0a\x09\x09presenter: self presenter;\x0a\x09\x09onLoginBlock: [ self renderAdminWidget ]",
+messageSends: ["presenter:", "new", "presenter", "onLoginBlock:", "renderAdminWidget"],
+referencedClasses: ["MRMozillaPersonaLoginWidget"]
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "presenter",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@presenter"];
+return $1;
+},
+args: [],
+source: "presenter\x0a\x09^ presenter",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "presenter:",
+protocol: 'accessing',
+fn: function (aTDProxy){
+var self=this;
+self["@presenter"]=aTDProxy;
+return self},
+args: ["aTDProxy"],
+source: "presenter: aTDProxy\x0a\x09presenter := aTDProxy",
+messageSends: [],
+referencedClasses: []
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "renderAdminWidget",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRAdminFrameWidget(){return globals.MRAdminFrameWidget||(typeof MRAdminFrameWidget=="undefined"?nil:MRAdminFrameWidget)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(self._presenter())._adminPresenter())._then_((function(adminPresenter){
+return smalltalk.withContext(function($ctx2) {
+_st(self._context())._adminPresenter_(adminPresenter);
+return _st(_st($MRAdminFrameWidget())._new())._render();
+}, function($ctx2) {$ctx2.fillBlock({adminPresenter:adminPresenter},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"renderAdminWidget",{},globals.MRLoginDispatcher)})},
+args: [],
+source: "renderAdminWidget\x0a\x09self presenter adminPresenter then: [ :adminPresenter |\x0a\x09\x09self context adminPresenter: adminPresenter.\x0a\x09\x09MRAdminFrameWidget new render ]",
+messageSends: ["then:", "adminPresenter", "presenter", "adminPresenter:", "context", "render", "new"],
+referencedClasses: ["MRAdminFrameWidget"]
+}),
+globals.MRLoginDispatcher);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "start",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $TDSessionErrorHandler(){return globals.TDSessionErrorHandler||(typeof TDSessionErrorHandler=="undefined"?nil:TDSessionErrorHandler)}
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1;
+_st($TDSessionErrorHandler())._onSessionError_((function(){
+return smalltalk.withContext(function($ctx2) {
+self._informSessionError();
+return _st(_st(window)._location())._reload();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+_st("body"._asJQuery())._empty();
+$2=self._presenter();
+$ctx1.sendIdx["presenter"]=1;
+$1=_st($2)._connect();
+_st($1)._then_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._dispatchWithUser_(_st(self._presenter())._user());
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"start",{},globals.MRLoginDispatcher)})},
+args: [],
+source: "start\x0a\x09TDSessionErrorHandler onSessionError: [\x0a\x09\x09self informSessionError.\x0a\x09\x09window location reload ].\x0a\x09'body' asJQuery empty.\x0a\x09self presenter connect then: [\x0a\x09\x09self dispatchWithUser: self presenter user ]",
+messageSends: ["onSessionError:", "informSessionError", "reload", "location", "empty", "asJQuery", "then:", "connect", "presenter", "dispatchWithUser:", "user"],
+referencedClasses: ["TDSessionErrorHandler"]
+}),
+globals.MRLoginDispatcher);
+
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "start",
+protocol: 'initialization',
+fn: function (){
+var self=this;
+function $TDProxy(){return globals.TDProxy||(typeof TDProxy=="undefined"?nil:TDProxy)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=self._new();
+_st($1)._presenter_(_st($TDProxy())._on_("/marina"));
+$2=_st($1)._start();
+return self}, function($ctx1) {$ctx1.fill(self,"start",{},globals.MRLoginDispatcher.klass)})},
+args: [],
+source: "start\x0a\x09self new\x0a\x09\x09presenter: (TDProxy on: '/marina');\x0a\x09\x09start",
+messageSends: ["presenter:", "new", "on:", "start"],
+referencedClasses: ["TDProxy"]
+}),
+globals.MRLoginDispatcher.klass);
+
+
 smalltalk.addClass('MRWidget', globals.Widget, [], 'Marina-Widgets-Core');
 globals.MRWidget.comment="I am the abstract superclass of all Marina widgets.";
 smalltalk.addMethod(

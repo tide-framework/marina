@@ -31,6 +31,69 @@ current
 	^ current ifNil: [ current := self new ]
 ! !
 
+Object subclass: #MRLoginDispatcher
+	instanceVariableNames: 'presenter'
+	package: 'Marina-Widgets-Core'!
+
+!MRLoginDispatcher methodsFor: 'accessing'!
+
+context
+	^ MRContext current
+!
+
+presenter
+	^ presenter
+!
+
+presenter: aTDProxy
+	presenter := aTDProxy
+! !
+
+!MRLoginDispatcher methodsFor: 'actions'!
+
+dispatchWithUser: anUser
+	anUser 
+		ifNil: [ self login ]
+		ifNotNil: [ self renderAdminWidget ]
+!
+
+informSessionError
+	window alert: 'Your session has expired, you will be redirected.'
+!
+
+login
+	self loginWidget render
+!
+
+loginWidget
+	^ MRMozillaPersonaLoginWidget new
+		presenter: self presenter;
+		onLoginBlock: [ self renderAdminWidget ]
+!
+
+renderAdminWidget
+	self presenter adminPresenter then: [ :adminPresenter |
+		self context adminPresenter: adminPresenter.
+		MRAdminFrameWidget new render ]
+!
+
+start
+	TDSessionErrorHandler onSessionError: [
+		self informSessionError.
+		window location reload ].
+	'body' asJQuery empty.
+	self presenter connect then: [
+		self dispatchWithUser: self presenter user ]
+! !
+
+!MRLoginDispatcher class methodsFor: 'initialization'!
+
+start
+	self new
+		presenter: (TDProxy on: '/marina');
+		start
+! !
+
 Widget subclass: #MRWidget
 	instanceVariableNames: ''
 	package: 'Marina-Widgets-Core'!
