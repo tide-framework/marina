@@ -664,18 +664,22 @@ var self=this;
 function $MRPageEditorWidget(){return globals.MRPageEditorWidget||(typeof MRPageEditorWidget=="undefined"?nil:MRPageEditorWidget)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
-_st(_st(_st(self._root())._templates())._contents())._then_((function(templates){
+_st(_st(self._root())._templates())._then_((function(proxy){
 return smalltalk.withContext(function($ctx2) {
+return _st(_st(proxy)._contents())._then_((function(templates){
+return smalltalk.withContext(function($ctx3) {
 $1=_st($MRPageEditorWidget())._new();
 _st($1)._page_(aPage);
 _st($1)._templates_(templates);
 $2=_st($1)._render();
 return $2;
-}, function($ctx2) {$ctx2.fillBlock({templates:templates},$ctx1,1)})}));
+}, function($ctx3) {$ctx3.fillBlock({templates:templates},$ctx2,2)})}));
+}, function($ctx2) {$ctx2.fillBlock({proxy:proxy},$ctx1,1)})}));
+$ctx1.sendIdx["then:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"editPage:",{aPage:aPage},globals.MRStructureListWidget)})},
 args: ["aPage"],
-source: "editPage: aPage\x0a\x09self root templates contents then: [ :templates |\x0a\x09\x09\x09MRPageEditorWidget new\x0a\x09\x09\x09\x09page: aPage;\x0a\x09\x09\x09\x09templates: templates;\x0a\x09\x09\x09\x09render ]",
-messageSends: ["then:", "contents", "templates", "root", "page:", "new", "templates:", "render"],
+source: "editPage: aPage\x0a\x09self root templates then: [ :proxy |\x0a\x09\x09proxy contents then: [ :templates |\x0a\x09\x09\x09MRPageEditorWidget new\x0a\x09\x09\x09\x09page: aPage;\x0a\x09\x09\x09\x09templates: templates;\x0a\x09\x09\x09\x09render ] ]",
+messageSends: ["then:", "templates", "root", "contents", "page:", "new", "templates:", "render"],
 referencedClasses: ["MRPageEditorWidget"]
 }),
 globals.MRStructureListWidget);

@@ -256,11 +256,12 @@ editDirectoryTitle
 !
 
 editPage: aPage
-	self root templates contents then: [ :templates |
+	self root templates then: [ :proxy |
+		proxy contents then: [ :templates |
 			MRPageEditorWidget new
 				page: aPage;
 				templates: templates;
-				render ]
+				render ] ]
 !
 
 openStructure: aStructure
