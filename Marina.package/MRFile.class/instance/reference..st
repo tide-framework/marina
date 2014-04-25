@@ -1,3 +1,3 @@
 accessing
 reference: aFileReference
-	reference := aFileReference pathString
+	reference := aFileReference relativeToPath: FileSystem workingDirectory
