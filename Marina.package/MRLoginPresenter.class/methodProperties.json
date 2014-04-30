@@ -1,6 +1,7 @@
 {
 	"class" : {
-		 },
+		"personaAudience" : "NicolasPetton 4/30/2014 15:31",
+		"personaAudience:" : "NicolasPetton 4/30/2014 15:31" },
 	"instance" : {
 		"accessForbidden" : "NicolasPetton 2/20/2014 10:59",
 		"adminPresenter" : "NicolasPetton 4/9/2014 14:09",
@@ -8,7 +9,7 @@
 		"isLoggedIn" : "NicolasPetton 4/4/2014 11:05",
 		"loginError" : "DamienCassou 4/16/2014 14:51",
 		"loginUserWithEmail:" : "DamienCassou 4/16/2014 14:57",
-		"queryDataFromAssertion:" : "DamienCassou 4/16/2014 14:44",
+		"queryDataFromAssertion:" : "NicolasPetton 4/30/2014 15:32",
 		"root" : "NicolasPetton 4/15/2014 11:38",
 		"userNamed:" : "NicolasPetton 4/15/2014 11:38",
 		"users" : "NicolasPetton 4/15/2014 11:37",

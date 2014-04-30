@@ -1,7 +1,7 @@
 {
 	"category" : "Marina-Tide",
 	"classinstvars" : [
-		 ],
+		"personaAudience" ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "NicolasPetton 2/20/2014 10:58",

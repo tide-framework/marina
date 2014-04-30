@@ -3,6 +3,6 @@ queryDataFromAssertion: anAssertion
 	^ (ZnStringEntity
 		text:
 			{('assertion' -> anAssertion).
-			('audience' -> TDServer server url asString)} asDictionary asJsonString)
+			('audience' -> self class personaAudience asString ifNil: [ TDServer server url ]) } asDictionary asJsonString)
 		contentType: ZnMimeType applicationJson;
 		yourself
