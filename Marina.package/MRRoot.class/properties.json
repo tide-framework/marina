@@ -7,7 +7,8 @@
 	"commentStamp" : "NicolasPetton 2/20/2014 10:53",
 	"instvars" : [
 		"templates",
-		"users" ],
+		"users",
+		"baseUrl" ],
 	"name" : "MRRoot",
 	"pools" : [
 		 ],

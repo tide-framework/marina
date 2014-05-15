@@ -1,3 +1,3 @@
 accessing
 personaAudience
-	^ personaAudience
+	^ personaAudience ifNil: [ MRRoot default baseUrl asString ]

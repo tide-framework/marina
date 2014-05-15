@@ -1,3 +1,3 @@
 accessing
 url
-	^ TDServer server url / self serverPath
+	^ self class baseUrl asZnUrl / self serverPath

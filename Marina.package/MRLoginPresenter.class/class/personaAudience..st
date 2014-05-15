@@ -1,3 +1,3 @@
 accessing
-personaAudience: anObject
-	personaAudience := anObject
+personaAudience: aString
+	^ personaAudience := aString
