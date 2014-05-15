@@ -437,7 +437,7 @@ renderUploadOn: html
 ! !
 
 MRMainFrameWidget subclass: #MRTemplateCreatorWidget
-	instanceVariableNames: 'templates'
+	instanceVariableNames: 'templates templateTitle'
 	package: 'Marina-Widgets-Structures'!
 
 !MRTemplateCreatorWidget methodsFor: 'accessing'!

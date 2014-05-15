@@ -289,6 +289,10 @@ showStructureListWidget
 
 showTemplateListWidget
 	MRTemplateListWidget new render
+!
+
+showUserListWidget
+	MRUserListWidget new render
 ! !
 
 !MRHeaderWidget methodsFor: 'rendering'!
@@ -350,7 +354,7 @@ renderRightItemsOn: html
 		html a 
 			with: [
 				html span class: 'glyphicon glyphicon-user'.
-				html with: ' ', self adminPresenter user fullName ];
+				html with: ' ', self adminPresenter user email ];
 			onClick: [ self editUserSettings ] ].
 	html li with: [ 
 		html a 

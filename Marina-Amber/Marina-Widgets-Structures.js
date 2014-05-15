@@ -1287,7 +1287,7 @@ globals.MRStructureListWidget);
 
 
 
-smalltalk.addClass('MRTemplateCreatorWidget', globals.MRMainFrameWidget, ['templates'], 'Marina-Widgets-Structures');
+smalltalk.addClass('MRTemplateCreatorWidget', globals.MRMainFrameWidget, ['templates', 'templateTitle'], 'Marina-Widgets-Structures');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "createTemplateTitle:",

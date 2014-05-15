@@ -1,4 +1,4 @@
 accessing
 fullName
 	<state>
-	^ fullName ifNil: [ '' ]
+	^ fullName ifNil: [ self email ]

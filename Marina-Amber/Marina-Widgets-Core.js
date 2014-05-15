@@ -1016,7 +1016,7 @@ $ctx2.sendIdx["a"]=1;
 _st($2)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
 _st(_st(html)._span())._class_("glyphicon glyphicon-user");
-return _st(html)._with_(" ".__comma(_st(_st(self._adminPresenter())._user())._fullName()));
+return _st(html)._with_(" ".__comma(_st(_st(self._adminPresenter())._user())._email()));
 $ctx3.sendIdx["with:"]=3;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["with:"]=2;
@@ -1041,8 +1041,8 @@ return $5;
 $ctx1.sendIdx["with:"]=4;
 return self}, function($ctx1) {$ctx1.fill(self,"renderRightItemsOn:",{html:html},globals.MRHeaderWidget)})},
 args: ["html"],
-source: "renderRightItemsOn: html\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html span class: 'glyphicon glyphicon-user'.\x0a\x09\x09\x09\x09html with: ' ', self adminPresenter user fullName ];\x0a\x09\x09\x09onClick: [ self editUserSettings ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'logout';\x0a\x09\x09\x09onClick: [ self logout ] ]",
-messageSends: ["with:", "li", "a", "class:", "span", ",", "fullName", "user", "adminPresenter", "onClick:", "editUserSettings", "logout"],
+source: "renderRightItemsOn: html\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html span class: 'glyphicon glyphicon-user'.\x0a\x09\x09\x09\x09html with: ' ', self adminPresenter user email ];\x0a\x09\x09\x09onClick: [ self editUserSettings ] ].\x0a\x09html li with: [ \x0a\x09\x09html a \x0a\x09\x09\x09with: 'logout';\x0a\x09\x09\x09onClick: [ self logout ] ]",
+messageSends: ["with:", "li", "a", "class:", "span", ",", "email", "user", "adminPresenter", "onClick:", "editUserSettings", "logout"],
 referencedClasses: []
 }),
 globals.MRHeaderWidget);
@@ -1138,6 +1138,23 @@ args: [],
 source: "showTemplateListWidget\x0a\x09MRTemplateListWidget new render",
 messageSends: ["render", "new"],
 referencedClasses: ["MRTemplateListWidget"]
+}),
+globals.MRHeaderWidget);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "showUserListWidget",
+protocol: 'actions',
+fn: function (){
+var self=this;
+function $MRUserListWidget(){return globals.MRUserListWidget||(typeof MRUserListWidget=="undefined"?nil:MRUserListWidget)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st($MRUserListWidget())._new())._render();
+return self}, function($ctx1) {$ctx1.fill(self,"showUserListWidget",{},globals.MRHeaderWidget)})},
+args: [],
+source: "showUserListWidget\x0a\x09MRUserListWidget new render",
+messageSends: ["render", "new"],
+referencedClasses: ["MRUserListWidget"]
 }),
 globals.MRHeaderWidget);
 
