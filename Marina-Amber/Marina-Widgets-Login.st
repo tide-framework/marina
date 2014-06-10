@@ -118,7 +118,7 @@ renderFormOn: html
 setupPersona
 	navigator id logout.
 	navigator id watch: #{
-		'loggedInUser' -> nil.
+		'loggedInUser' -> false.
 		'onlogin' -> [ :assertion | self login: assertion ].
 		'onlogout' -> [ self logout ]
 	}

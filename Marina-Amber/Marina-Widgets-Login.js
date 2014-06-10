@@ -348,7 +348,7 @@ $1=_st(navigator)._id();
 $ctx1.sendIdx["id"]=1;
 _st($1)._logout();
 $ctx1.sendIdx["logout"]=1;
-_st(_st(navigator)._id())._watch_(globals.HashedCollection._newFromPairs_(["loggedInUser",nil,"onlogin",(function(assertion){
+_st(_st(navigator)._id())._watch_(globals.HashedCollection._newFromPairs_(["loggedInUser",false,"onlogin",(function(assertion){
 return smalltalk.withContext(function($ctx2) {
 return self._login_(assertion);
 }, function($ctx2) {$ctx2.fillBlock({assertion:assertion},$ctx1,1)})}),"onlogout",(function(){
@@ -357,7 +357,7 @@ return self._logout();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})})]));
 return self}, function($ctx1) {$ctx1.fill(self,"setupPersona",{},globals.MRMozillaPersonaLoginWidget)})},
 args: [],
-source: "setupPersona\x0a\x09navigator id logout.\x0a\x09navigator id watch: #{\x0a\x09\x09'loggedInUser' -> nil.\x0a\x09\x09'onlogin' -> [ :assertion | self login: assertion ].\x0a\x09\x09'onlogout' -> [ self logout ]\x0a\x09}",
+source: "setupPersona\x0a\x09navigator id logout.\x0a\x09navigator id watch: #{\x0a\x09\x09'loggedInUser' -> false.\x0a\x09\x09'onlogin' -> [ :assertion | self login: assertion ].\x0a\x09\x09'onlogout' -> [ self logout ]\x0a\x09}",
 messageSends: ["logout", "id", "watch:", "login:"],
 referencedClasses: []
 }),
