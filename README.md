@@ -11,6 +11,7 @@ In a shell:
 $ mkdir marina
 $ cd marina
 $ wget "https://ci.inria.fr/pharo-contribution/job/marina/PHARO=30,VERSION=development,VM=vm/lastSuccessfulBuild/artifact/Marina.zip"
+$ unzip Marina.zip
 $ wget -O- get.pharo.org/vm | bash
 $ git clone https://github.com/tide-framework/marina.git
 $ cd marina
