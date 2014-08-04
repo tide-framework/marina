@@ -90,7 +90,7 @@ start
 
 start
 	self new
-		presenter: (TDProxy on: '/marina');
+		presenter: (TDClientProxy on: '/marina');
 		start
 ! !
 

@@ -1,4 +1,5 @@
-define("marina/Marina-Widgets-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Objects", "amber_core/Web"], function(smalltalk,nil,_st, globals){
+define("marina/Marina-Widgets-Core", ["amber/boot", "amber_core/Kernel-Objects", "amber_core/Web"], function($boot){
+var smalltalk=$boot.vm,nil=$boot.nil,_st=$boot.asReceiver,globals=$boot.globals;
 smalltalk.addPackage('Marina-Widgets-Core');
 smalltalk.packages["Marina-Widgets-Core"].transport = {"type":"amd","amdNamespace":"marina"};
 
@@ -287,17 +288,17 @@ selector: "start",
 protocol: 'initialization',
 fn: function (){
 var self=this;
-function $TDProxy(){return globals.TDProxy||(typeof TDProxy=="undefined"?nil:TDProxy)}
+function $TDClientProxy(){return globals.TDClientProxy||(typeof TDClientProxy=="undefined"?nil:TDClientProxy)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 $1=self._new();
-_st($1)._presenter_(_st($TDProxy())._on_("/marina"));
+_st($1)._presenter_(_st($TDClientProxy())._on_("/marina"));
 $2=_st($1)._start();
 return self}, function($ctx1) {$ctx1.fill(self,"start",{},globals.MRLoginDispatcher.klass)})},
 args: [],
-source: "start\x0a\x09self new\x0a\x09\x09presenter: (TDProxy on: '/marina');\x0a\x09\x09start",
+source: "start\x0a\x09self new\x0a\x09\x09presenter: (TDClientProxy on: '/marina');\x0a\x09\x09start",
 messageSends: ["presenter:", "new", "on:", "start"],
-referencedClasses: ["TDProxy"]
+referencedClasses: ["TDClientProxy"]
 }),
 globals.MRLoginDispatcher.klass);
 
