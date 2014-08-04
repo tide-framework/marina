@@ -11,4 +11,9 @@ createRoot
 	root add: self blog.
 	root add: self docDirectory.
 	root save.
+	root structures do: #save.
+	root templates do: #save.
+	root users do: #save.
+	
+	
 	^ root
